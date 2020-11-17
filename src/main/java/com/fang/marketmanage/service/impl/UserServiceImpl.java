@@ -12,11 +12,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
-
+    //系统管理员
     @Override
     public int addNewUser(User user) {
         return userMapper.addNewUser(user);
     }
+
 
     @Override
     public List<User> findUserList() {
@@ -27,4 +28,6 @@ public class UserServiceImpl implements UserService {
     public User login(String phone, String password) {
         return null;
     }
+
+
 }
