@@ -1,0 +1,21 @@
+server:
+ port: 8080
+
+spring:
+ thymeleaf:
+  cache: false
+  encoding: utf-8
+ datasource:
+  url: jdbc:mysql://localhost:3306/marketmanage?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+  username: root
+  password: 555913
+  driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+mybatis:
+ type-aliases-package: com.fang.marketmanage.entity
+ check-config-location: true
+ config-location: classpath:mybatis-config.xml
+ mapper-locations: classpath*:mapper/*Mapper.xml
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css">
+    <script src="/webjars/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+<h1>用户列表</h1>
+<form class="form-group" action="/admin/user/add">
+    <input type="text" class="form-control" placeholder="Username" name="username" autofocus>
+    <input type="text" class="form-control" placeholder="Phone" name="phone" >
+    <input type="radio" class="form-control" name="sex" value="男">男
+    <input type="radio" class="form-control" name="sex" value="女">女
+    <input type="radio" class="form-control" name="roleId" value="2">库管员
+    <input type="radio" class="form-control" name="roleId" value="3">营业员
+    <button class="btn btn-lg btn-primary btn-block" type="submit">添加</button>
+</form>
+</table>
+</body>
+</html>
