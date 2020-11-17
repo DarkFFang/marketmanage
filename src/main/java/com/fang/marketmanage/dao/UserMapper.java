@@ -1,6 +1,7 @@
 package com.fang.marketmanage.dao;
 
 import com.fang.marketmanage.entity.User;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,11 +15,11 @@ public interface UserMapper {
     //系统管理员
     int addNewUser(User user);//增加用户
     List<User> findUserList();//用户列表
-    int deleteUser(User user);//删除用户
-    User updateUser(User user);//修改用户
-    List<User> searchUserByName();//通过用户名查询用户
-    List<User> searchClerk();//搜索营业员列表
-    List<User> searchKeeper();//搜索库管员列表
+    int deleteUserById(Integer id);//删除用户
+    User updateUserById(Integer id);//修改用户
+    List<User> findUserByUsername(String username);//通过用户名查询用户
+    List<User> findClerk();//搜索营业员列表
+    List<User> findKeeper();//搜索库管员列表
 
 
 }
