@@ -1,5 +1,12 @@
 package com.fang.marketmanage.entity;
 
-public class Good {
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
+public class Good {
+    private Integer id;
 }
