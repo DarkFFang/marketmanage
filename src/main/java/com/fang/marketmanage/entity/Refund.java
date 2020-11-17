@@ -9,13 +9,11 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Good {
+public class Refund {
     private Integer id;
-    private String name;
-    private Integer typeId;
-    private Date sDate;
-    private Date eDate;
-    private Integer price;
+    private Integer goodId;
+    private Date date;
+    private Integer quantity;
     private Integer unitId;
-    private String other;
+    private Integer price;
 }

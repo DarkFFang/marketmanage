@@ -7,11 +7,13 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class User {
+public class Supplier {
     private Integer id;
-    private String username;
+    private String name;
+    private String address;
     private String phone;
-    private String password;
-    private String sex;
-    private Integer roleId;
+    private String email;
+    private String fax;
+    private String reputation;
+    private Integer loan;
 }

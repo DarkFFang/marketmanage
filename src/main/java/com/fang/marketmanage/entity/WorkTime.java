@@ -9,13 +9,10 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Good {
-    private Integer id;
-    private String name;
-    private Integer typeId;
+public class WorkTime {
+    private Integer userId;
+    private Integer roleId;
     private Date sDate;
     private Date eDate;
-    private Integer price;
-    private Integer unitId;
-    private String other;
+    private String workDay;
 }
