@@ -3,5 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fang.marketmanage.dao.GoodMapper">
-    <select id=""></select>
+    <resultMap id="goodResultMap" type="com.fang.marketmanage.entity.Good">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="typeId" column="typeid"/>
+        <result property="sDate" column="sdate"/>
+        <result property="eDate" column="edate"/>
+        <result property="price" column="price"/>
+        <result property="unitId" column="unitid"/>
+        <result property="other" column="other"/>
+    </resultMap>
+    <insert id="addNewUser" parameterType="com.fang.marketmanage.entity.User">
+        INSERT INTO user VALUES (#{id},#{username},#{phone},#{password},#{sex},#{roleId})
+    </insert>
+    <select id="findUserList" resultMap="userResultMap">
+        SELECT * FROM user
+    </select>
+    <select id="login" parameterType="java.lang.String" resultMap="userResultMap">
+        SELECT * FROM user
+        WHERE #{phone}=phone and #{password}=password
+    </select>
 </mapper>

@@ -12,7 +12,7 @@
         <result property="roleId" column="roleid"/>
     </resultMap>
     <insert id="addNewUser" parameterType="com.fang.marketmanage.entity.User">
-        INSERT INTO user VALUES (#{id},#{username},#{phone},#{password},#{sex},#{roleId})
+        INSERT INTO user VALUES (#{username},#{phone},#{password},#{sex},#{roleId})
     </insert>
     <select id="findUserList" resultMap="userResultMap">
         SELECT * FROM user
@@ -21,4 +21,7 @@
         SELECT * FROM user
         WHERE #{phone}=phone and #{password}=password
     </select>
+    <delete id="deleteUserById">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
 </mapper>
