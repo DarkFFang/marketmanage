@@ -25,6 +25,51 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User update(Integer id) {
+        return null;
+    }
+
+    @Override
+    public User exit() {
+        return null;
+    }
+
+    @Override
+    public User register(User user) {
+        return null;
+    }
+
+    @Override
+    public int deleteUserById(Integer id) {
+        return 0;
+    }
+
+    @Override
+    public User updateUserById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public User updateUserRoleById(Integer id) {
+        return null;
+    }
+
+    @Override
+    public List<User> findUserByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public List<User> findClerkList() {
+        return null;
+    }
+
+    @Override
+    public List<User> findKeeperList() {
+        return null;
+    }
+
+    @Override
     public User login(String phone, String password) {
         return null;
     }
