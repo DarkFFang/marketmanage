@@ -16,7 +16,7 @@
     <insert id="addNewGood" parameterType="com.fang.marketmanage.entity.Good">
         INSERT INTO good VALUES (#{name},#{typeId},#{sDate},#{eDate},#{price},#{unitId},#{other})
     </insert>
-    <select id="findGoodList" resultMap="GoodResultMap">
+    <select id="findGoodList" resultMap="goodResultMap">
         SELECT * FROM good
     </select>
     <delete id="deleteGoodById">

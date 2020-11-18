@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fang.marketmanage.dao.WorkTimeMapper">
-    <resultMap id="WorkTimeResultMap" type="com.fang.marketmanage.entity.WorkTime">
+    <resultMap id="workTimeResultMap" type="com.fang.marketmanage.entity.WorkTime">
         <id property="userId" column="userid"/>
         <result property="roleId" column="roleid"/>
         <result property="sDate" column="sdate"/>
@@ -14,7 +14,7 @@
         INSERT INTO workday
         VALUES (#{userId},#{roleId},#{sDate},#{eDate},#{workDay})
     </select>
-    <select id="findWorkTimeList" resultMap="WorkDayResultMap">
+    <select id="findWorkTimeList" resultMap="workTimeResultMap">
         SELECT * FROM workday
     </select>
     <delete id="deleteWorkTimeById">

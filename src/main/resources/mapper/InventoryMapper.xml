@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fang.marketmanage.dao.InventoryMapper">
-    <resultMap id="InventoryResultMap" type="com.fang.marketmanage.entity.Inventory">
+    <resultMap id="inventoryResultMap" type="com.fang.marketmanage.entity.Inventory">
         <id property="goodId" column="goodid"/>
         <result property="date" column="date"/>
         <result property="goodName" column="goodname"/>
@@ -16,7 +16,7 @@
     <select id="addNewInventory" parameterType="com.fang.marketmanage.entity.Inventory">
         INSERT INTO inventory VALUES (#{goodId},#{date},#{goodName},#{quantity},#{newQuantity},#{unitId},#{yk})
     </select>
-    <select id="findInventoryList" resultMap="InventoryResultMap">
+    <select id="findInventoryList" resultMap="inventoryResultMap">
         SELECT * FROM inventory
     </select>
     <delete id="deleteInventoryById">

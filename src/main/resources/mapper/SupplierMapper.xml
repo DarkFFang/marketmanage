@@ -28,7 +28,7 @@
     <select id="findSupplierByName">
         SELECT * FROM supplier WHERE id=#{id}
     </select>
-    <select id="findSupplierByName">
-        SELECT * FROM supplier WHERE date=#{date}
+    <select id="findSupplierByReputation">
+        SELECT * FROM supplier WHERE date=#{reputation}
     </select>
 </mapper>
