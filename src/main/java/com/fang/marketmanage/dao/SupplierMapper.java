@@ -1,9 +1,11 @@
 package com.fang.marketmanage.dao;
 
 import com.fang.marketmanage.entity.Supplier;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface SupplierMapper {
     int addNewSupplier(Supplier supplier);//增加供应商
 
