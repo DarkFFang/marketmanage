@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.RefundMapper">
+    <resultMap id="RefundResultMap" type="com.fang.marketmanage.entity.Refund">
+        <id property="id" column="id"/>
+        <result property="goodid" column="goodId"/>
+        <result property="date" column="date"/>
+        <result property="quantity" column="quantity"/>
+        <result property="unitId" column="unitid"/>
+        <result property="price" column="price"/>
+        <result property="reason" column="reason"/>
+    </resultMap>
+    <select id="addNewRefund" parameterType="com.fang.marketmanage.entity.Refund">
+        INSERT INTO refund VALUES (#{goodId},#{date},#{quantity},#{unitId},#{price},#{reason})
+    </select>
+    <select id="findRefundList" resultMap="RefundResultMap">
+        SELECT * FROM refund
+    </select>
+    <delete id="deleteRefundById">
+        DELETE FROM refund WHERE id=#{id}
+    </delete>
+    <update id="updateRefundById">
+        UPDATE refund SET goodid=#{goodId},date=#{date},quantity=#{quantity},unitid=#{unitId},price=#{price},reason=#{reason}
+    </update>
+    <select id="findRefundListByName">
+        SELECT * FROM refund WHERE goodid=#{goodId}
+    </select>
+    <select id="findRefundListByDate">
+        SELECT * FROM refund WHERE date=#{date}
+    </select>
+</mapper>

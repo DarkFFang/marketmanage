@@ -16,4 +16,5 @@ public class Refund {
     private Integer quantity;
     private Integer unitId;
     private Integer price;
+    private  String reason;
 }

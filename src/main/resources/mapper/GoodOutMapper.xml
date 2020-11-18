@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.GoodOutMapper">
+    <resultMap id="GoodOutResultMap" type="com.fang.marketmanage.entity.GoodOut">
+        <id property="id" column="id"/>
+        <result property="date" column="date"/>
+        <result property="supplierId" column="supplierid"/>
+        <result property="goodId" column="goodid"/>
+        <result property="quantity" column="quantity"/>
+        <result property="unitId" column="unitid"/>
+        <result property="price" column="price"/>
+        <result property="paid" column="paid"/>
+        <result property="userId" column="userid"/>
+    </resultMap>
+    <insert id="addNewGoodOut" parameterType="com.fang.marketmanage.entity.GoodOut">
+        INSERT INTO goodout VALUES (#{date},#{supplierId},#{goodId},#{quantity},#{unitId},#{price},#{paid},#{userId})
+    </insert>
+    <select id="findGoodOutList" resultMap="GoodOutResultMap">
+        SELECT * FROM goodout
+    </select>
+    <delete id="deleteGoodOutById">
+        DELETE FROM goodout where id=#{id}
+    </delete>
+    <update id="updateGoodOutById">
+        UPDATE goodout SET date=#{date},supplierid=#{supplierId},goodid=#{goodId},quantity=#{quantity},unitid=#{unitId},price=#{price},paid=#{paid},userid=#{userId}
+    </update>
+    <select id="findGoodOutListByName">
+        SELECT * FROM goodout WHERE goodout=#{goodId}
+    </select>
+    <select id="findGoodOutListByDate">
+        SELECT * FROM goodout WHERE date=#{date}
+    </select>
+    <select id="findGoodOutListByKeeperName">
+        SELECT * FROM goodout WHERE userid=#{userId}
+    </select>
+</mapper>

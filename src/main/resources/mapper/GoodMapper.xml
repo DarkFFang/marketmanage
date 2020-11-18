@@ -13,14 +13,22 @@
         <result property="unitId" column="unitid"/>
         <result property="other" column="other"/>
     </resultMap>
-    <insert id="addNewUser" parameterType="com.fang.marketmanage.entity.User">
-        INSERT INTO user VALUES (#{id},#{username},#{phone},#{password},#{sex},#{roleId})
+    <insert id="addNewGood" parameterType="com.fang.marketmanage.entity.Good">
+        INSERT INTO good VALUES (#{name},#{typeId},#{sDate},#{eDate},#{price},#{unitId},#{other})
     </insert>
-    <select id="findUserList" resultMap="userResultMap">
-        SELECT * FROM user
+    <select id="findGoodList" resultMap="GoodResultMap">
+        SELECT * FROM good
     </select>
-    <select id="login" parameterType="java.lang.String" resultMap="userResultMap">
-        SELECT * FROM user
-        WHERE #{phone}=phone and #{password}=password
+    <delete id="deleteGoodById">
+        DELETE FROM good where id=#{id}
+    </delete>
+    <update id="updateGoodById">
+        UPDATE good SET name=#{name},typeid=#{typeId},sdate=#{sDate},edate=#{eDate},price=#{price},unitId=#{unitId},other=#{other}
+    </update>
+    <select id="findGoodByName">
+        SELECT * FROM good WHERE name=#{name}
+    </select>
+    <select id="findGoodListByType">
+        SELECT * FROM good WHERE typeid=#{typeId}
     </select>
 </mapper>

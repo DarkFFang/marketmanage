@@ -17,7 +17,7 @@ public interface InventoryMapper {
 
     List<Inventory> findInventoryList();//盘存列表
 
-    List<Inventory> updateInventoryListById(Integer id);//填写盘存表
+    List<Inventory> updateInventoryListById(Integer id);//修改盘存表(仅修改实际数量)
 
     List<Inventory> findInventoryListByDate(Date date);//通过时间查询盘存表
 }

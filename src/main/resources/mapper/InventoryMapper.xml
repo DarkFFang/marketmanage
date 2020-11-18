@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.InventoryMapper">
+    <resultMap id="InventoryResultMap" type="com.fang.marketmanage.entity.Inventory">
+        <id property="goodId" column="goodid"/>
+        <result property="date" column="date"/>
+        <result property="goodName" column="goodname"/>
+        <result property="goodId" column="goodid"/>
+        <result property="quantity" column="quantity"/>
+        <result property="newQuantity" column="newquantity"/>
+        <result property="unitId" column="unitid"/>
+        <result property="yk" column="yk"/>
+    </resultMap>
+    <select id="addNewInventory" parameterType="com.fang.marketmanage.entity.Inventory">
+        INSERT INTO inventory VALUES (#{goodId},#{date},#{goodName},#{quantity},#{newQuantity},#{unitId},#{yk})
+    </select>
+    <select id="findInventoryList" resultMap="InventoryResultMap">
+        SELECT * FROM inventory
+    </select>
+    <delete id="deleteInventoryById">
+        DELETE FROM inventory   WHERE id=#{id} AND date=#{date}
+    </delete>
+    <delete id="deleteAllInventory">
+        DELETE FROM inventory
+    </delete>
+    <update id="updateInventoryListById">
+        UPDATE inventory SET newquantity=#{newQuantity}
+    </update>
+    <select id="findInventoryListByDate">
+        SELECT * FROM inventory WHERE date=#{date}
+    </select>
+</mapper>

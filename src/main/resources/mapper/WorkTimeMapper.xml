@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.WorkTimeMapper">
+    <resultMap id="WorkTimeResultMap" type="com.fang.marketmanage.entity.WorkTime">
+        <id property="userId" column="userid"/>
+        <result property="roleId" column="roleid"/>
+        <result property="sDate" column="sdate"/>
+        <result property="eDate" column="edate"/>
+        <result property="workDay" column="workday"/>
+    </resultMap>
+    <select id="addNewWorkTime" parameterType="com.fang.marketmanage.entity.WorkTime">
+        INSERT INTO workday
+        VALUES (#{userId},#{roleId},#{sDate},#{eDate},#{workDay})
+    </select>
+    <select id="findWorkTimeList" resultMap="WorkDayResultMap">
+        SELECT * FROM workday
+    </select>
+    <delete id="deleteWorkTimeById">
+        DELETE FROM workday
+        WHERE userid=#{userId} and workday=#{workDay}
+    </delete>
+    <update id="updateWorkTimeById">
+        UPDATE workday
+        SET userid=(SELECT userid FROM user WHERE username=#{username}),
+            roleid=(SELECT roleid FROM role WHERE name=#{name}),
+            sdate=#{sDate},edate=#{eDate},workday=#{workDay}
+    </update>
+    <select id="searchWorkTimeByUsername">
+        SELECT * FROM workday WHERE userid=(SELECT userid FROM user WHERE username=#{username}
+    </select>
+    <select id="findClerkTime">
+        SELECT * FROM workday WHERE roleid=2
+    </select>
+    <select id="findKeeperTime">
+        SELECT * FROM workday WHERE roleid=3
+    </select>
+</mapper>
