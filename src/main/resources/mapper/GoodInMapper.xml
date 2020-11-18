@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.GoodInMapperMapper">
+    <resultMap id="GoodInResultMap" type="com.fang.marketmanage.entity.GoodIn">
+        <id property="id" column="id"/>
+        <result property="date" column="date"/>
+        <result property="supplierId" column="supplierid"/>
+        <result property="goodId" column="goodid"/>
+        <result property="quantity" column="quantity"/>
+        <result property="unitId" column="unitid"/>
+        <result property="price" column="price"/>
+        <result property="paid" column="paid"/>
+        <result property="userId" column="userid"/>
+    </resultMap>
+    <insert id="addNewGoodIn" parameterType="com.fang.marketmanage.entity.GoodIn">
+        INSERT INTO goodin VALUES (#{date},#{supplierId},#{goodId},#{quantity},#{unitId},#{price},#{paid},#{userId})
+    </insert>
+    <select id="findGoodInList" resultMap="GoodInResultMap">
+        SELECT * FROM goodin
+    </select>
+    <delete id="deleteGoodInById">
+        DELETE FROM goodin where id=#{id}
+    </delete>
+    <update id="updateGoodInById">
+        UPDATE goodin SET date=#{date},supplierid=#{supplierId},goodid=#{goodId},quantity=#{quantity},unitid=#{unitId},price=#{price},paid=#{paid},userid=#{userId}
+    </update>
+    <select id="findGoodInListByName">
+        SELECT * FROM goodin WHERE goodid=#{goodId}
+    </select>
+    <select id="findGoodInListByDate">
+        SELECT * FROM goodin WHERE date=#{date}
+    </select>
+    <select id="findGoodInListByClerkName">
+        SELECT * FROM goodin WHERE userid=#{userId}
+    </select>
+</mapper>
