@@ -18,10 +18,7 @@
     <select id="findUserList" resultMap="userResultMap">
         SELECT * FROM user
     </select>
-    <select id="login" parameterType="java.lang.String" resultMap="userResultMap">
-        SELECT * FROM user
-        WHERE #{phone}=phone and #{password}=password
-    </select>
+
     <delete id="deleteUserById">
         DELETE FROM user
         WHERE id=#{id}
@@ -38,9 +35,13 @@
         UPDATE user
         SET roleid=#{roleId}
     </update>
-    <select id="findUserByUsername">
+    <select id="findUsersByUsername">
         SELECT * FROM user
         WHERE username=#{username}
+    </select>
+    <select id="findUserByPhone" resultMap="userResultMap">
+        SELECT * FROM user
+        WHERE phone=#{phone}
     </select>
     <select id="findClerkList">
         SELECT * FROM user

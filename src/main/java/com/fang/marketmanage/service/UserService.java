@@ -1,12 +1,12 @@
 package com.fang.marketmanage.service;
 
 import com.fang.marketmanage.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     //公共方法
-    User login(String phone, String password);//登录
 
     User update(Integer id);//修改个人信息
 
