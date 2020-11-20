@@ -28,6 +28,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("超市商品管理")
                 .description("API接口文档")
+                .termsOfServiceUrl("https://github.com/DarkFFang/marketmanage")
                 .version("1.0.0")
                 .build();
     }

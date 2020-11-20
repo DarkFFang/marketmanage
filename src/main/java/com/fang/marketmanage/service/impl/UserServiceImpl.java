@@ -4,8 +4,12 @@ import com.fang.marketmanage.dao.UserMapper;
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -13,6 +17,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     //系统管理员
+
+
+    @Override
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        User user=userMapper.findUserByPhone(phone);
+        if(user == null){
+            throw new UsernameNotFoundException("用户不存在！");
+        }
+        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
+        simpleGrantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+(user.getRoleId()).toString()));
+        System.out.println(user);
+        return new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPassword(), simpleGrantedAuthorities);
+    }
+
     @Override
     public int addNewUser(User user) {
         return userMapper.addNewUser(user);
@@ -66,11 +84,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findKeeperList() {
-        return null;
-    }
-
-    @Override
-    public User login(String phone, String password) {
         return null;
     }
 

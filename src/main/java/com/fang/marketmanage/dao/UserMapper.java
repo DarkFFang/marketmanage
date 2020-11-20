@@ -30,6 +30,8 @@ public interface UserMapper {
 
     List<User> findUserByUsername(String username);//通过用户名（营业员或库管员）查询用户
 
+    User findUserByPhone(String phone);
+
     List<User> findClerkList();//搜索营业员列表
 
     List<User> findKeeperList();//搜索库管员列表

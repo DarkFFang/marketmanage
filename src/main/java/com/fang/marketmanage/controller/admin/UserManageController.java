@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api("管理用户API接口")
+
 @RestController
 @RequestMapping("/admin/user")
+@Api(value = "用户管理接口")
 public class UserManageController {
     @Autowired
     UserService userService;
