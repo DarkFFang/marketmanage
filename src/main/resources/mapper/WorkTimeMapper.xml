@@ -27,13 +27,13 @@
             roleid=(SELECT roleid FROM role WHERE name=#{name}),
             sdate=#{sDate},edate=#{eDate},workday=#{workDay}
     </update>
-    <select id="searchWorkTimeByUsername">
+    <select id="searchWorkTimeByUsername" resultMap="workTimeResultMap">
         SELECT * FROM workday WHERE userid=(SELECT userid FROM user WHERE username=#{username}
     </select>
-    <select id="findClerkTime">
+    <select id="findClerkTime" resultMap="workTimeResultMap">
         SELECT * FROM workday WHERE roleid=2
     </select>
-    <select id="findKeeperTime">
+    <select id="findKeeperTime" resultMap="workTimeResultMap">
         SELECT * FROM workday WHERE roleid=3
     </select>
 </mapper>

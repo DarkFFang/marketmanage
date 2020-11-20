@@ -13,10 +13,10 @@
     <select id="findStockList" resultMap="stockResultMap">
         SELECT * FROM stock
     </select>
-    <select id="findStockByName">
-        SELECT  * FROM stock WHERE gooid=#{goodId}
+    <select id="findStockByName" resultMap="stockResultMap">
+        SELECT  * FROM stock WHERE goodid=(SELECT goodid FROM good WHERE name=#{name})
     </select>
-    <select id="finStockListByType">
-        SELECT  * FROM stock WHERE unitid=#{unitId}
+    <select id="finStockListByType" resultMap="stockResultMap">
+        SELECT  * FROM stock WHERE goodid IN (SELECT goodid FROM good WHERE typeid=(SELECT typeid FROM goodtype WHERE name=#{name}))
     </select>
 </mapper>

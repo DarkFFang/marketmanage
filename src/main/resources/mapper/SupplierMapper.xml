@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fang.marketmanage.dao.SupplierMapper">
-    <resultMap id="SupplierResultMap" type="com.fang.marketmanage.entity.Supplier">
+    <resultMap id="supplierResultMap" type="com.fang.marketmanage.entity.Supplier">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="address" column="address"/>
@@ -16,7 +16,7 @@
     <select id="addNewSupplier" parameterType="com.fang.marketmanage.entity.Supplier">
         INSERT INTO supplier VALUES (#{name},#{address},#{phone},#{email},#{fax},#{reputation},#{loan})
     </select>
-    <select id="findSupplierList" resultMap="SupplierResultMap">
+    <select id="findSupplierList" resultMap="supplierResultMap">
         SELECT * FROM supplier
     </select>
     <delete id="deleteSupplierById">
@@ -24,11 +24,12 @@
     </delete>
     <update id="updateSupplierById">
         UPDATE supplier SET name=#{name},address=#{address},phone=#{phone},email=#{email},fax=#{fax},reputation=#{reputation},loan=#{loan}
+        WHERE id=#{id}
     </update>
-    <select id="findSupplierByName">
-        SELECT * FROM supplier WHERE id=#{id}
+    <select id="findSupplierByName" resultMap="supplierResultMap">
+        SELECT * FROM supplier WHERE name=#{name}
     </select>
-    <select id="findSupplierByReputation">
-        SELECT * FROM supplier WHERE date=#{reputation}
+    <select id="findSupplierByReputation" resultMap="supplierResultMap">
+        SELECT * FROM supplier WHERE reputation=#{reputation}
     </select>
 </mapper>

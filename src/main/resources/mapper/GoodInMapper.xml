@@ -25,14 +25,15 @@
     </delete>
     <update id="updateGoodInById">
         UPDATE goodin SET date=#{date},supplierid=#{supplierId},goodid=#{goodId},quantity=#{quantity},unitid=#{unitId},price=#{price},paid=#{paid},userid=#{userId}
+        WHERE id=#{id}
     </update>
-    <select id="findGoodInListByName">
-        SELECT * FROM goodin WHERE goodid=#{goodId}
+    <select id="findGoodInListByName" resultMap="goodInResultMap">
+        SELECT * FROM goodin WHERE goodid=(SELECT goodid FROM good WHERE name=#{name}
     </select>
-    <select id="findGoodInListByDate">
+    <select id="findGoodInListByDate" resultMap="goodInResultMap">
         SELECT * FROM goodin WHERE date=#{date}
     </select>
-    <select id="findGoodInListByClerkName">
-        SELECT * FROM goodin WHERE userid=#{userId}
+    <select id="findGoodInListByClerkName" resultMap="goodInResultMap">
+        SELECT * FROM goodin WHERE userid=(SELECT userid FROM user WHERE username=#{username})
     </select>
 </mapper>

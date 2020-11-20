@@ -7,7 +7,6 @@
         <id property="goodId" column="goodid"/>
         <result property="date" column="date"/>
         <result property="goodName" column="goodname"/>
-        <result property="goodId" column="goodid"/>
         <result property="quantity" column="quantity"/>
         <result property="newQuantity" column="newquantity"/>
         <result property="unitId" column="unitid"/>
@@ -20,15 +19,15 @@
         SELECT * FROM inventory
     </select>
     <delete id="deleteInventoryById">
-        DELETE FROM inventory   WHERE id=#{id} AND date=#{date}
+        DELETE FROM inventory WHERE id=#{id} AND date=#{date}
     </delete>
     <delete id="deleteAllInventory">
         DELETE FROM inventory
     </delete>
     <update id="updateInventoryListById">
-        UPDATE inventory SET newquantity=#{newQuantity}
+        UPDATE inventory SET newquantity=#{newQuantity} WHERE goodid=#{goodId} and date=#{date}
     </update>
-    <select id="findInventoryListByDate">
+    <select id="findInventoryListByDate" resultMap="inventoryResultMap">
         SELECT * FROM inventory WHERE date=#{date}
     </select>
 </mapper>
