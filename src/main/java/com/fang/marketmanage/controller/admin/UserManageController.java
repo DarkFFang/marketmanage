@@ -2,13 +2,11 @@ package com.fang.marketmanage.controller.admin;
 
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.service.UserService;
+import com.fang.marketmanage.util.Resp;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,17 +20,26 @@ public class UserManageController {
 
 
     @PostMapping("/add")
-    public String addNewUser(User user) {
-        user.setPassword("111111");
-        System.out.println(user.toString());
-        userService.addNewUser(user);
-        return "redirect:list";
+    public Resp addNewUser(User user) {
+        if (userService.addNewUser(user)==1){
+            return new Resp("success", "添加成功！");
+        } else {
+            return new Resp("error", "添加失败！");
+        }
     }
 
     @GetMapping("/list")
-    public List<User> findUserList(Model model) {
+    public List<User> findUserList() {
         List<User> userlist=userService.findUserList();
-        model.addAttribute("list",userlist);
         return userlist;
+    }
+
+    @PutMapping("/update/{id}")
+    public Resp updateUserById(User user){
+        if (userService.addNewUser(user)==1){
+            return new Resp("success", "修改成功！");
+        } else {
+            return new Resp("error", "修改失败！");
+        }
     }
 }
