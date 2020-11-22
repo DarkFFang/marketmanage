@@ -25,7 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //super.configure(http);
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").hasRole("系统管理员");
+                .antMatchers("/admin/**").permitAll();
+
+        http.csrf().disable();
 
         http.formLogin()
                 .successHandler(new AuthenticationSuccessHandler() {
