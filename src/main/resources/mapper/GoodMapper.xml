@@ -24,11 +24,12 @@
     </delete>
     <update id="updateGoodById">
         UPDATE good SET name=#{name},typeid=#{typeId},sdate=#{sDate},edate=#{eDate},price=#{price},unitId=#{unitId},other=#{other}
+        WHERE id=#{id}
     </update>
-    <select id="findGoodByName">
+    <select id="findGoodByName" resultMap="goodResultMap">
         SELECT * FROM good WHERE name=#{name}
     </select>
-    <select id="findGoodListByType">
-        SELECT * FROM good WHERE typeid=#{typeId}
+    <select id="findGoodListByType" resultMap="goodResultMap">
+        SELECT * FROM good WHERE typeid=(SELECT id FROM goodtype WHERE name=#{name})
     </select>
 </mapper>

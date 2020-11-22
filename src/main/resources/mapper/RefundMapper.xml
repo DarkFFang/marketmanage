@@ -23,11 +23,12 @@
     </delete>
     <update id="updateRefundById">
         UPDATE refund SET goodid=#{goodId},date=#{date},quantity=#{quantity},unitid=#{unitId},price=#{price},reason=#{reason}
+        WHERE id=#{id}
     </update>
-    <select id="findRefundListByName">
-        SELECT * FROM refund WHERE goodid=#{goodId}
+    <select id="findRefundListByName" resultMap="refundResultMap">
+        SELECT * FROM refund WHERE goodid=(SELECT goodid FROM good WHERE name=#{name})
     </select>
-    <select id="findRefundListByDate">
+    <select id="findRefundListByDate" resultMap="refundResultMap">
         SELECT * FROM refund WHERE date=#{date}
     </select>
 </mapper>
