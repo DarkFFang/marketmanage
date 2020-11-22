@@ -12,7 +12,7 @@
     </resultMap>
     <select id="addNewWorkTime" parameterType="com.fang.marketmanage.entity.WorkTime">
         INSERT INTO workday
-        VALUES (#{userId},#{roleId},#{sDate},#{eDate},#{workDay})
+        VALUES (#{userId},#{sDate},#{eDate},#{workDay})
     </select>
     <select id="findWorkTimeList" resultMap="workTimeResultMap">
         SELECT * FROM workday

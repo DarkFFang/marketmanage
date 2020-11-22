@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface StockMapper {
-    int findStockList();//库存列表
+    List<Stock> findStockList();//库存列表
 
     Stock findStockByName(String name);//通过商品名称查询该商品库存
 

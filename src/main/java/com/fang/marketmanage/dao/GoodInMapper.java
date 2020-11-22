@@ -15,7 +15,7 @@ public interface GoodInMapper {
 
     int deleteGoodInById(Integer id);//删除入库表一项
 
-    Good updateGoodInById(Integer id);//修改入库单信息
+    int updateGoodInById(Integer id);//修改入库单信息
 
     List<GoodIn> findGoodInListByName(String name);//通过商品名称查询入库单列表
 

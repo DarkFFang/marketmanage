@@ -15,7 +15,7 @@ public interface GoodOutMapper {
 
     int deleteGoodOutById(Integer id);//删除出库单一项
 
-    Good updateGoodOutById(Integer id);//修改出库单信息
+    int updateGoodOutById(Integer id);//修改出库单信息
 
     List<GoodOut> findGoodOutListByName(String name);//通过商品名称查询出库单列表
 

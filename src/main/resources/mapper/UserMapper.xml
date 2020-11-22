@@ -9,31 +9,27 @@
         <result property="phone" column="phone"/>
         <result property="password" column="password"/>
         <result property="sex" column="sex"/>
-        <result property="roleId" column="roleid"/>
     </resultMap>
     <insert id="addNewUser" parameterType="com.fang.marketmanage.entity.User">
-        INSERT INTO user(username,phone,password,sex,roleid)
-        VALUES (#{username},#{phone},#{password},#{sex},#{roleId})
+        INSERT INTO user(username,phone,password,sex)
+        VALUES (#{username},#{phone},#{password},#{sex})
     </insert>
     <select id="findUserList" resultMap="userResultMap">
         SELECT * FROM user
     </select>
-
     <delete id="deleteUserById">
         DELETE FROM user
         WHERE id=#{id}
     </delete>
-    <update id="update">
-        UPDATE user
-        SET username=#{username},phone=#{phone},password=#{password}
-    </update>
     <update id="updateUserById">
         UPDATE user
-        SET username=#{username},phone=#{phone},password=#{password}
+        SET username=#{username},phone=#{phone},password=#{password},sex=#{sex}
+        WHERE id=#{id}
     </update>
     <update id="updateUserRoleById">
-        UPDATE user
-        SET roleid=#{roleId}
+        UPDATE user_role
+        SET roleid=(SELECT roleid FROM role name=#{name})
+        WHERE  userid=(SELECT userid FROM user WHERE username=#{username})
     </update>
     <select id="findUsersByUsername">
         SELECT * FROM user

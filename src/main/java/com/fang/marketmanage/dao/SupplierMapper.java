@@ -13,7 +13,7 @@ public interface SupplierMapper {
 
     int deleteSupplierById(Integer id);//删除供应商
 
-    Supplier updateSupplierById(Integer id);//修改供应商
+    int updateSupplierById(Integer id);//修改供应商
 
     Supplier findSupplierByName(String name);//通过供应商名称查询供应商
 

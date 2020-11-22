@@ -14,7 +14,7 @@ public interface GoodMapper {
 
     int deleteGoodById(Integer id);//删除商品
 
-    Good updateGoodById(Integer id);//修改商品
+    int updateGoodById(Integer id);//修改商品
 
     Good findGoodByName(String name);//通过商品名称查询商品
 

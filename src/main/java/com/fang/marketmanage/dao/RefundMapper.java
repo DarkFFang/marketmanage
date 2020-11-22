@@ -14,7 +14,7 @@ public interface RefundMapper {
 
     int deleteRefundById(Integer id);//删除退货表项
 
-    Refund updateRefundById(Integer id);//修改退货表项
+    int updateRefundById(Integer id);//修改退货表项
 
     List<Refund> findRefundListByName(String name);//通过商品名称查询退货列表
 
