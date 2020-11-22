@@ -22,24 +22,34 @@ public class UserManageController {
     @PostMapping("/add")
     public Resp addNewUser(User user) {
         if (userService.addNewUser(user)==1){
-            return new Resp("success", "添加成功！");
+            return Resp.success("添加成功！");
         } else {
-            return new Resp("error", "添加失败！");
+            return Resp.error("添加失败！");
         }
     }
 
     @GetMapping("/list")
     public List<User> findUserList() {
         List<User> userlist=userService.findUserList();
+        System.out.println(userlist);
         return userlist;
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     public Resp updateUserById(User user){
-        if (userService.addNewUser(user)==1){
-            return new Resp("success", "修改成功！");
+        if (userService.updateUserById(user)==1){
+            return Resp.success("修改成功！");
         } else {
-            return new Resp("error", "修改失败！");
+            return Resp.error("修改失败！");
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Resp deleteUserById(@PathVariable Integer id){
+        if (userService.deleteUserById(id)==1){
+            return Resp.success("删除成功！");
+        } else {
+            return Resp.error("删除失败");
         }
     }
 }

@@ -9,13 +9,22 @@
         <result property="phone" column="phone"/>
         <result property="password" column="password"/>
         <result property="sex" column="sex"/>
+        <collection property="roles" ofType="com.fang.marketmanage.entity.Role">
+            <id property="id" column="rid"/>
+            <result property="name" column="rname"/>
+        </collection>
     </resultMap>
     <insert id="addNewUser" parameterType="com.fang.marketmanage.entity.User">
         INSERT INTO user(username,phone,password,sex)
         VALUES (#{username},#{phone},#{password},#{sex})
     </insert>
     <select id="findUserList" resultMap="userResultMap">
-        SELECT * FROM user
+        SELECT user.id,user.username,user.phone,user.password,user.sex,role.id as rid,role.name as rname
+        FROM user
+        LEFT JOIN user_role
+        ON user.id=user_role.userid
+        LEFT JOIN role
+        ON user_role.roleid=role.id
     </select>
     <delete id="deleteUserById">
         DELETE FROM user
