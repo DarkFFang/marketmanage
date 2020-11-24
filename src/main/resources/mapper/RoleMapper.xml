@@ -11,4 +11,7 @@
         SELECT * FROM role
         WHERE id in (SELECT roleid FROM user_role WHERE userid=#{id})
     </select>
+    <select id="getRolesList" resultMap="roleResultMap">
+        SELECT * FROM role
+    </select>
 </mapper>

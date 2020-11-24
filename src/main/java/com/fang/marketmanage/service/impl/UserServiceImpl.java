@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateUserRoleById(Integer id) {
-        return 0;
+        return userMapper.updateUserRoleById(id);
     }
 
     @Override

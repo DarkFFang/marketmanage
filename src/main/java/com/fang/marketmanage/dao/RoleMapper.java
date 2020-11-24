@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface RoleMapper {
     List<Role> getRolesByUserId(Integer id);
+    List<Role> getRolesList();
 }
