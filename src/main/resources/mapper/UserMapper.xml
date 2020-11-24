@@ -19,7 +19,7 @@
         VALUES (#{username},#{phone},#{password},#{sex})
     </insert>
     <select id="findUserList" resultMap="userResultMap">
-        SELECT user.id,user.username,user.phone,user.password,user.sex,role.id as rid,role.name as rname
+        SELECT user.id,user.username,user.phone,user.sex,role.id as rid,role.name as rname
         FROM user
         LEFT JOIN user_role
         ON user.id=user_role.userid
@@ -29,6 +29,7 @@
     <delete id="deleteUserById">
         DELETE FROM user
         WHERE id=#{id}
+        ALTER TABLE user auto_increment = 1;
     </delete>
     <update id="updateUserById">
         UPDATE user
