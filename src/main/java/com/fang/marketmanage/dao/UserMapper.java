@@ -27,5 +27,10 @@ public interface UserMapper {
 
     List<User> findKeeperList();//搜索库管员列表
 
+    int addPermissionById();//增加用户权限
+
+    int deletePermissionById();//删除用户权限
+
+    int findPermissionById();//查询用户权限
 
 }

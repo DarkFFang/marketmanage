@@ -18,8 +18,13 @@ public interface UserService extends UserDetailsService {
 
     List<User> findUserByUsername(String username);//通过用户名（营业员或库管员）查询用户
 
-
     List<User> findClerkList();//搜索营业员列表
 
     List<User> findKeeperList();//搜索库管员列表
+
+    int addPermissionById();//增加用户权限
+
+    int deletePermissionById();//删除用户权限
+
+    //List<Permission> findPermissionById();//查询用户权限
 }

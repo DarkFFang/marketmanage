@@ -23,7 +23,8 @@
         DELETE FROM good where id=#{id}
     </delete>
     <update id="updateGoodById">
-        UPDATE good SET name=#{name},typeid=#{typeId},sdate=#{sDate},edate=#{eDate},price=#{price},unitId=#{unitId},other=#{other}
+        UPDATE good SET
+        name=#{name},typeid=#{typeId},sdate=#{sDate},edate=#{eDate},price=#{price},unitId=#{unitId},other=#{other}
         WHERE id=#{id}
     </update>
     <select id="findGoodByName" resultMap="goodResultMap">

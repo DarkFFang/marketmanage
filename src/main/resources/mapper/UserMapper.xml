@@ -22,8 +22,21 @@
         WHERE id=#{id}
     </delete>
     <update id="updateUserById">
-        UPDATE user
-        SET username=#{username},phone=#{phone},password=#{password},sex=#{sex}
+        UPDATE user u
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username != null and username != ''">
+                u.username = #{username},
+            </if>
+            <if test="phone != null and phone != ''">
+                u.phone = #{phone},
+            </if>
+            <if test="password != null and password != ''">
+                u.password = #{password},
+            </if>
+            <if test="sex != null and sex != ''">
+                u.sex = #{sex},
+            </if>
+        </trim>
         WHERE id=#{id}
     </update>
     <update id="updateUserRoleById">
@@ -47,5 +60,14 @@
         SELECT * FROM user
         WHERE roleid=3
     </select>
-
+    <insert id="addPermissionById">
+        INSERT INTO (roleid,permissionid)
+        VALUES (#{roleid},#{permissionId})
+    </insert>
+    <delete id="deletePermissionById">
+        DELETE FROM role_permission WHERE roleid=#{roleId}
+    </delete>
+    <select id="findPermissionById">
+        SELECT * FROM role_permission WHERE roleid=#{roleId}
+    </select>
 </mapper>
