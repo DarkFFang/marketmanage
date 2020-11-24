@@ -12,7 +12,7 @@ public interface UserService extends UserDetailsService {
 
     int deleteUserById(Integer id);//删除用户（营业员或库管员）
 
-    int updateUserById(Integer id);//修改用户（营业员或库管员）
+    int updateUserById(User user);//修改用户（营业员或库管员）
 
     int updateUserRoleById(Integer id);//修改用户（营业员或库管员）
 

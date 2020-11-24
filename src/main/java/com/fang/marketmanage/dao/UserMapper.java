@@ -1,5 +1,6 @@
 package com.fang.marketmanage.dao;
 
+import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
 import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +16,7 @@ public interface UserMapper {
 
     int deleteUserById(Integer id);//删除用户（营业员或库管员）
 
-    int updateUserById(Integer id);//修改用户（营业员或库管员）
+    int updateUserById(User user);//修改用户（营业员或库管员）
 
     int updateUserRoleById(Integer id);//修改用户（营业员或库管员）
 

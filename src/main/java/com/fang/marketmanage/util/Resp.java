@@ -13,4 +13,14 @@ import lombok.Setter;
 public class Resp {
     private String status;
     private String msg;
+
+    public static Resp success(String msg)
+    {
+        return new Resp("success",msg);
+    }
+
+    public static Resp error(String msg)
+    {
+        return new Resp("error",msg);
+    }
 }

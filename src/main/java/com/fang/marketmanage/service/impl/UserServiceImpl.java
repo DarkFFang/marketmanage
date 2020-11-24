@@ -1,6 +1,8 @@
 package com.fang.marketmanage.service.impl;
 
+import com.fang.marketmanage.dao.RoleMapper;
 import com.fang.marketmanage.dao.UserMapper;
+import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
-    //系统管理员
+
+    @Autowired
+    RoleMapper roleMapper;
 
 
     @Override
@@ -25,10 +29,9 @@ public class UserServiceImpl implements UserService {
         if(user == null){
             throw new UsernameNotFoundException("用户不存在！");
         }
-        List<SimpleGrantedAuthority> simpleGrantedAuthorities = new ArrayList<>();
-        simpleGrantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+(user.getRoleId()).toString()));
-        System.out.println(user);
-        return new org.springframework.security.core.userdetails.User(user.getPhone(), user.getPassword(), simpleGrantedAuthorities);
+        List<Role> roles=roleMapper.getRolesByUserId(user.getId());
+        user.setRoles(roles);
+        return user;
     }
 
     @Override
@@ -44,17 +47,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int deleteUserById(Integer id) {
-        return 0;
+        return userMapper.deleteUserById(id);
     }
 
     @Override
-    public int updateUserById(Integer id) {
-        return 0;
+    public int updateUserById(User user) {
+        return userMapper.updateUserById(user);
     }
 
     @Override
     public int updateUserRoleById(Integer id) {
-        return 0;
+        return userMapper.updateUserRoleById(id);
     }
 
     @Override
