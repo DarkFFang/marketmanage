@@ -25,7 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //super.configure(http);
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").hasRole("系统管理员");
+                .antMatchers("/admin/**").hasRole("系统管理员")
+                .antMatchers("/goodmana/**").hasAnyRole("系统管理员","库管员");
 
         http.csrf().disable();
 
