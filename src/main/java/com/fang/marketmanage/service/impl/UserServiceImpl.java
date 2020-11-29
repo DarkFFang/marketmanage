@@ -1,13 +1,18 @@
 package com.fang.marketmanage.service.impl;
 
+import com.fang.marketmanage.config.CustomGrantedAuthority;
+import com.fang.marketmanage.dao.PermissionMapper;
 import com.fang.marketmanage.dao.RoleMapper;
 import com.fang.marketmanage.dao.UserMapper;
+import com.fang.marketmanage.entity.Permission;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +20,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     UserMapper userMapper;
 
     @Autowired
     RoleMapper roleMapper;
 
+    @Autowired
+    PermissionMapper permissionMapper;
+
 
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
         User user=userMapper.findUserByPhone(phone);
         if(user == null){
-            throw new UsernameNotFoundException("用户不存在！");
+            throw new UsernameNotFoundException(phone+"用户不存在！请联系管理员。");
         }
-        List<Role> roles=roleMapper.getRolesByUserId(user.getId());
-        user.setRoles(roles);
-        return user;
+        List<Permission> permissions=permissionMapper.findPermissionsByUserId(user.getId());
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Permission permission : permissions) {
+            if (permission != null && permission.getName() != null) {
+                GrantedAuthority grantedAuthority = new CustomGrantedAuthority(permission.getUrl(), permission.getMethod());
+                authorities.add(grantedAuthority);
+            }
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),authorities);
     }
 
     @Override
@@ -73,5 +87,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findKeeperList() {
         return null;
+    }
+
+    @Override
+    public int addPermissionById() {
+        return 0;
+    }
+
+    @Override
+    public int deletePermissionById() {
+        return 0;
+    }
+
+    @Override
+    public void alterUserAutoIncrement() {
+        userMapper.alterUserAutoIncrement();
     }
 }

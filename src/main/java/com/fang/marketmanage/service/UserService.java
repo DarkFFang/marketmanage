@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService extends UserDetailsService {
+public interface UserService {
     int addNewUser(User user);//增加用户（营业员或库管员）
 
     List<User> findUserList();//用户列表（营业员和库管员）
@@ -25,6 +25,8 @@ public interface UserService extends UserDetailsService {
     int addPermissionById();//增加用户权限
 
     int deletePermissionById();//删除用户权限
+
+    void alterUserAutoIncrement();
 
     //List<Permission> findPermissionById();//查询用户权限
 }

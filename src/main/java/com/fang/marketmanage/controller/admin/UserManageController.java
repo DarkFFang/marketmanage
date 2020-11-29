@@ -7,6 +7,8 @@ import com.fang.marketmanage.service.UserService;
 import com.fang.marketmanage.util.Resp;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,12 +22,17 @@ public class UserManageController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    RoleService roleService;
-
+    @GetMapping("/user")
+    public List<User> findUserList() {
+        List<User> userlist=userService.findUserList();
+        System.out.println(userlist);
+        return userlist;
+    }
 
     @PostMapping("/user")
     public Resp addNewUser(User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         if (userService.addNewUser(user)==1){
             return Resp.success("添加成功！");
         } else {
@@ -33,15 +40,11 @@ public class UserManageController {
         }
     }
 
-    @GetMapping("/user/list")
-    public List<User> findUserList() {
-        List<User> userlist=userService.findUserList();
-        System.out.println(userlist);
-        return userlist;
-    }
 
     @PutMapping("/user")
     public Resp updateUserById(User user){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(user.getPassword()));
         if (userService.updateUserById(user)==1){
             return Resp.success("修改成功！");
         } else {
@@ -52,14 +55,10 @@ public class UserManageController {
     @DeleteMapping("/user/{id}")
     public Resp deleteUserById(@PathVariable Integer id){
         if (userService.deleteUserById(id)==1){
+            userService.alterUserAutoIncrement();
             return Resp.success("删除成功！");
         } else {
             return Resp.error("删除失败");
         }
-    }
-
-    @GetMapping("/roles")
-    public List<Role> getRolesList() {
-        return roleService.getRolesList();
     }
 }

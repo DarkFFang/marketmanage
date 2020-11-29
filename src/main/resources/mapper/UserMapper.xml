@@ -29,7 +29,6 @@
     <delete id="deleteUserById">
         DELETE FROM user
         WHERE id=#{id}
-        ALTER TABLE user auto_increment = 1;
     </delete>
     <update id="updateUserById">
         UPDATE user u
@@ -80,4 +79,7 @@
     <select id="findPermissionById">
         SELECT * FROM role_permission WHERE roleid=#{roleId}
     </select>
+    <update id="alterUserAutoIncrement">
+        ALTER TABLE user auto_increment = 1
+    </update>
 </mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.PermissionMapper">
+    <resultMap id="permissionResultMap" type="com.fang.marketmanage.entity.Permission">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="url" column="url"/>
+        <result property="pId" column="pid"/>
+    </resultMap>
+    <select id="findPermissionsByUserId" resultMap="permissionResultMap">
+        select p.*
+        from user u
+        LEFT JOIN user_role ur on u.id=ur.userid
+        LEFT JOIN role r on ur.roleid=r.id
+        LEFT JOIN role_permission rp on rp.roleid=r.id
+        LEFT JOIN permission p on p.id =rp.permissionid
+        where u.id=#{id}
+    </select>
+    <select id="findAll" resultMap="permissionResultMap">
+        SELECT * FROM permission
+    </select>
+</mapper>

@@ -34,4 +34,6 @@ public interface UserMapper {
 
     int findPermissionById();//查询用户权限
 
+    void alterUserAutoIncrement();
+
 }
