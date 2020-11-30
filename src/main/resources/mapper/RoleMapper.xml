@@ -7,11 +7,30 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
     </resultMap>
-    <select id="getRolesByUserId" resultMap="roleResultMap">
+    <select id="findRolesByUserId" resultMap="roleResultMap">
         SELECT * FROM role
         WHERE id in (SELECT roleid FROM user_role WHERE userid=#{id})
     </select>
-    <select id="getRolesList" resultMap="roleResultMap">
+    <select id="findAllRole" resultMap="roleResultMap">
         SELECT * FROM role
     </select>
+    <insert id="addNewRole" parameterType="com.fang.marketmanage.entity.Role">
+        INSERT INTO role(name) VALUES (#{name})
+    </insert>
+    <update id="updateRoleById" parameterType="com.fang.marketmanage.entity.Role">
+        UPDATE role
+        SET name=#{name}
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteRoleById">
+        DELETE FROM role
+        WHERE id=#{id}
+    </delete>
+    <insert id="addNewUserRole">
+        INSERT INTO user_role(userid,roleid) VALUES (#{userid},#{roleid})
+    </insert>
+    <delete id="deleteUserRoleByUserId">
+        DELETE FROM user_role
+        WHERE userid=#{userid}
+    </delete>
 </mapper>

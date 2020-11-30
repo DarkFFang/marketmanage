@@ -8,6 +8,7 @@
         <result property="name" column="name"/>
         <result property="url" column="url"/>
         <result property="pId" column="pid"/>
+        <result property="method" column="method"/>
     </resultMap>
     <select id="findPermissionsByUserId" resultMap="permissionResultMap">
         select p.*
@@ -18,7 +19,21 @@
         LEFT JOIN permission p on p.id =rp.permissionid
         where u.id=#{id}
     </select>
-    <select id="findAll" resultMap="permissionResultMap">
-        SELECT * FROM permission
+    <select id="findPermissionsByRoleId" resultType="com.fang.marketmanage.entity.PermissionVo">
+        SELECT id,name FROM permission
+        WHERE id in (SELECT permissionid FROM role_permission WHERE roleid=#{roleid})
     </select>
+    <select id="findAllPermissions" resultType="com.fang.marketmanage.entity.PermissionVo">
+        SELECT id,name FROM permission
+    </select>
+    <insert id="addNewRolePermissions">
+        INSERT INTO role_permission (roleid,permissionid) VALUES
+        <foreach collection="permissionids" separator="," item="permissionid">
+            (#{roleid},#{permissionid})
+        </foreach>
+    </insert>
+    <delete id="deleteRolePermissionByRoleId">
+        DELETE FROM role_permission
+        WHERE roleid=#{roleid}
+    </delete>
 </mapper>
