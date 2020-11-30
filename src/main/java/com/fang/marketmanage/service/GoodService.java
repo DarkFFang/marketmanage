@@ -13,7 +13,11 @@ public interface GoodService {
 
     int updateGoodById(Good good);//修改商品
 
+    Integer findMaxId();
+
     Good findGoodByName(String name);//通过商品名称查询商品
 
     List<Good> findGoodListByType(String name);//通过商品类型查询商品列表
+
+    void alterGoodAutoIncrement();
 }

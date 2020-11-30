@@ -4,9 +4,10 @@ import com.fang.marketmanage.dao.StockMapper;
 import com.fang.marketmanage.entity.Stock;
 import com.fang.marketmanage.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class StockServiceImpl implements StockService {
     @Autowired
     StockMapper stockMapper;
@@ -39,5 +40,10 @@ public class StockServiceImpl implements StockService {
     @Override
     public List<Stock> finStockListByType(String name) {
         return null;
+    }
+
+    @Override
+    public void alterStockAutoIncrement() {
+        stockMapper.alterStockAutoIncrement();
     }
 }

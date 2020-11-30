@@ -18,4 +18,6 @@ public interface StockMapper {
     Stock findStockByName(String name);//通过商品名称查询该商品库存
 
     List<Stock> finStockListByType(String name);//通过类型查询该类型商品的库存
+
+    void alterStockAutoIncrement();
 }

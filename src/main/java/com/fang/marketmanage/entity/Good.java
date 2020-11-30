@@ -3,6 +3,7 @@ package com.fang.marketmanage.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -13,7 +14,9 @@ public class Good {
     private Integer id;
     private String name;
     private Integer typeId;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eDate;
     private Integer price;
     private Integer unitId;

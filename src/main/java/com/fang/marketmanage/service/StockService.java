@@ -17,4 +17,6 @@ public interface StockService {
 
     List<Stock> finStockListByType(String name);//通过类型查询该类型商品的库存
 
+    void alterStockAutoIncrement();
+
 }

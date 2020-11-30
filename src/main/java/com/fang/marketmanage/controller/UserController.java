@@ -10,6 +10,6 @@ public class UserController {
 
     @GetMapping("/currentUserName")
     public String currentUserName() {
-        return SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        return UserUtil.getCurrentUser().getUsername();
     }
 }

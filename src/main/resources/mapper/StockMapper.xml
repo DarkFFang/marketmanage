@@ -13,10 +13,16 @@
     <select id="findStockList" resultMap="stockResultMap">
         SELECT * FROM stock
     </select>
+    <insert id="addNewStock" parameterType="com.fang.marketmanage.entity.Stock">
+        INSERT INTO stock(goodid,date,quantity,unitId,price) VALUES (#{goodId},#{date},0,#{unitId},0)
+    </insert>
     <select id="findStockByName" resultMap="stockResultMap">
         SELECT  * FROM stock WHERE goodid=(SELECT goodid FROM good WHERE name=#{name})
     </select>
     <select id="finStockListByType" resultMap="stockResultMap">
         SELECT  * FROM stock WHERE goodid IN (SELECT goodid FROM good WHERE typeid=(SELECT typeid FROM goodtype WHERE name=#{name}))
     </select>
+    <update id="alterStockAutoIncrement">
+        ALTER TABLE stock auto_increment = 1
+    </update>
 </mapper>

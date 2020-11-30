@@ -34,6 +34,11 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
+    public Integer findMaxId() {
+        return goodMapper.findMaxId();
+    }
+
+    @Override
     public Good findGoodByName(String name) {
         return null;
     }
@@ -41,5 +46,10 @@ public class GoodServiceImpl implements GoodService {
     @Override
     public List<Good> findGoodListByType(String name) {
         return null;
+    }
+
+    @Override
+    public void alterGoodAutoIncrement() {
+        goodMapper.alterGoodAutoIncrement();
     }
 }

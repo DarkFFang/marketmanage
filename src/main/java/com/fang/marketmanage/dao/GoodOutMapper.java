@@ -22,4 +22,6 @@ public interface GoodOutMapper {
     List<GoodOut> findGoodOutListByDate(Date date);//通过时间查询出库单列表
 
     List<GoodOut> findGoodOutListByKeeperName(String name);//通过营业员员姓名查询出库单列表
+
+    void alterUserAutoIncrement();
 }

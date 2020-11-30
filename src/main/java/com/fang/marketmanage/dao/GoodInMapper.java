@@ -22,4 +22,6 @@ public interface GoodInMapper {
     List<GoodIn> findGoodInListByDate(Date date);//通过时间查询入库单列表
 
     List<GoodIn> findGoodInListByClerkName(String name);//通过库管员姓名查询入库单列表
+
+    void alterUserAutoIncrement();
 }

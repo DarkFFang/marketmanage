@@ -14,8 +14,13 @@
         <result property="other" column="other"/>
     </resultMap>
     <insert id="addNewGood" parameterType="com.fang.marketmanage.entity.Good">
-        INSERT INTO good VALUES (#{name},#{typeId},#{sDate},#{eDate},#{price},#{unitId},#{other})
+        INSERT INTO good(name,typeId,sDate,eDate,price,unitId,other) VALUES (#{name},#{typeId},#{sDate},#{eDate},#{price},#{unitId},#{other})
     </insert>
+    <select id="findMaxId" resultType="Integer">
+    SELECT id
+    FROM  good
+    ORDER BY id DESC LIMIT 1
+    </select>
     <select id="findGoodList" resultMap="goodResultMap">
         SELECT * FROM good
     </select>
@@ -33,4 +38,7 @@
     <select id="findGoodListByType" resultMap="goodResultMap">
         SELECT * FROM good WHERE typeid=(SELECT id FROM goodtype WHERE name=#{name})
     </select>
+    <update id="alterGoodAutoIncrement">
+        ALTER TABLE good auto_increment = 1
+    </update>
 </mapper>

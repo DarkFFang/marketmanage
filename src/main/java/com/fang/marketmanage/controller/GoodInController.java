@@ -25,20 +25,20 @@ public class GoodInController {
             return Resp.error("添加失败！");
         }
     }
-    @DeleteMapping("/goodin")
-    public Resp deleteGoodInById(Integer id) {
+    @DeleteMapping("/goodin/{id}")
+    public Resp deleteGoodInById(@PathVariable Integer id) {
         if (goodInService.deleteGoodInById(id) == 1) {
-            return Resp.success("添加成功！");
+            return Resp.success("删除成功！");
         } else {
-            return Resp.error("添加失败！");
+            return Resp.error("删除失败！");
         }
     }
     @PutMapping("/goodin")
     public Resp updateGoodInById(GoodIn goodIn) {
         if (goodInService.updateGoodInById(goodIn) == 1) {
-            return Resp.success("添加成功！");
+            return Resp.success("修改成功！");
         } else {
-            return Resp.error("添加失败！");
+            return Resp.error("修改失败！");
         }
     }
 }
