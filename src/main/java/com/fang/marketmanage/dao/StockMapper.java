@@ -13,7 +13,9 @@ public interface StockMapper {
 
     int deleteStockById(Integer id);//删除库存
 
-    int updateStockById(Stock stock);//修改库存
+    int updateStockQuantityIncByGoodId(Integer goodid,Integer increment);//修改库存增加数量
+
+    int updateStockQuantityDecByGoodId(Integer goodid,Integer decrement);//修改库存减少数量
 
     Stock findStockByName(String name);//通过商品名称查询该商品库存
 

@@ -1,6 +1,7 @@
 package com.fang.marketmanage.service.impl;
 
 import com.fang.marketmanage.dao.GoodOutMapper;
+import com.fang.marketmanage.dao.StockMapper;
 import com.fang.marketmanage.entity.GoodOut;
 import com.fang.marketmanage.service.GoodOutService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,14 @@ import java.util.List;
 public class GoodOutServiceImpl implements GoodOutService {
     @Autowired
     GoodOutMapper goodOutMapper;
+    @Autowired
+    StockMapper stockMapper;
 
     @Override
-    public int addNewGoodOut(GoodOut goodout) {
-        return goodOutMapper.addNewGoodOut(goodout);
+    public int addNewGoodOut(GoodOut goodOut) {
+        stockMapper.updateStockQuantityDecByGoodId(goodOut.getGoodId(), goodOut.getQuantity());
+        goodOut.setDate(new Date());
+        return goodOutMapper.addNewGoodOut(goodOut);
     }
 
     @Override

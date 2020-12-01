@@ -28,14 +28,7 @@ public class GoodController {
 
     @PostMapping("/good")
     public Resp addNewGood(Good good) {
-        Integer id=goodService.findMaxId()+1;
-        good.setId(id);
         if (goodService.addNewGood(good) == 1) {
-            Stock stock=new Stock();
-            stock.setGoodId(good.getId());
-            stock.setUnitId(good.getUnitId());
-            stock.setDate(new Date());
-            stockService.addNewStock(stock);
             return Resp.success("添加成功！");
         } else {
             return Resp.error("添加失败！");

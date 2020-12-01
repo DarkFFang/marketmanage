@@ -15,7 +15,7 @@
         <result property="userId" column="userid"/>
     </resultMap>
     <insert id="addNewGoodOut" parameterType="com.fang.marketmanage.entity.GoodOut">
-        INSERT INTO goodout VALUES (#{date},#{supplierId},#{goodId},#{quantity},#{unitId},#{price},#{paid},#{userId})
+        INSERT INTO goodout(date,supplierid,goodid,quantity,unitid,price,paid,userid) VALUES (#{date},#{supplierId},#{goodId},#{quantity},#{unitId},#{price},#{paid},#{userId})
     </insert>
     <select id="findGoodOutList" resultMap="goodOutResultMap">
         SELECT * FROM goodout

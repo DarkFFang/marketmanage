@@ -29,7 +29,7 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public int updateStockById(Stock stock) {
-        return stockMapper.updateStockById(stock);
+       return 0;
     }
 
     @Override

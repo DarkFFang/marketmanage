@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fang.marketmanage.dao.GoodInMapperMapper">
+<mapper namespace="com.fang.marketmanage.dao.GoodInMapper">
     <resultMap id="goodInResultMap" type="com.fang.marketmanage.entity.GoodIn">
         <id property="id" column="id"/>
         <result property="date" column="date"/>
@@ -15,7 +15,7 @@
         <result property="userId" column="userid"/>
     </resultMap>
     <insert id="addNewGoodIn" parameterType="com.fang.marketmanage.entity.GoodIn">
-        INSERT INTO goodin VALUES (#{date},#{supplierId},#{goodId},#{quantity},#{unitId},#{price},#{paid},#{userId})
+        INSERT INTO goodin(date,supplierid,goodid,quantity,unitid,price,paid,userid) VALUES (#{date},#{supplierId},#{goodId},#{quantity},#{unitId},#{price},#{paid},#{userId})
     </insert>
     <select id="findGoodInList" resultMap="goodInResultMap">
         SELECT * FROM goodin

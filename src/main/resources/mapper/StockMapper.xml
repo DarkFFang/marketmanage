@@ -22,6 +22,16 @@
     <select id="finStockListByType" resultMap="stockResultMap">
         SELECT  * FROM stock WHERE goodid IN (SELECT goodid FROM good WHERE typeid=(SELECT typeid FROM goodtype WHERE name=#{name}))
     </select>
+    <update id="updateStockQuantityIncByGoodId">
+        UPDATE stock
+        SET quantity=quantity+#{increment}
+        WHERE goodid=#{goodid}
+    </update>
+    <update id="updateStockQuantityDecByGoodId">
+        UPDATE stock
+        SET quantity=quantity-#{decrement}
+        WHERE goodid=#{goodid}
+    </update>
     <update id="alterStockAutoIncrement">
         ALTER TABLE stock auto_increment = 1
     </update>
