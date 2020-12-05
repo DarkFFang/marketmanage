@@ -4,6 +4,7 @@ import com.fang.marketmanage.config.CustomGrantedAuthority;
 import com.fang.marketmanage.dao.PermissionMapper;
 import com.fang.marketmanage.dao.RoleMapper;
 import com.fang.marketmanage.dao.UserMapper;
+import com.fang.marketmanage.entity.JwtUser;
 import com.fang.marketmanage.entity.Permission;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 authorities.add(grantedAuthority);
             }
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),authorities);
+        return new JwtUser(user.getId(),user.getUsername(),user.getPhone(),user.getPassword(),authorities);
     }
 
     @Override

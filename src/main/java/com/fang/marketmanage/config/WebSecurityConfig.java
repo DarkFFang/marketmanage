@@ -1,24 +1,26 @@
 package com.fang.marketmanage.config;
 
-import com.fang.marketmanage.service.impl.UserServiceImpl;
+import com.alibaba.fastjson.JSONObject;
+import com.fang.marketmanage.entity.JwtUser;
+import com.fang.marketmanage.filter.JwtAuthenticationTokenFilter;
+import com.fang.marketmanage.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,40 +31,36 @@ import java.io.PrintWriter;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private CustomFilterSecurityInterceptor customFilterSecurityInterceptor;
+    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Autowired
-    SessionRegistry sessionRegistry;
+    private CorsFilter corsFilter;
 
-    @Bean
-    SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
-    }
+    @Autowired
+    private UserDetailsService userDetailsService;
 
-    @Bean
-    UserDetailsService detailsService(){
-        return new UserServiceImpl();
-    }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(detailsService());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //super.configure(http);
-        http.authorizeRequests()
-                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                    @Override
-                    public <O extends FilterSecurityInterceptor> O postProcess(O o) {
-                        o.setSecurityMetadataSource(new CustomInvocationSecurityMetadataSourceService());
-                        o.setAccessDecisionManager(new CustomAccessDecisionManager());
-                        return o;
-                    }
-                });
-
-        http.csrf().disable();
+        http
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/*/api-docs").permitAll()
+                .antMatchers("/druid/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .headers().frameOptions().disable();
 
         http.formLogin()
                 .loginProcessingUrl("/login")
@@ -72,6 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
                         httpServletResponse.setContentType("application/json;charset=utf-8");
+                        JwtUser jwtUser =(JwtUser) authentication.getPrincipal();
+                        httpServletResponse.setHeader(JwtTokenUtil.TOKEN_HEADER,JwtTokenUtil.createToken(jwtUser));
                         PrintWriter out = httpServletResponse.getWriter();
                         out.write("{\"status\":\"success\",\"msg\":\"登录成功\"}");
                         out.flush();
@@ -91,11 +91,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                ;
+                .logoutUrl("/logout");
 
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
+        http.addFilterBefore(corsFilter, LogoutFilter.class);
 
-        http.addFilterBefore(customFilterSecurityInterceptor, FilterSecurityInterceptor.class);
     }
 
     @Bean
