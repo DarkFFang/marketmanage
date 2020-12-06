@@ -5,16 +5,17 @@
 <mapper namespace="com.fang.marketmanage.dao.RefundMapper">
     <resultMap id="refundResultMap" type="com.fang.marketmanage.entity.Refund">
         <id property="id" column="id"/>
-        <result property="goodid" column="goodId"/>
+        <result property="goodId" column="goodid"/>
         <result property="date" column="date"/>
         <result property="quantity" column="quantity"/>
         <result property="unitId" column="unitid"/>
         <result property="price" column="price"/>
         <result property="reason" column="reason"/>
     </resultMap>
-    <select id="addNewRefund" parameterType="com.fang.marketmanage.entity.Refund">
-        INSERT INTO refund VALUES (#{goodId},#{date},#{quantity},#{unitId},#{price},#{reason})
-    </select>
+    <insert id="addNewRefund" parameterType="com.fang.marketmanage.entity.Refund">
+        INSERT INTO refund(goodid,date,quantity,unitid,price,reason)
+        VALUES (#{goodId},#{date},#{quantity},#{unitId},#{price},#{reason})
+    </insert>
     <select id="findRefundList" resultMap="refundResultMap">
         SELECT * FROM refund
     </select>

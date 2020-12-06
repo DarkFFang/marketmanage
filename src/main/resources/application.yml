@@ -10,6 +10,8 @@ spring:
   username: market
   password: 555913
   driver-class-name: com.mysql.cj.jdbc.Driver
+  hikari:
+   max-lifetime: 120000
 
 
 mybatis:

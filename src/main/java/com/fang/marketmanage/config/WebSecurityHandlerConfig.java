@@ -27,9 +27,8 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 /**
  * spring security处理器
  *
- * @author 小威老师 xiaoweijiagou@163.com
+ * @author fang
  *
- *         2017年10月16日
  */
 @Configuration
 public class WebSecurityHandlerConfig {
@@ -72,7 +71,7 @@ public class WebSecurityHandlerConfig {
     }
 
     /**
-     * 未登录，返回403
+     * 未登录，返回401
      *
      * @return
      */
@@ -83,7 +82,7 @@ public class WebSecurityHandlerConfig {
             @Override
             public void commence(HttpServletRequest request, HttpServletResponse response,
                                  AuthenticationException authException) throws IOException, ServletException {
-                RespUtil.response(response,HttpStatus.FORBIDDEN.value(),RespUtil.error("认证失效或者过期，禁止访问，请重新登录"));
+                RespUtil.response(response,HttpStatus.UNAUTHORIZED.value(),RespUtil.error("认证失效或者过期，禁止访问，请重新登录"));
             }
         };
     }

@@ -6,14 +6,11 @@ import com.fang.marketmanage.dao.RoleMapper;
 import com.fang.marketmanage.dao.UserMapper;
 import com.fang.marketmanage.entity.JwtUser;
 import com.fang.marketmanage.entity.Permission;
-import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 

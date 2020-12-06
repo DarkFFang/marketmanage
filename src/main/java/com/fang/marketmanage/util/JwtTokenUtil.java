@@ -36,7 +36,6 @@ public class JwtTokenUtil {
         claims.put("id", jwtUser.getId());
         claims.put("username", jwtUser.getUsername());
         claims.put("phone", jwtUser.getPhone());
-        claims.put("authorities", jwtUser.getAuthorities());
         return createToken(claims);
     }
 

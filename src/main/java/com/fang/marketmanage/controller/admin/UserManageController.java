@@ -26,7 +26,7 @@ public class UserManageController {
     @GetMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;GET')")
     public List<User> findUserList() {
-        List<User> userlist=userService.findUserList();
+        List<User> userlist = userService.findUserList();
         return userlist;
     }
 
@@ -35,7 +35,7 @@ public class UserManageController {
     public RespUtil addNewUser(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        if (userService.addNewUser(user)==1){
+        if (userService.addNewUser(user) == 1) {
             return RespUtil.success("添加成功！");
         } else {
             return RespUtil.error("添加失败！");
@@ -45,10 +45,10 @@ public class UserManageController {
 
     @PutMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;PUT')")
-    public RespUtil updateUserById(User user){
+    public RespUtil updateUserById(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
-        if (userService.updateUserById(user)==1){
+        if (userService.updateUserById(user) == 1) {
             return RespUtil.success("修改成功！");
         } else {
             return RespUtil.error("修改失败！");
@@ -57,8 +57,8 @@ public class UserManageController {
 
     @DeleteMapping("/user/{id}")
     @PreAuthorize("hasAuthority('/admin/user/**;DELETE')")
-    public RespUtil deleteUserById(@PathVariable Integer id){
-        if (userService.deleteUserById(id)==1){
+    public RespUtil deleteUserById(@PathVariable Integer id) {
+        if (userService.deleteUserById(id) == 1) {
             userService.alterUserAutoIncrement();
             return RespUtil.success("删除成功！");
         } else {

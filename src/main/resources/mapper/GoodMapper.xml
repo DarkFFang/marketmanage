@@ -14,7 +14,8 @@
         <result property="other" column="other"/>
     </resultMap>
     <insert id="addNewGood" parameterType="com.fang.marketmanage.entity.Good">
-        INSERT INTO good(name,typeId,sDate,eDate,price,unitId,other) VALUES (#{name},#{typeId},#{sDate},#{eDate},#{price},#{unitId},#{other})
+        INSERT INTO good(name,typeId,sDate,eDate,price,unitId,other)
+        VALUES (#{name},#{typeId},#{sDate},#{eDate},#{price},#{unitId},#{other})
     </insert>
     <select id="findMaxId" resultType="Integer">
     SELECT id

@@ -1,12 +1,7 @@
 package com.fang.marketmanage;
 
 import com.alibaba.fastjson.JSON;
-import com.fang.marketmanage.config.CustomGrantedAuthority;
-import com.fang.marketmanage.dao.PermissionMapper;
-import com.fang.marketmanage.dao.UserMapper;
 import com.fang.marketmanage.entity.JwtUser;
-import com.fang.marketmanage.entity.Permission;
-import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.service.UserService;
 import com.fang.marketmanage.util.JwtTokenUtil;
 import io.jsonwebtoken.Claims;
@@ -16,19 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.*;
 
 @SpringBootTest
 class MarketmanageApplicationTests {
-    @Autowired
-    private UserMapper userMapper;
 
-    @Autowired
-    private PermissionMapper permissionMapper;
 
     @Autowired
     private UserService userService;

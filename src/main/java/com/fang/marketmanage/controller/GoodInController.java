@@ -19,6 +19,7 @@ public class GoodInController {
     public List<GoodIn> findGoodInList() {
         return goodInService.findGoodInList();
     }
+
     @PostMapping("/goodin")
     @PreAuthorize("hasAuthority('/goodin/**;POST')")
     public RespUtil addNewGoodIn(GoodIn goodIn) {
@@ -28,6 +29,7 @@ public class GoodInController {
             return RespUtil.error("添加失败！");
         }
     }
+
     @DeleteMapping("/goodin/{id}")
     @PreAuthorize("hasAuthority('/goodin/**;DELETE')")
     public RespUtil deleteGoodInById(@PathVariable Integer id) {
@@ -37,6 +39,7 @@ public class GoodInController {
             return RespUtil.error("删除失败！");
         }
     }
+
     @PutMapping("/goodin")
     @PreAuthorize("hasAuthority('/goodin/**;PUT')")
     public RespUtil updateGoodInById(GoodIn goodIn) {
