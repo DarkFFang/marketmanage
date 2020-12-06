@@ -1,9 +1,8 @@
 package com.fang.marketmanage.controller.admin;
 
-import com.fang.marketmanage.entity.Permission;
 import com.fang.marketmanage.entity.PermissionVo;
 import com.fang.marketmanage.service.RoleService;
-import com.fang.marketmanage.util.Resp;
+import com.fang.marketmanage.util.RespUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,29 +25,29 @@ public class PermissionManageController {
 
     @PostMapping("/rolepermission")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;POST')")
-    public Resp addNewRolePermissions(Integer roleid,Integer[] permissionids) {
+    public RespUtil addNewRolePermissions(Integer roleid,Integer[] permissionids) {
         if (roleService.addNewRolePermissions(roleid, permissionids) == permissionids.length) {
-            return Resp.success("添加成功");
+            return RespUtil.success("添加成功");
         }
-        return Resp.error("添加失败");
+        return RespUtil.error("添加失败");
     }
 
     @PutMapping("/rolepermission")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;PUT')")
-    public Resp updateRolePermissions(Integer roleid, Integer[] permissionids) {
+    public RespUtil updateRolePermissions(Integer roleid, Integer[] permissionids) {
         if (roleService.updateRolePermissions(roleid, permissionids) == permissionids.length) {
-            return Resp.success("修改成功");
+            return RespUtil.success("修改成功");
         }
-        return Resp.error("修改失败");
+        return RespUtil.error("修改失败");
     }
 
     @DeleteMapping("/rolepermission/{roleid}")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;DELETE')")
-    public Resp deleteRolePermissionByRoleId(@PathVariable Integer roleid) {
+    public RespUtil deleteRolePermissionByRoleId(@PathVariable Integer roleid) {
         if (roleService.deleteRolePermissionByRoleId(roleid) > 0) {
-            return Resp.success("删除成功");
+            return RespUtil.success("删除成功");
         }
-        return Resp.error("删除失败");
+        return RespUtil.error("删除失败");
     }
 
     @GetMapping("/rolepermission/{roleid}")

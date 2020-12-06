@@ -18,7 +18,7 @@ public class JwtTokenUtil {
     private static final String SECRET = "Qnxj@xc!mk";
     private static final String ISS = "fang";
 
-    private static final int EXPIRATION = 60 * 60 * 24;
+    private static final int EXPIRATION = 30;
 
     // 创建token
     public static String createToken(Map<String, Object> claims) {

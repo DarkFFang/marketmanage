@@ -4,7 +4,7 @@ import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.service.RoleService;
 import com.fang.marketmanage.service.UserService;
-import com.fang.marketmanage.util.Resp;
+import com.fang.marketmanage.util.RespUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,37 +32,37 @@ public class UserManageController {
 
     @PostMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;POST')")
-    public Resp addNewUser(User user) {
+    public RespUtil addNewUser(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         if (userService.addNewUser(user)==1){
-            return Resp.success("添加成功！");
+            return RespUtil.success("添加成功！");
         } else {
-            return Resp.error("添加失败！");
+            return RespUtil.error("添加失败！");
         }
     }
 
 
     @PutMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;PUT')")
-    public Resp updateUserById(User user){
+    public RespUtil updateUserById(User user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         if (userService.updateUserById(user)==1){
-            return Resp.success("修改成功！");
+            return RespUtil.success("修改成功！");
         } else {
-            return Resp.error("修改失败！");
+            return RespUtil.error("修改失败！");
         }
     }
 
     @DeleteMapping("/user/{id}")
     @PreAuthorize("hasAuthority('/admin/user/**;DELETE')")
-    public Resp deleteUserById(@PathVariable Integer id){
+    public RespUtil deleteUserById(@PathVariable Integer id){
         if (userService.deleteUserById(id)==1){
             userService.alterUserAutoIncrement();
-            return Resp.success("删除成功！");
+            return RespUtil.success("删除成功！");
         } else {
-            return Resp.error("删除失败");
+            return RespUtil.error("删除失败");
         }
     }
 }

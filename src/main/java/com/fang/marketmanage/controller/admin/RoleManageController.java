@@ -2,7 +2,7 @@ package com.fang.marketmanage.controller.admin;
 
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.service.RoleService;
-import com.fang.marketmanage.util.Resp;
+import com.fang.marketmanage.util.RespUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,52 +25,52 @@ public class RoleManageController {
 
     @PostMapping("/role")
     @PreAuthorize("hasAuthority('/admin/role/**;POST')")
-    public Resp addNewRole(Role role) {
+    public RespUtil addNewRole(Role role) {
         if (roleService.addNewRole(role) == 1) {
-            return Resp.success("添加成功");
+            return RespUtil.success("添加成功");
         }
-        return Resp.error("添加失败");
+        return RespUtil.error("添加失败");
     }
     @PutMapping("/role")
     @PreAuthorize("hasAuthority('/admin/role/**;PUT')")
-    public Resp updateRoleById(Role role) {
+    public RespUtil updateRoleById(Role role) {
         if (roleService.updateRoleById(role) == 1) {
-            return Resp.success("修改成功");
+            return RespUtil.success("修改成功");
         }
-        return Resp.error("修改失败");
+        return RespUtil.error("修改失败");
     }
     @DeleteMapping("/role/{id}")
     @PreAuthorize("hasAuthority('/admin/role/**;DELETE')")
-    public Resp deleteRoleById(@PathVariable Integer id) {
+    public RespUtil deleteRoleById(@PathVariable Integer id) {
         if (roleService.deleteRoleById(id) == 1) {
-            return Resp.success("删除成功");
+            return RespUtil.success("删除成功");
         }
-        return Resp.error("删除失败");
+        return RespUtil.error("删除失败");
     }
 
     @PostMapping("/userrole")
     @PreAuthorize("hasAuthority('/admin/userrole/**;POST')")
-    public Resp addNewUserRole(Integer userid, Integer roleid) {
+    public RespUtil addNewUserRole(Integer userid, Integer roleid) {
         if (roleService.addNewUserRole(userid, roleid) == 1) {
-            return Resp.success("添加成功");
+            return RespUtil.success("添加成功");
         }
-        return Resp.error("添加失败");
+        return RespUtil.error("添加失败");
     }
 
     @PutMapping("/userrole")
     @PreAuthorize("hasAuthority('/admin/userrole/**;PUT')")
-    public Resp updateUserRole(Integer userid, Integer roleid) {
+    public RespUtil updateUserRole(Integer userid, Integer roleid) {
         if (roleService.updateUserRole(userid,roleid) == 1) {
-            return Resp.success("修改成功");
+            return RespUtil.success("修改成功");
         }
-        return Resp.error("修改失败");
+        return RespUtil.error("修改失败");
     }
     @DeleteMapping("/userrole/{userid}")
     @PreAuthorize("hasAuthority('/admin/userrole/**;DELETE')")
-    public Resp deleteUserRoleByUserId(@PathVariable Integer userid) {
+    public RespUtil deleteUserRoleByUserId(@PathVariable Integer userid) {
         if (roleService.deleteUserRoleByUserId(userid) == 1) {
-            return Resp.success("删除成功");
+            return RespUtil.success("删除成功");
         }
-        return Resp.error("删除失败");
+        return RespUtil.error("删除失败");
     }
 }

@@ -17,11 +17,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.ServletException;
@@ -35,6 +38,17 @@ import java.io.PrintWriter;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+    @Autowired
+    private LogoutSuccessHandler logoutSuccessHandler;
+    @Autowired
+    private AuthenticationSuccessHandler authenticationSuccessHandler;
+    @Autowired
+    private AuthenticationFailureHandler authenticationFailureHandler;
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
 
     @Autowired
     private CorsFilter corsFilter;
@@ -70,32 +84,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .usernameParameter("phone")
                 .passwordParameter("password")
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-                        httpServletResponse.setContentType("application/json;charset=utf-8");
-                        JwtUser jwtUser =(JwtUser) authentication.getPrincipal();
-                        httpServletResponse.setHeader(JwtTokenUtil.TOKEN_HEADER,JwtTokenUtil.createToken(jwtUser));
-                        PrintWriter out = httpServletResponse.getWriter();
-                        out.write("{\"status\":\"success\",\"msg\":\"登录成功\"}");
-                        out.flush();
-                        out.close();
-                    }
-                })
-                .failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-                        httpServletResponse.setContentType("application/json;charset=utf-8");
-                        PrintWriter out = httpServletResponse.getWriter();
-                        out.write("{\"status\":\"error\",\"msg\":\"登录失败\"}");
-                        out.flush();
-                        out.close();
-                    }
-                })
-                .permitAll()
-                .and()
-                .logout()
-                .logoutUrl("/logout");
+                .successHandler(authenticationSuccessHandler)
+                .failureHandler(authenticationFailureHandler)
+                .permitAll();
+
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessHandler(logoutSuccessHandler);
+
+        http.exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler);
 
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(corsFilter, JwtAuthenticationTokenFilter.class);
