@@ -33,6 +33,7 @@ public class GoodController {
     }
 
     @PostMapping("/good")
+    @PreAuthorize("hasAuthority('/good/**;POST')")
     public Resp addNewGood(Good good) {
         if (goodService.addNewGood(good) == 1) {
             return Resp.success("添加成功！");
