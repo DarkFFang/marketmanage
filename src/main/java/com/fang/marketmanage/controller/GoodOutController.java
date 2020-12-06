@@ -4,6 +4,7 @@ import com.fang.marketmanage.entity.GoodOut;
 import com.fang.marketmanage.service.GoodOutService;
 import com.fang.marketmanage.util.Resp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +15,12 @@ public class GoodOutController {
     GoodOutService goodOutService;
 
     @GetMapping("/goodout")
+    @PreAuthorize("hasAuthority('/goodout/**;GET')")
     public List<GoodOut> findGoodOutList() {
         return goodOutService.findGoodOutList();
     }
     @PostMapping("/goodout")
+    @PreAuthorize("hasAuthority('/goodout/**;POST')")
     public Resp addNewGoodOut(GoodOut goodOut) {
         if (goodOutService.addNewGoodOut(goodOut) == 1) {
             return Resp.success("添加成功！");
@@ -26,6 +29,7 @@ public class GoodOutController {
         }
     }
     @DeleteMapping("/goodout/{id}")
+    @PreAuthorize("hasAuthority('/goodout/**;DELETE')")
     public Resp deleteGoodOutById(@PathVariable Integer id) {
         if (goodOutService.deleteGoodOutById(id) == 1) {
             return Resp.success("删除成功！");
@@ -34,6 +38,7 @@ public class GoodOutController {
         }
     }
     @PutMapping("/goodout")
+    @PreAuthorize("hasAuthority('/goodout/**;PUT')")
     public Resp updateGoodOutById(GoodOut goodOut) {
         if (goodOutService.updateGoodOutById(goodOut) == 1) {
             return Resp.success("修改成功！");

@@ -43,6 +43,7 @@ public class GoodController {
     }
 
     @PutMapping("/good")
+    @PreAuthorize("hasAuthority('/good/**;PUT')")
     public Resp updateGoodById(Good good) {
         if (goodService.updateGoodById(good) == 1) {
             return Resp.success("修改成功！");
@@ -52,6 +53,7 @@ public class GoodController {
     }
 
     @DeleteMapping("/good/{id}")
+    @PreAuthorize("hasAuthority('/good/**;DELETE')")
     public Resp deleteGoodById(@PathVariable Integer id) {
         if (goodService.deleteGoodById(id) == 1) {
             return Resp.success("删除成功！");

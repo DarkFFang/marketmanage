@@ -31,6 +31,7 @@ public class UserManageController {
     }
 
     @PostMapping("/user")
+    @PreAuthorize("hasAuthority('/admin/user/**;POST')")
     public Resp addNewUser(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -43,6 +44,7 @@ public class UserManageController {
 
 
     @PutMapping("/user")
+    @PreAuthorize("hasAuthority('/admin/user/**;PUT')")
     public Resp updateUserById(User user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -54,6 +56,7 @@ public class UserManageController {
     }
 
     @DeleteMapping("/user/{id}")
+    @PreAuthorize("hasAuthority('/admin/user/**;DELETE')")
     public Resp deleteUserById(@PathVariable Integer id){
         if (userService.deleteUserById(id)==1){
             userService.alterUserAutoIncrement();
