@@ -21,6 +21,8 @@ public class ResourcesConfig implements WebMvcConfigurer {
         config.addAllowedHeader("*");
         // 设置访问源请求方法
         config.addAllowedMethod("*");
+        // 暴露头部
+        config.addExposedHeader("Authorization");
         // 对接口配置跨域设置
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
