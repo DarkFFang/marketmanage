@@ -7,13 +7,16 @@ import com.fang.marketmanage.service.GoodService;
 import com.fang.marketmanage.service.StockService;
 import com.fang.marketmanage.util.Resp;
 import io.swagger.models.auth.In;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
 
-
+@Slf4j
 @RestController
 public class GoodController {
     @Autowired
@@ -23,7 +26,9 @@ public class GoodController {
     StockService stockService;
 
     @GetMapping("/good")
+    @PreAuthorize("hasAuthority('/good/**;GET')")
     public List<Good> findGoodList() {
+        log.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
         return goodService.findGoodList();
     }
 

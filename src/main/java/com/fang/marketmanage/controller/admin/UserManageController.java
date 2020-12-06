@@ -7,6 +7,7 @@ import com.fang.marketmanage.service.UserService;
 import com.fang.marketmanage.util.Resp;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
@@ -23,9 +24,9 @@ public class UserManageController {
     UserService userService;
 
     @GetMapping("/user")
+    @PreAuthorize("hasAuthority('/admin/user/**;GET')")
     public List<User> findUserList() {
         List<User> userlist=userService.findUserList();
-        System.out.println(userlist);
         return userlist;
     }
 
