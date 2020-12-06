@@ -1,7 +1,7 @@
 package com.fang.marketmanage.controller;
 import com.fang.marketmanage.entity.Supplier;
 import com.fang.marketmanage.service.SupplierService;
-import com.fang.marketmanage.util.Resp;
+import com.fang.marketmanage.util.RespUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,39 +19,29 @@ public class SupplierController {
     }
     @PostMapping("/supplier")
     @PreAuthorize("hasAuthority('/supplier/**;POST')")
-    public Resp addNewSupplier(Supplier supplier) {
+    public RespUtil addNewSupplier(Supplier supplier) {
         if (supplierService.addNewSupplier(supplier) == 1) {
-            return Resp.success("添加成功！");
+            return RespUtil.success("添加成功！");
         } else {
-            return Resp.error("添加失败！");
+            return RespUtil.error("添加失败！");
         }
     }
     @DeleteMapping("/supplier/{id}")
     @PreAuthorize("hasAuthority('/supplier/**;DELETE')")
-    public Resp deleteSupplierById(@PathVariable Integer id) {
+    public RespUtil deleteSupplierById(@PathVariable Integer id) {
         if (supplierService.deleteSupplierById(id) == 1) {
-            return Resp.success("删除成功！");
+            return RespUtil.success("删除成功！");
         } else {
-            return Resp.error("删除失败！");
+            return RespUtil.error("删除失败！");
         }
     }
     @PutMapping("/supplier")
     @PreAuthorize("hasAuthority('/supplier/**;PUT')")
-    public Resp updateSupplierById(Supplier supplier) {
+    public RespUtil updateSupplierById(Supplier supplier) {
         if (supplierService.updateSupplierById(supplier) == 1) {
-            return Resp.success("修改成功！");
+            return RespUtil.success("修改成功！");
         } else {
-            return Resp.error("修改失败！");
+            return RespUtil.error("修改失败！");
         }
-    }
-    @GetMapping("/supplier")
-    @PreAuthorize("hasAuthority('/supplier/**;GET')")
-    public Supplier findSupplierByName(String name) {
-        return supplierService.findSupplierByName(name);
-    }
-    @GetMapping("/supplier")
-    @PreAuthorize("hasAuthority('/supplier/**;GET')")
-    public List<Supplier> findSupplierListByReputation(String reputation) {
-        return supplierService.findSupplierListByReputation(reputation);
     }
 }
