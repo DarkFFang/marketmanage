@@ -45,8 +45,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
 
-
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -64,12 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/*/api-docs").permitAll()
                 .antMatchers("/druid/**").permitAll()
+                .antMatchers("/static/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable();
 
         http.formLogin()
-                .loginProcessingUrl("/login")
                 .usernameParameter("phone")
                 .passwordParameter("password")
                 .successHandler(authenticationSuccessHandler)

@@ -32,6 +32,11 @@
         SET quantity=quantity-#{decrement}
         WHERE goodid=#{goodid}
     </update>
+    <update id="updateStockQuantityByGoodId">
+        UPDATE stock
+        SET quantity=#{newQuantity}
+        WHERE goodid=#{goodid}
+    </update>
     <update id="alterStockAutoIncrement">
         ALTER TABLE stock auto_increment = 1
     </update>
