@@ -10,7 +10,7 @@
         <result property="workDay" column="workday"/>
     </resultMap>
     <select id="addNewWorkTime" parameterType="com.fang.marketmanage.entity.WorkTime">
-        INSERT INTO workday
+        INSERT INTO workday(userid,sdate,edate,workday)
         VALUES (#{userId},#{sDate},#{eDate},#{workDay})
     </select>
     <select id="findWorkTimeList" resultMap="workTimeResultMap">
@@ -21,10 +21,25 @@
         WHERE userid=#{userId} and workday=#{workDay}
     </delete>
     <update id="updateWorkTimeById">
-        UPDATE workday
-        SET userid=(SELECT userid FROM user WHERE username=#{username}),
-            roleid=(SELECT roleid FROM role WHERE name=#{name}),
-            sdate=#{sDate},edate=#{eDate},workday=#{workDay}
+        UPDATE workday w
+        <trim prefix="set" suffixOverrides=",">
+            <if test="userid != null and userid != ''">
+                w.userid = (SELECT userid FROM user WHERE username=#{username}),
+            </if>
+            <if test="roleid != null and roleid != ''">
+                w.roleid = (SELECT roleid FROM role WHERE name=#{name}),
+            </if>
+            <if test="sdate != null and sdate != ''">
+                w.sdate = #{sDate},
+            </if>
+            <if test="edate != null and edate != ''">
+                w.edate = #{eDate},
+            </if>
+            <if test="workDay != null and workDay != ''">
+                w.workday = #{workDay},
+            </if>
+        </trim>
+        WHERE userid=#{userId} and workday=#{workDay}
     </update>
     <select id="searchWorkTimeByUsername" resultMap="workTimeResultMap">
         SELECT * FROM workday WHERE userid=(SELECT userid FROM user WHERE username=#{username}

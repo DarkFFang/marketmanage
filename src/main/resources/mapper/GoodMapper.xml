@@ -29,8 +29,33 @@
         DELETE FROM good where id=#{id}
     </delete>
     <update id="updateGoodById">
-        UPDATE good SET
-        name=#{name},typeid=#{typeId},sdate=#{sDate},edate=#{eDate},price=#{price},unitId=#{unitId},other=#{other}
+        UPDATE good w
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                w.name = #{name},
+            </if>
+            <if test="typeId != null and typeId != ''">
+                w.typeid = #{typeId},
+            </if>
+            <if test="sDate != null and sDate != ''">
+                w.sdate = #{sDate},
+            </if>
+            <if test="eDate != null and eDate != ''">
+                w.edate = #{eDate},
+            </if>
+            <if test="price != null and price != ''">
+                w.price = #{price},
+            </if>
+            <if test="price != null and price != ''">
+                w.price = #{price},
+            </if>
+            <if test="unitId != null and unitId != ''">
+                w.unitid = #{unitId},
+            </if>
+            <if test="other != null and other != ''">
+                w.other = #{other},
+            </if>
+        </trim>
         WHERE id=#{id}
     </update>
     <select id="findGoodByName" resultMap="goodResultMap">

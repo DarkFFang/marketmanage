@@ -26,6 +26,33 @@
         UPDATE supplier SET name=#{name},address=#{address},phone=#{phone},email=#{email},fax=#{fax},reputation=#{reputation},loan=#{loan}
         WHERE id=#{id}
     </update>
+    <update id="updateSupplierById">
+        UPDATE supplier w
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name != null and name != ''">
+                w.name = #{name},
+            </if>
+            <if test="address != null and address != ''">
+                w.address = #{address},
+            </if>
+            <if test="phone != null and phone != ''">
+                w.phone = #{phone},
+            </if>
+            <if test="email != null and email != ''">
+                w.email = #{email},
+            </if>
+            <if test="fax != null and fax != ''">
+                w.fax = #{fax},
+            </if>
+            <if test="reputation != null and reputation != ''">
+                w.reputation = #{reputation},
+            </if>
+            <if test="loan != null and loan != ''">
+                w.loan = #{loan},
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
     <select id="findSupplierByName" resultMap="supplierResultMap">
         SELECT * FROM supplier WHERE name=#{name}
     </select>

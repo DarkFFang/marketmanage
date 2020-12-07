@@ -24,7 +24,33 @@
         DELETE FROM goodout where id=#{id}
     </delete>
     <update id="updateGoodOutById">
-        UPDATE goodout SET date=#{date},supplierid=#{supplierId},goodid=#{goodId},quantity=#{quantity},unitid=#{unitId},price=#{price},paid=#{paid},userid=#{userId}
+        UPDATE goodout w
+        <trim prefix="set" suffixOverrides=",">
+            <if test="date != null and date != ''">
+                w.date = #{date},
+            </if>
+            <if test="supplierId != null and supplierId != ''">
+                w.supplierid = #{supplierId},
+            </if>
+            <if test="goodId != null and goodId != ''">
+                w.goodid = #{goodId},
+            </if>
+            <if test="quantity != null and quantity != ''">
+                w.quantity = #{quantity},
+            </if>
+            <if test="unitId != null and unitId != ''">
+                w.unitid = #{unitId},
+            </if>
+            <if test="price != null and price != ''">
+                w.price = #{price},
+            </if>
+            <if test="paid != null and paid != ''">
+                w.paid = #{paid},
+            </if>
+            <if test="userId != null and userId != ''">
+                w.userid = #{userId},
+            </if>
+        </trim>
         WHERE id=#{id}
     </update>
     <select id="findGoodOutListByName" resultMap="goodOutResultMap">

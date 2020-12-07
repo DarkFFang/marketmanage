@@ -23,7 +23,27 @@
         DELETE FROM refund WHERE id=#{id}
     </delete>
     <update id="updateRefundById">
-        UPDATE refund SET goodid=#{goodId},date=#{date},quantity=#{quantity},unitid=#{unitId},price=#{price},reason=#{reason}
+        UPDATE refund w
+        <trim prefix="set" suffixOverrides=",">
+            <if test="goodId != null and goodId != ''">
+                w.goodid = #{goodId},
+            </if>
+            <if test="date != null and date != ''">
+                w.date = #{date},
+            </if>
+            <if test="quantity != null and quantity != ''">
+                w.quantity = #{quantity},
+            </if>
+            <if test="unitId != null and unitId != ''">
+                w.unitid = #{unitId},
+            </if>
+            <if test="price != null and price != ''">
+                w.price = #{price},
+            </if>
+            <if test="reason != null and reason != ''">
+                w.reason = #{reason},
+            </if>
+        </trim>
         WHERE id=#{id}
     </update>
     <select id="findRefundListByName" resultMap="refundResultMap">
