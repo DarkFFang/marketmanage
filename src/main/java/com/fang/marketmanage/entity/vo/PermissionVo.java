@@ -1,4 +1,4 @@
-package com.fang.marketmanage.entity;
+package com.fang.marketmanage.entity.vo;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -21,13 +21,10 @@
         WHERE userid=#{userId} and workday=#{workDay}
     </delete>
     <update id="updateWorkTimeById">
-        UPDATE workday w
+        UPDATE worktime w
         <trim prefix="set" suffixOverrides=",">
             <if test="userid != null and userid != ''">
-                w.userid = (SELECT userid FROM user WHERE username=#{username}),
-            </if>
-            <if test="roleid != null and roleid != ''">
-                w.roleid = (SELECT roleid FROM role WHERE name=#{name}),
+                w.userid = #{userid},
             </if>
             <if test="sdate != null and sdate != ''">
                 w.sdate = #{sDate},

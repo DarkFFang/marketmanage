@@ -3,7 +3,7 @@ package com.fang.marketmanage.service.impl;
 import com.fang.marketmanage.dao.PermissionMapper;
 import com.fang.marketmanage.dao.RoleMapper;
 import com.fang.marketmanage.entity.Permission;
-import com.fang.marketmanage.entity.PermissionVo;
+import com.fang.marketmanage.entity.vo.PermissionVo;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

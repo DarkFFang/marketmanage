@@ -29,31 +29,28 @@
         DELETE FROM good where id=#{id}
     </delete>
     <update id="updateGoodById">
-        UPDATE good w
+        UPDATE good g
         <trim prefix="set" suffixOverrides=",">
             <if test="name != null and name != ''">
-                w.name = #{name},
+                g.name = #{name},
             </if>
             <if test="typeId != null and typeId != ''">
-                w.typeid = #{typeId},
+                g.typeid = #{typeId},
             </if>
             <if test="sDate != null and sDate != ''">
-                w.sdate = #{sDate},
+                g.sdate = #{sDate},
             </if>
             <if test="eDate != null and eDate != ''">
-                w.edate = #{eDate},
+                g.edate = #{eDate},
             </if>
             <if test="price != null and price != ''">
-                w.price = #{price},
-            </if>
-            <if test="price != null and price != ''">
-                w.price = #{price},
+                g.price = #{price},
             </if>
             <if test="unitId != null and unitId != ''">
-                w.unitid = #{unitId},
+                g.unitid = #{unitId},
             </if>
             <if test="other != null and other != ''">
-                w.other = #{other},
+                g.other = #{other},
             </if>
         </trim>
         WHERE id=#{id}

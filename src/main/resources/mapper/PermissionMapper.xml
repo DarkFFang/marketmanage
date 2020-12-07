@@ -19,11 +19,11 @@
         LEFT JOIN permission p on p.id =rp.permissionid
         where u.id=#{id}
     </select>
-    <select id="findPermissionsByRoleId" resultType="com.fang.marketmanage.entity.PermissionVo">
+    <select id="findPermissionsByRoleId" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
         SELECT id,name FROM permission
         WHERE id in (SELECT permissionid FROM role_permission WHERE roleid=#{roleid})
     </select>
-    <select id="findAllPermissions" resultType="com.fang.marketmanage.entity.PermissionVo">
+    <select id="findAllPermissions" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
         SELECT id,name FROM permission
     </select>
     <insert id="addNewRolePermissions">

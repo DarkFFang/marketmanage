@@ -2,6 +2,7 @@ package com.fang.marketmanage.controller.admin;
 
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
+import com.fang.marketmanage.entity.vo.UserVo;
 import com.fang.marketmanage.service.RoleService;
 import com.fang.marketmanage.service.UserService;
 import com.fang.marketmanage.util.RespUtil;
@@ -25,8 +26,8 @@ public class UserManageController {
 
     @GetMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;GET')")
-    public List<User> findUserList() {
-        List<User> userlist = userService.findUserList();
+    public List<UserVo> findUserList() {
+        List<UserVo> userlist = userService.findUserList();
         return userlist;
     }
 

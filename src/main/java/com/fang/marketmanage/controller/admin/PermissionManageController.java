@@ -1,6 +1,6 @@
 package com.fang.marketmanage.controller.admin;
 
-import com.fang.marketmanage.entity.PermissionVo;
+import com.fang.marketmanage.entity.vo.PermissionVo;
 import com.fang.marketmanage.service.RoleService;
 import com.fang.marketmanage.util.RespUtil;
 import io.swagger.annotations.Api;

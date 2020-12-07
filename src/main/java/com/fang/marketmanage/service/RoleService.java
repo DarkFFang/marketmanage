@@ -1,7 +1,7 @@
 package com.fang.marketmanage.service;
 
 import com.fang.marketmanage.entity.Permission;
-import com.fang.marketmanage.entity.PermissionVo;
+import com.fang.marketmanage.entity.vo.PermissionVo;
 import com.fang.marketmanage.entity.Role;
 
 import java.util.List;

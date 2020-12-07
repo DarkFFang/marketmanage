@@ -7,6 +7,7 @@ import com.fang.marketmanage.dao.UserMapper;
 import com.fang.marketmanage.entity.JwtUser;
 import com.fang.marketmanage.entity.Permission;
 import com.fang.marketmanage.entity.User;
+import com.fang.marketmanage.entity.vo.UserVo;
 import com.fang.marketmanage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -53,8 +54,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> findUserList() {
+    public List<UserVo> findUserList() {
         return userMapper.findUserList();
+    }
+
+    @Override
+    public User findUserById(Integer id) {
+        return userMapper.findUserById(id);
     }
 
     @Override

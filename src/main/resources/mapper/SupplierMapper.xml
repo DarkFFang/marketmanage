@@ -22,10 +22,10 @@
     <delete id="deleteSupplierById">
         DELETE FROM supplier WHERE id=#{id}
     </delete>
-    <update id="updateSupplierById">
-        UPDATE supplier SET name=#{name},address=#{address},phone=#{phone},email=#{email},fax=#{fax},reputation=#{reputation},loan=#{loan}
-        WHERE id=#{id}
-    </update>
+<!--    <update id="updateSupplierById">-->
+<!--        UPDATE supplier SET name=#{name},address=#{address},phone=#{phone},email=#{email},fax=#{fax},reputation=#{reputation},loan=#{loan}-->
+<!--        WHERE id=#{id}-->
+<!--    </update>-->
     <update id="updateSupplierById">
         UPDATE supplier w
         <trim prefix="set" suffixOverrides=",">

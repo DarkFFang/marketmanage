@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fang.marketmanage.dao.UserMapper">
-    <resultMap id="userResultMap" type="com.fang.marketmanage.entity.User">
+    <resultMap id="userVoResultMap" type="com.fang.marketmanage.entity.vo.UserVo">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="phone" column="phone"/>
@@ -18,13 +18,18 @@
         INSERT INTO user(username,phone,password,sex)
         VALUES (#{username},#{phone},#{password},#{sex})
     </insert>
-    <select id="findUserList" resultMap="userResultMap">
+    <select id="findUserList" resultMap="userVoResultMap">
         SELECT user.id,user.username,user.phone,user.sex,role.id as rid,role.name as rname
         FROM user
         LEFT JOIN user_role
         ON user.id=user_role.userid
         LEFT JOIN role
         ON user_role.roleid=role.id
+    </select>
+    <select id="findUserById" resultType="com.fang.marketmanage.entity.User">
+        SELECT id,username,phone,password,sex
+        FROM user
+        WHERE id=#{id}
     </select>
     <delete id="deleteUserById">
         DELETE FROM user
@@ -57,7 +62,7 @@
         SELECT * FROM user
         WHERE username=#{username}
     </select>
-    <select id="findUserByPhone" resultMap="userResultMap">
+    <select id="findUserByPhone" resultType="com.fang.marketmanage.entity.User">
         SELECT * FROM user
         WHERE phone=#{phone}
     </select>

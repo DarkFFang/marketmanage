@@ -1,6 +1,7 @@
 package com.fang.marketmanage.service;
 
 import com.fang.marketmanage.entity.User;
+import com.fang.marketmanage.entity.vo.UserVo;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -8,7 +9,9 @@ import java.util.List;
 public interface UserService extends UserDetailsService {
     int addNewUser(User user);//增加用户（营业员或库管员）
 
-    List<User> findUserList();//用户列表（营业员和库管员）
+    List<UserVo> findUserList();//用户列表（营业员和库管员）
+
+    User findUserById(Integer id);
 
     int deleteUserById(Integer id);//删除用户（营业员或库管员）
 
