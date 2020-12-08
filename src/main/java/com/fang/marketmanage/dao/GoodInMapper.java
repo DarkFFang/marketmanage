@@ -17,11 +17,13 @@ public interface GoodInMapper {
 
     int updateGoodInById(GoodIn goodIn);//修改入库单信息
 
+    GoodIn findGoodInById(Integer id);
+
     List<GoodIn> findGoodInListByName(String name);//通过商品名称查询入库单列表
 
     List<GoodIn> findGoodInListByDate(Date date);//通过时间查询入库单列表
 
     List<GoodIn> findGoodInListByClerkName(String name);//通过库管员姓名查询入库单列表
 
-    void alterUserAutoIncrement();
+    void alterGoodInAutoIncrement();
 }

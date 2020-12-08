@@ -7,7 +7,6 @@
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="phone" column="phone"/>
-        <result property="password" column="password"/>
         <result property="sex" column="sex"/>
         <collection property="roles" ofType="com.fang.marketmanage.entity.Role">
             <id property="id" column="rid"/>

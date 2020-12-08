@@ -60,7 +60,6 @@ public class UserManageController {
     @PreAuthorize("hasAuthority('/admin/user/**;DELETE')")
     public RespUtil deleteUserById(@PathVariable Integer id) {
         if (userService.deleteUserById(id) == 1) {
-            userService.alterUserAutoIncrement();
             return RespUtil.success("删除成功！");
         } else {
             return RespUtil.error("删除失败");

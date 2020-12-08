@@ -65,7 +65,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int deleteUserById(Integer id) {
-        return userMapper.deleteUserById(id);
+        int result=userMapper.deleteUserById(id);
+        if (result == 1) {
+            userMapper.alterUserAutoIncrement();
+        }
+        return result;
     }
 
     @Override
@@ -103,8 +107,4 @@ public class UserServiceImpl implements UserService {
         return 0;
     }
 
-    @Override
-    public void alterUserAutoIncrement() {
-        userMapper.alterUserAutoIncrement();
-    }
 }

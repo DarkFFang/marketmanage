@@ -29,7 +29,5 @@ public interface UserService extends UserDetailsService {
 
     int deletePermissionById();//删除用户权限
 
-    void alterUserAutoIncrement();
-
     //List<Permission> findPermissionById();//查询用户权限
 }
