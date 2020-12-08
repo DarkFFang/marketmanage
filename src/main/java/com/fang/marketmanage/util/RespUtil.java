@@ -18,14 +18,12 @@ public class RespUtil {
     private String status;
     private String msg;
 
-    public static RespUtil success(String msg)
-    {
-        return new RespUtil("success",msg);
+    public static RespUtil success(String msg) {
+        return new RespUtil("success", msg);
     }
 
-    public static RespUtil error(String msg)
-    {
-        return new RespUtil("error",msg);
+    public static RespUtil error(String msg) {
+        return new RespUtil("error", msg);
     }
 
     public static void response(HttpServletResponse response, int httpStatus, Object object) {

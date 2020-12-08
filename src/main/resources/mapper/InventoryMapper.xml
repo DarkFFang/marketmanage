@@ -11,9 +11,11 @@
         <result property="newQuantity" column="newquantity"/>
         <result property="unitId" column="unitid"/>
         <result property="yk" column="yk"/>
+        <result property="other" column="other"/>
     </resultMap>
     <select id="addNewInventory" parameterType="com.fang.marketmanage.entity.Inventory">
-        INSERT INTO inventory VALUES (#{goodId},#{date},#{goodName},#{quantity},#{newQuantity},#{unitId},#{yk})
+        INSERT INTO inventory
+        VALUES (#{goodId},#{date},#{goodName},#{quantity},#{newQuantity},#{unitId},#{yk},#{other})
     </select>
     <select id="findInventoryList" resultMap="inventoryResultMap">
         SELECT * FROM inventory
@@ -28,6 +30,17 @@
         UPDATE inventory SET newquantity=#{newQuantity} WHERE goodid=#{goodId} and date=#{date}
     </update>
     <select id="findInventoryListByDate" resultMap="inventoryResultMap">
-        SELECT * FROM inventory WHERE date=#{date}
+        SELECT * FROM inventory
+        WHERE date=#{date}
+    </select>
+    <insert id="addNewInventoryRecord" parameterType="com.fang.marketmanage.entity.InventoryRecord">
+        INSERT INTO inventory_record(date) VALUES (#{date})
+    </insert>
+    <select id="findInventoryRecordList" resultType="com.fang.marketmanage.entity.InventoryRecord">
+        SELECT * FROM inventory_record
+    </select>
+    <select id="findInventoryRecordById" resultType="com.fang.marketmanage.entity.InventoryRecord">
+        SELECT * FROM inventory_record
+        WHERE id=#{id}
     </select>
 </mapper>

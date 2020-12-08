@@ -14,7 +14,7 @@ public interface PermissionMapper {
 
     List<PermissionVo> findAllPermissions();
 
-    int addNewRolePermissions(Integer roleid,Integer[] permissionids);
+    int addNewRolePermissions(Integer roleid, Integer[] permissionids);
 
     int deleteRolePermissionByRoleId(Integer roleid);
 }

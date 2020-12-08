@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 public class RoleServiceImpl implements RoleService {
     @Autowired
-    RoleMapper roleMapper;
+    private RoleMapper roleMapper;
     @Autowired
-    PermissionMapper permissionMapper;
+    private PermissionMapper permissionMapper;
 
     @Override
     public List<Role> findAllRole() {
@@ -77,7 +77,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int addNewRolePermissions(Integer roleid, Integer[] permissionids) {
-        return permissionMapper.addNewRolePermissions(roleid,permissionids);
+        return permissionMapper.addNewRolePermissions(roleid, permissionids);
     }
 
     @Override

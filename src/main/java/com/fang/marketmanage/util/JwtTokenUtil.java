@@ -18,7 +18,7 @@ public class JwtTokenUtil {
     private static final String SECRET = "Qnxj@xc!mk";
     private static final String ISS = "fang";
 
-    private static final int EXPIRATION = 60*60*24;
+    private static final int EXPIRATION = 60 * 60 * 24;
 
     // 创建token
     public static String createToken(Map<String, Object> claims) {
@@ -60,7 +60,6 @@ public class JwtTokenUtil {
     }
 
 
-
     // 是否已过期
     public static boolean isExpiration(String token) {
         return getTokenClaims(token).getExpiration().before(new Date());
@@ -74,9 +73,9 @@ public class JwtTokenUtil {
         return refreshedToken;
     }
 
-    public static boolean validateToken(String token,UserDetails userDetails){
+    public static boolean validateToken(String token, UserDetails userDetails) {
         JwtUser user = (JwtUser) userDetails;
-        String username= getUsernameFromToken(token);
+        String username = getUsernameFromToken(token);
         return (username.equals(user.getUsername()) && !isExpiration(token));
     }
 

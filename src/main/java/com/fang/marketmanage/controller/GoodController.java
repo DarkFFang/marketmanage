@@ -2,18 +2,15 @@ package com.fang.marketmanage.controller;
 
 
 import com.fang.marketmanage.entity.Good;
-import com.fang.marketmanage.entity.Stock;
 import com.fang.marketmanage.service.GoodService;
 import com.fang.marketmanage.service.StockService;
 import com.fang.marketmanage.util.RespUtil;
-import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Slf4j

@@ -1,7 +1,5 @@
 package com.fang.marketmanage.dao;
 
-import com.fang.marketmanage.entity.Good;
-import com.fang.marketmanage.entity.GoodIn;
 import com.fang.marketmanage.entity.GoodOut;
 import org.apache.ibatis.annotations.Mapper;
 

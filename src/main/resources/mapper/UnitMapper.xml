@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.UnitMapper">
+    <resultMap id="unitResultMap" type="com.fang.marketmanage.entity.Unit">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <insert id="addNewUnit" parameterType="com.fang.marketmanage.entity.Unit">
+        INSERT INTO unit(name) VALUES (#{name})
+    </insert>
+    <select id="findUnitList" resultMap="unitResultMap">
+        SELECT * FROM unit
+    </select>
+    <update id="alterAutoIncrement">
+        ALTER TABLE unit auto_increment = 1
+    </update>
+</mapper>

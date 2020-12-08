@@ -28,7 +28,6 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
  * spring security处理器
  *
  * @author fang
- *
  */
 @Configuration
 public class WebSecurityHandlerConfig {
@@ -46,8 +45,8 @@ public class WebSecurityHandlerConfig {
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                                 Authentication authentication) throws IOException, ServletException {
                 JwtUser jwtUser = (JwtUser) authentication.getPrincipal();
-                response.setHeader(JwtTokenUtil.TOKEN_HEADER,JwtTokenUtil.createToken(jwtUser));
-                RespUtil.response(response,HttpStatus.OK.value(),RespUtil.success("登录成功"));
+                response.setHeader(JwtTokenUtil.TOKEN_HEADER, JwtTokenUtil.createToken(jwtUser));
+                RespUtil.response(response, HttpStatus.OK.value(), RespUtil.success("登录成功"));
             }
         };
     }
@@ -64,7 +63,7 @@ public class WebSecurityHandlerConfig {
             @Override
             public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                                 AuthenticationException exception) throws IOException, ServletException {
-                RespUtil.response(response,HttpStatus.UNAUTHORIZED.value(),RespUtil.error("登录失败"));
+                RespUtil.response(response, HttpStatus.UNAUTHORIZED.value(), RespUtil.error("登录失败"));
             }
         };
 
@@ -82,7 +81,7 @@ public class WebSecurityHandlerConfig {
             @Override
             public void commence(HttpServletRequest request, HttpServletResponse response,
                                  AuthenticationException authException) throws IOException, ServletException {
-                RespUtil.response(response,HttpStatus.UNAUTHORIZED.value(),RespUtil.error("认证失效或者过期，禁止访问，请重新登录"));
+                RespUtil.response(response, HttpStatus.UNAUTHORIZED.value(), RespUtil.error("认证失效或者过期，禁止访问，请重新登录"));
             }
         };
     }
@@ -99,7 +98,7 @@ public class WebSecurityHandlerConfig {
             @Override
             public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-                RespUtil.response(response,HttpStatus.OK.value(),RespUtil.error("退出成功"));
+                RespUtil.response(response, HttpStatus.OK.value(), RespUtil.error("退出成功"));
             }
         };
 
@@ -115,7 +114,7 @@ public class WebSecurityHandlerConfig {
         return new AccessDeniedHandler() {
             @Override
             public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-                RespUtil.response(httpServletResponse,HttpStatus.FORBIDDEN.value(),RespUtil.error("没有此权限，请与管理员联系"));
+                RespUtil.response(httpServletResponse, HttpStatus.FORBIDDEN.value(), RespUtil.error("没有此权限，请与管理员联系"));
             }
         };
     }

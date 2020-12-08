@@ -25,7 +25,7 @@ public class PermissionManageController {
 
     @PostMapping("/rolepermission")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;POST')")
-    public RespUtil addNewRolePermissions(Integer roleid,Integer[] permissionids) {
+    public RespUtil addNewRolePermissions(Integer roleid, Integer[] permissionids) {
         if (roleService.addNewRolePermissions(roleid, permissionids) == permissionids.length) {
             return RespUtil.success("添加成功");
         }

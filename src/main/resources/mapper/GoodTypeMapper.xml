@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fang.marketmanage.dao.GoodTypeMapper">
+    <resultMap id="goodTypeResultMap" type="com.fang.marketmanage.entity.GoodType">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <insert id="addNewGoodType" parameterType="com.fang.marketmanage.entity.GoodType">
+        INSERT INTO good(name) VALUES (#{name})
+    </insert>
+    <select id="findGoodTypeList" resultMap="goodTypeResultMap">
+        SELECT * FROM goodtype
+    </select>
+    <update id="alterAutoIncrement">
+        ALTER TABLE goodtype auto_increment = 1
+    </update>
+</mapper>

@@ -14,16 +14,16 @@ import java.util.List;
 @Service
 public class GoodServiceImpl implements GoodService {
     @Autowired
-    GoodMapper goodMapper;
+    private GoodMapper goodMapper;
 
     @Autowired
-    StockMapper stockMapper;
+    private StockMapper stockMapper;
 
     @Override
     public int addNewGood(Good good) {
-        Integer id=goodMapper.findMaxId()+1;
+        Integer id = goodMapper.findMaxId() + 1;
         good.setId(id);
-        Stock stock=new Stock();
+        Stock stock = new Stock();
         stock.setGoodId(good.getId());
         stock.setUnitId(good.getUnitId());
         stock.setDate(new Date());

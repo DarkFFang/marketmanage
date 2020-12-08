@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -29,7 +28,7 @@ public class UserController {
     @GetMapping("/user")
     public UserVo findCurrentUser() {
         JwtUser jwtUser = (JwtUser) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        User user=userService.findUserById(jwtUser.getId());
+        User user = userService.findUserById(jwtUser.getId());
         List<Role> roles = roleService.findRolesByUserId(jwtUser.getId());
         UserVo userVo = new UserVo();
         userVo.setId(user.getId());

@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class StockServiceImpl implements StockService {
     @Autowired
-    StockMapper stockMapper;
+    private StockMapper stockMapper;
 
     @Override
     public List<Stock> findStockList() {

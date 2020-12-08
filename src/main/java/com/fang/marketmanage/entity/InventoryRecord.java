@@ -10,14 +10,8 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Inventory {
-    private Integer goodId;
+public class InventoryRecord {
+    private Integer id;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    private String goodName;
-    private Integer quantity;
-    private Integer newQuantity;
-    private Integer unitId;
-    private Integer yk;
-    private String other;
 }

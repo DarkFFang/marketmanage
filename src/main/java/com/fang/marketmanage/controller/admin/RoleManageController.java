@@ -31,6 +31,7 @@ public class RoleManageController {
         }
         return RespUtil.error("添加失败");
     }
+
     @PutMapping("/role")
     @PreAuthorize("hasAuthority('/admin/role/**;PUT')")
     public RespUtil updateRoleById(Role role) {
@@ -39,6 +40,7 @@ public class RoleManageController {
         }
         return RespUtil.error("修改失败");
     }
+
     @DeleteMapping("/role/{id}")
     @PreAuthorize("hasAuthority('/admin/role/**;DELETE')")
     public RespUtil deleteRoleById(@PathVariable Integer id) {
@@ -60,11 +62,12 @@ public class RoleManageController {
     @PutMapping("/userrole")
     @PreAuthorize("hasAuthority('/admin/userrole/**;PUT')")
     public RespUtil updateUserRole(Integer userid, Integer roleid) {
-        if (roleService.updateUserRole(userid,roleid) == 1) {
+        if (roleService.updateUserRole(userid, roleid) == 1) {
             return RespUtil.success("修改成功");
         }
         return RespUtil.error("修改失败");
     }
+
     @DeleteMapping("/userrole/{userid}")
     @PreAuthorize("hasAuthority('/admin/userrole/**;DELETE')")
     public RespUtil deleteUserRoleByUserId(@PathVariable Integer userid) {

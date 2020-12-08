@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class StockController {
     @Autowired
-    StockService stockService;
+    private StockService stockService;
 
     @GetMapping("/stock")
     @PreAuthorize("hasAuthority('/stock/**;GET')")

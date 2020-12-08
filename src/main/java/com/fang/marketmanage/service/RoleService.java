@@ -30,7 +30,7 @@ public interface RoleService {
 
     List<PermissionVo> findAllPermissions();
 
-    int addNewRolePermissions(Integer roleid,Integer[] permissionids);
+    int addNewRolePermissions(Integer roleid, Integer[] permissionids);
 
     int updateRolePermissions(Integer roleid, Integer[] permissionids);
 
