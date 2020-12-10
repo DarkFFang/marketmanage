@@ -42,8 +42,4 @@ public class StockServiceImpl implements StockService {
         return null;
     }
 
-    @Override
-    public void alterStockAutoIncrement() {
-        stockMapper.alterStockAutoIncrement();
-    }
 }

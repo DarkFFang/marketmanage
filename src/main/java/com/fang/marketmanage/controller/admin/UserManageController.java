@@ -1,5 +1,6 @@
 package com.fang.marketmanage.controller.admin;
 
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.entity.vo.UserVo;
@@ -33,6 +34,7 @@ public class UserManageController {
 
     @PostMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;POST')")
+    @CustomLog(operation = "添加新用户")
     public RespUtil addNewUser(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -46,6 +48,7 @@ public class UserManageController {
 
     @PutMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;PUT')")
+    @CustomLog(operation = "修改用户信息")
     public RespUtil updateUserById(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
@@ -58,6 +61,7 @@ public class UserManageController {
 
     @DeleteMapping("/user/{id}")
     @PreAuthorize("hasAuthority('/admin/user/**;DELETE')")
+    @CustomLog(operation = "删除用户")
     public RespUtil deleteUserById(@PathVariable Integer id) {
         if (userService.deleteUserById(id) == 1) {
             return RespUtil.success("删除成功！");
