@@ -12,10 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-@Api
 public class PermissionManageController {
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
 
     @GetMapping("/permission")
     @PreAuthorize("hasAuthority('/admin/permission/**;GET')")

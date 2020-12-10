@@ -6,6 +6,8 @@ import com.fang.marketmanage.service.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SysLogServiceImpl implements SysLogService {
     @Autowired
@@ -13,5 +15,10 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public int addNewSysLog(SysLog sysLog) {
         return sysLogMapper.addNewSysLog(sysLog);
+    }
+
+    @Override
+    public List<SysLog> findSysLogList() {
+        return sysLogMapper.findSysLogList();
     }
 }

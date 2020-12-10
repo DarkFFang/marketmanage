@@ -5,6 +5,7 @@ spring:
  thymeleaf:
   cache: false
   encoding: utf-8
+
  datasource:
   url: jdbc:mysql://119.29.40.206:3306/marketmanage?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
   username: market
@@ -12,6 +13,10 @@ spring:
   driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
    max-lifetime: 120000
+
+ jackson:
+  date-format: yyyy-MM-dd
+  time-zone: GMT+8
 
 
 mybatis:

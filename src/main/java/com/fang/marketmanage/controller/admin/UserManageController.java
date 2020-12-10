@@ -20,10 +20,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-@Api
 public class UserManageController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;GET')")
