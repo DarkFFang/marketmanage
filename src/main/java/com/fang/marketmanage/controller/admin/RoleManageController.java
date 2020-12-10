@@ -1,5 +1,6 @@
 package com.fang.marketmanage.controller.admin;
 
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.service.RoleService;
 import com.fang.marketmanage.util.RespUtil;
@@ -24,6 +25,7 @@ public class RoleManageController {
 
     @PostMapping("/role")
     @PreAuthorize("hasAuthority('/admin/role/**;POST')")
+    @CustomLog(operation = "添加角色")
     public RespUtil addNewRole(Role role) {
         if (roleService.addNewRole(role) == 1) {
             return RespUtil.success("添加成功");
@@ -33,6 +35,7 @@ public class RoleManageController {
 
     @PutMapping("/role")
     @PreAuthorize("hasAuthority('/admin/role/**;PUT')")
+    @CustomLog(operation = "修改角色")
     public RespUtil updateRoleById(Role role) {
         if (roleService.updateRoleById(role) == 1) {
             return RespUtil.success("修改成功");
@@ -42,6 +45,7 @@ public class RoleManageController {
 
     @DeleteMapping("/role/{id}")
     @PreAuthorize("hasAuthority('/admin/role/**;DELETE')")
+    @CustomLog(operation = "删除角色")
     public RespUtil deleteRoleById(@PathVariable Integer id) {
         if (roleService.deleteRoleById(id) == 1) {
             return RespUtil.success("删除成功");
@@ -51,6 +55,7 @@ public class RoleManageController {
 
     @PostMapping("/userrole")
     @PreAuthorize("hasAuthority('/admin/userrole/**;POST')")
+    @CustomLog(operation = "为用户添加角色")
     public RespUtil addNewUserRole(Integer userid, Integer roleid) {
         if (roleService.addNewUserRole(userid, roleid) == 1) {
             return RespUtil.success("添加成功");
@@ -60,6 +65,7 @@ public class RoleManageController {
 
     @PutMapping("/userrole")
     @PreAuthorize("hasAuthority('/admin/userrole/**;PUT')")
+    @CustomLog(operation = "修改用户角色")
     public RespUtil updateUserRole(Integer userid, Integer roleid) {
         if (roleService.updateUserRole(userid, roleid) == 1) {
             return RespUtil.success("修改成功");
@@ -69,6 +75,7 @@ public class RoleManageController {
 
     @DeleteMapping("/userrole/{userid}")
     @PreAuthorize("hasAuthority('/admin/userrole/**;DELETE')")
+    @CustomLog(operation = "删除用户角色")
     public RespUtil deleteUserRoleByUserId(@PathVariable Integer userid) {
         if (roleService.deleteUserRoleByUserId(userid) == 1) {
             return RespUtil.success("删除成功");

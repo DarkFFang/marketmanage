@@ -1,5 +1,6 @@
 package com.fang.marketmanage.controller;
 
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.GoodType;
 import com.fang.marketmanage.service.GoodTypeService;
 import com.fang.marketmanage.util.RespUtil;
@@ -25,6 +26,7 @@ public class GoodTypeController {
     }
 
     @PostMapping("/goodtype")
+    @CustomLog(operation = "添加商品类型")
     public RespUtil addNewGoodType(GoodType goodType) {
         if (goodTypeService.addNewGoodType(goodType) == 1) {
             return RespUtil.success("添加成功！");

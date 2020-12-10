@@ -1,5 +1,6 @@
 package com.fang.marketmanage.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,7 +13,7 @@ import java.util.Date;
 @ToString
 public class Inventory {
     private Integer goodId;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-ss HH:mm:ss")
     private Date date;
     private String goodName;
     private Integer quantity;

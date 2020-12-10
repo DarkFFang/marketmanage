@@ -13,7 +13,6 @@ import java.util.Date;
 public class Refund {
     private Integer id;
     private Integer goodId;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private Integer quantity;
     private Integer unitId;

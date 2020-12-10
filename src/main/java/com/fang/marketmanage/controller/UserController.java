@@ -1,5 +1,6 @@
 package com.fang.marketmanage.controller;
 
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.JwtUser;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
@@ -40,6 +41,7 @@ public class UserController {
     }
 
     @PutMapping("/user/password")
+    @CustomLog(operation = "修改用户密码")
     public RespUtil updateCurrentUserPassword(Integer id, String oldPassword, String newPassword) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         User user = userService.findUserById(id);

@@ -14,9 +14,7 @@ public class Good {
     private Integer id;
     private String name;
     private Integer typeId;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date sDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eDate;
     private Integer price;
     private Integer unitId;

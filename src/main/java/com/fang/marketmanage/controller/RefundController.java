@@ -1,5 +1,6 @@
 package com.fang.marketmanage.controller;
 
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Refund;
 import com.fang.marketmanage.service.RefundService;
 import com.fang.marketmanage.util.RespUtil;
@@ -22,6 +23,7 @@ public class RefundController {
 
     @PostMapping("/refund")
     @PreAuthorize("hasAuthority('/refund/**;POST')")
+    @CustomLog(operation = "添加商品退货")
     public RespUtil addNewRefund(Refund refund) {
         if (refundService.addNewRefund(refund) == 1) {
             return RespUtil.success("添加成功");
@@ -31,6 +33,7 @@ public class RefundController {
 
     @PutMapping("/refund")
     @PreAuthorize("hasAuthority('/refund/**;PUT')")
+    @CustomLog(operation = "修改商品退货")
     public RespUtil updateRefundById(Refund refund) {
         if (refundService.updateRefundById(refund) == 1) {
             return RespUtil.success("修改成功");
@@ -40,6 +43,7 @@ public class RefundController {
 
     @DeleteMapping("/refund/{id}")
     @PreAuthorize("hasAuthority('/refund/**;DELETE')")
+    @CustomLog(operation = "删除商品退货")
     public RespUtil deleteRefundById(@PathVariable Integer id) {
         if (refundService.deleteRefundById(id) == 1) {
             return RespUtil.success("删除成功");

@@ -12,7 +12,6 @@ import java.util.Date;
 @ToString
 public class GoodOut {
     private Integer id;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private Integer supplierId;
     private Integer goodId;

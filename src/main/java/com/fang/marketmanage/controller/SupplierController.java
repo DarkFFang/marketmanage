@@ -1,4 +1,5 @@
 package com.fang.marketmanage.controller;
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Supplier;
 import com.fang.marketmanage.service.SupplierService;
 import com.fang.marketmanage.util.RespUtil;
@@ -19,6 +20,7 @@ public class SupplierController {
     }
     @PostMapping("/supplier")
     @PreAuthorize("hasAuthority('/supplier/**;POST')")
+    @CustomLog(operation = "添加供应商")
     public RespUtil addNewSupplier(Supplier supplier) {
         if (supplierService.addNewSupplier(supplier) == 1) {
             return RespUtil.success("添加成功！");
@@ -28,6 +30,7 @@ public class SupplierController {
     }
     @DeleteMapping("/supplier/{id}")
     @PreAuthorize("hasAuthority('/supplier/**;DELETE')")
+    @CustomLog(operation = "删除供应商")
     public RespUtil deleteSupplierById(@PathVariable Integer id) {
         if (supplierService.deleteSupplierById(id) == 1) {
             return RespUtil.success("删除成功！");
@@ -37,6 +40,7 @@ public class SupplierController {
     }
     @PutMapping("/supplier")
     @PreAuthorize("hasAuthority('/supplier/**;PUT')")
+    @CustomLog(operation = "修改供应商")
     public RespUtil updateSupplierById(Supplier supplier) {
         if (supplierService.updateSupplierById(supplier) == 1) {
             return RespUtil.success("修改成功！");

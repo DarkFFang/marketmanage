@@ -1,6 +1,7 @@
 package com.fang.marketmanage.controller;
 
 
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Good;
 import com.fang.marketmanage.service.GoodService;
 import com.fang.marketmanage.service.StockService;
@@ -31,6 +32,7 @@ public class GoodController {
 
     @PostMapping("/good")
     @PreAuthorize("hasAuthority('/good/**;POST')")
+    @CustomLog(operation = "添加商品")
     public RespUtil addNewGood(Good good) {
         if (goodService.addNewGood(good) == 1) {
             return RespUtil.success("添加成功！");
@@ -41,6 +43,7 @@ public class GoodController {
 
     @PutMapping("/good")
     @PreAuthorize("hasAuthority('/good/**;PUT')")
+    @CustomLog(operation = "修改商品")
     public RespUtil updateGoodById(Good good) {
         if (goodService.updateGoodById(good) == 1) {
             return RespUtil.success("修改成功！");
@@ -51,6 +54,7 @@ public class GoodController {
 
     @DeleteMapping("/good/{id}")
     @PreAuthorize("hasAuthority('/good/**;DELETE')")
+    @CustomLog(operation = "删除商品")
     public RespUtil deleteGoodById(@PathVariable Integer id) {
         if (goodService.deleteGoodById(id) == 1) {
             return RespUtil.success("删除成功！");

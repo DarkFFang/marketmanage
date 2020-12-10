@@ -1,5 +1,6 @@
 package com.fang.marketmanage.controller;
 
+import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Unit;
 import com.fang.marketmanage.service.UnitService;
 import com.fang.marketmanage.util.RespUtil;
@@ -21,6 +22,7 @@ public class UnitController {
     }
 
     @PostMapping("/unit")
+    @CustomLog(operation = "添加单位")
     public RespUtil addNewUnit(Unit unit) {
         if (unitService.addNewUnit(unit) == 1) {
             return RespUtil.success("添加成功！");
