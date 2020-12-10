@@ -63,7 +63,7 @@ public class RoleManageController {
         return RespUtil.error("添加失败");
     }
 
-    @PutMapping("/userrole")
+    @PutMapping("/user_role")
     @PreAuthorize("hasAuthority('/admin/userrole/**;PUT')")
     @CustomLog(operation = "修改用户角色")
     public RespUtil updateUserRole(Integer userid, Integer roleid) {
@@ -73,7 +73,7 @@ public class RoleManageController {
         return RespUtil.error("修改失败");
     }
 
-    @DeleteMapping("/userrole/{userid}")
+    @DeleteMapping("/user_role/{userid}")
     @PreAuthorize("hasAuthority('/admin/userrole/**;DELETE')")
     @CustomLog(operation = "删除用户角色")
     public RespUtil deleteUserRoleByUserId(@PathVariable Integer userid) {

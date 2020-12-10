@@ -14,6 +14,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler({SQLIntegrityConstraintViolationException.class})
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public RespUtil sqlException(SQLIntegrityConstraintViolationException e) {
-        return RespUtil.error("重复");
+        return RespUtil.error("数据库未知错误");
     }
+
 }

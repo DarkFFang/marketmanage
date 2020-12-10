@@ -4,47 +4,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fang.marketmanage.dao.WorkTimeMapper">
     <resultMap id="workTimeResultMap" type="com.fang.marketmanage.entity.WorkTime">
-        <id property="userId" column="userid"/>
+        <id property="id" column="id"/>
+        <result property="userId" column="userid"/>
         <result property="sDate" column="sdate"/>
         <result property="eDate" column="edate"/>
         <result property="workDay" column="workday"/>
     </resultMap>
-    <select id="addNewWorkTime" parameterType="com.fang.marketmanage.entity.WorkTime">
-        INSERT INTO workday(userid,sdate,edate,workday)
+    <insert id="addNewWorkTime" parameterType="com.fang.marketmanage.entity.WorkTime">
+        INSERT INTO worktime(userid,sdate,edate,workday)
         VALUES (#{userId},#{sDate},#{eDate},#{workDay})
-    </select>
+    </insert>
     <select id="findWorkTimeList" resultMap="workTimeResultMap">
-        SELECT * FROM workday
+        SELECT * FROM worktime
     </select>
     <delete id="deleteWorkTimeById">
-        DELETE FROM workday
-        WHERE userid=#{userId} and workday=#{workDay}
+        DELETE FROM worktime
+        WHERE userid=#{id}
     </delete>
     <update id="updateWorkTimeById">
         UPDATE worktime w
         <trim prefix="set" suffixOverrides=",">
-            <if test="userid != null and userid != ''">
-                w.userid = #{userid},
+            <if test="userId != null and userId != ''">
+                w.userid = #{userId},
             </if>
-            <if test="sdate != null and sdate != ''">
+            <if test="sDate != null and sDate != ''">
                 w.sdate = #{sDate},
             </if>
-            <if test="edate != null and edate != ''">
+            <if test="sDate != null and eDate != ''">
                 w.edate = #{eDate},
             </if>
             <if test="workDay != null and workDay != ''">
                 w.workday = #{workDay},
             </if>
         </trim>
-        WHERE userid=#{userId} and workday=#{workDay}
+        WHERE id=#{id}
     </update>
     <select id="searchWorkTimeByUsername" resultMap="workTimeResultMap">
-        SELECT * FROM workday WHERE userid=(SELECT userid FROM user WHERE username=#{username}
+        SELECT * FROM worktime WHERE userid=(SELECT userid FROM user WHERE username=#{username}
     </select>
     <select id="findClerkTime" resultMap="workTimeResultMap">
-        SELECT * FROM workday WHERE roleid=2
+        SELECT * FROM worktime WHERE roleid=2
     </select>
     <select id="findKeeperTime" resultMap="workTimeResultMap">
-        SELECT * FROM workday WHERE roleid=3
+        SELECT * FROM worktime WHERE roleid=3
     </select>
 </mapper>

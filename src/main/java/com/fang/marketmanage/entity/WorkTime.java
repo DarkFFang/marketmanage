@@ -1,5 +1,6 @@
 package com.fang.marketmanage.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,11 +12,11 @@ import java.util.Date;
 @Setter
 @ToString
 public class WorkTime {
+    private Integer id;
     private Integer userId;
-    private Integer roleId;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date sDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date eDate;
     private String workDay;
 }

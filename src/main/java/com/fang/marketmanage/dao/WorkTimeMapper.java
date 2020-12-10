@@ -11,7 +11,7 @@ public interface WorkTimeMapper {
 
     int deleteWorkTimeById(Integer id); //删除时间表项
 
-    int updateWorkTimeById(Integer id); //修改时间表项
+    int updateWorkTimeById(WorkTime worktime); //修改时间表项
 
     List<WorkTime> findWorkTimeList(); //时间表列表
 
