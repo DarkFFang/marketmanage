@@ -18,7 +18,6 @@ spring:
   date-format: yyyy-MM-dd
   time-zone: GMT+8
 
-
 mybatis:
  type-aliases-package: com.fang.marketmanage.entity
  check-config-location: true

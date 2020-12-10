@@ -1,6 +1,7 @@
 package com.fang.marketmanage.service.impl;
 
 import com.fang.marketmanage.dao.InventoryMapper;
+import com.fang.marketmanage.dao.StockMapper;
 import com.fang.marketmanage.entity.Inventory;
 import com.fang.marketmanage.entity.InventoryRecord;
 import com.fang.marketmanage.service.InventoryService;
@@ -14,10 +15,17 @@ import java.util.List;
 public class InventoryServiceImpl implements InventoryService {
     @Autowired
     private InventoryMapper inventoryMapper;
+    @Autowired
+    private StockMapper stockMapper;
 
     @Override
-    public int addNewInventory(Inventory inventory) {
-        return inventoryMapper.addNewInventory(inventory);
+    public int addNewInventoryList(List<Inventory> inventoryList) {
+        int count=0;
+        for (Inventory inventory:inventoryList){
+            count+=inventoryMapper.addNewInventory(inventory);
+            stockMapper.updateStockQuantityByGoodId(inventory.getGoodId(), inventory.getNewQuantity());
+        }
+        return count;
     }
 
     @Override
@@ -42,11 +50,13 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public List<Inventory> findInventoryListByDate(Date date) {
-        return null;
+        return inventoryMapper.findInventoryListByDate(date);
     }
 
     @Override
-    public int addNewInventoryRecord(InventoryRecord inventoryRecord) {
+    public int addNewInventoryRecord() {
+        InventoryRecord inventoryRecord = new InventoryRecord();
+        inventoryRecord.setDate(new Date());
         return inventoryMapper.addNewInventoryRecord(inventoryRecord);
     }
 

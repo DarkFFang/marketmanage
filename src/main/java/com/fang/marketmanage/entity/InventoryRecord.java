@@ -13,6 +13,5 @@ import java.util.Date;
 @ToString
 public class InventoryRecord {
     private Integer id;
-    @JsonFormat(pattern = "yyyy-MM-ss HH:mm:ss")
     private Date date;
 }

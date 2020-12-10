@@ -53,7 +53,7 @@ public class RoleManageController {
         return RespUtil.error("删除失败");
     }
 
-    @PostMapping("/userrole")
+    @PostMapping("/user_role")
     @PreAuthorize("hasAuthority('/admin/userrole/**;POST')")
     @CustomLog(operation = "为用户添加角色")
     public RespUtil addNewUserRole(Integer userid, Integer roleid) {

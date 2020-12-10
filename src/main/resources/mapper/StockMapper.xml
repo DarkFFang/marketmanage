@@ -19,8 +19,11 @@
     <select id="findStockByName" resultMap="stockResultMap">
         SELECT  * FROM stock WHERE goodid=(SELECT goodid FROM good WHERE name=#{name})
     </select>
-    <select id="finStockListByType" resultMap="stockResultMap">
+    <select id="findStockListByType" resultMap="stockResultMap">
         SELECT  * FROM stock WHERE goodid IN (SELECT goodid FROM good WHERE typeid=(SELECT typeid FROM goodtype WHERE name=#{name}))
+    </select>
+    <select id="findStockCount">
+        SELECT COUNT(*) FROM stock
     </select>
     <update id="updateStockQuantityIncByGoodId">
         UPDATE stock

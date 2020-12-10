@@ -13,7 +13,6 @@ import java.util.Date;
 @ToString
 public class Inventory {
     private Integer goodId;
-    @JsonFormat(pattern = "yyyy-MM-ss HH:mm:ss")
     private Date date;
     private String goodName;
     private Integer quantity;

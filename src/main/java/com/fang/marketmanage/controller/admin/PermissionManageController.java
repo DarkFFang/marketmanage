@@ -22,7 +22,7 @@ public class PermissionManageController {
         return roleService.findAllPermissions();
     }
 
-    @PostMapping("/rolepermission")
+    @PostMapping("/role_permission")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;POST')")
     public RespUtil addNewRolePermissions(Integer roleid, Integer[] permissionids) {
         if (roleService.addNewRolePermissions(roleid, permissionids) == permissionids.length) {
@@ -31,7 +31,7 @@ public class PermissionManageController {
         return RespUtil.error("添加失败");
     }
 
-    @PutMapping("/rolepermission")
+    @PutMapping("/role_permission")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;PUT')")
     public RespUtil updateRolePermissions(Integer roleid, Integer[] permissionids) {
         if (roleService.updateRolePermissions(roleid, permissionids) == permissionids.length) {
@@ -40,7 +40,7 @@ public class PermissionManageController {
         return RespUtil.error("修改失败");
     }
 
-    @DeleteMapping("/rolepermission/{roleid}")
+    @DeleteMapping("/role_permission/{roleid}")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;DELETE')")
     public RespUtil deleteRolePermissionByRoleId(@PathVariable Integer roleid) {
         if (roleService.deleteRolePermissionByRoleId(roleid) > 0) {
@@ -49,7 +49,7 @@ public class PermissionManageController {
         return RespUtil.error("删除失败");
     }
 
-    @GetMapping("/rolepermission/{roleid}")
+    @GetMapping("/role_permission/{roleid}")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;GET')")
     public List<PermissionVo> findPermissionsByRoleId(@PathVariable Integer roleid) {
         return roleService.findPermissionsByRoleId(roleid);

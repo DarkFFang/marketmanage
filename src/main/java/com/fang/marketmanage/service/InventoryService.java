@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface InventoryService {
 
-    int addNewInventory(Inventory inventory);//增加盘存表
+    int addNewInventoryList(List<Inventory> inventoryList);//增加盘存表
 
     int deleteInventoryById(Integer id);//删除盘存表
 
@@ -20,7 +20,7 @@ public interface InventoryService {
 
     List<Inventory> findInventoryListByDate(Date date);//通过时间查询盘存表
 
-    int addNewInventoryRecord(InventoryRecord inventoryRecord);
+    int addNewInventoryRecord();
 
     List<InventoryRecord> findInventoryRecordList();
 

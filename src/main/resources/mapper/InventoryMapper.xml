@@ -13,10 +13,10 @@
         <result property="yk" column="yk"/>
         <result property="other" column="other"/>
     </resultMap>
-    <select id="addNewInventory" parameterType="com.fang.marketmanage.entity.Inventory">
+    <insert id="addNewInventory" parameterType="com.fang.marketmanage.entity.Inventory">
         INSERT INTO inventory
         VALUES (#{goodId},#{date},#{goodName},#{quantity},#{newQuantity},#{unitId},#{yk},#{other})
-    </select>
+    </insert>
     <select id="findInventoryList" resultMap="inventoryResultMap">
         SELECT * FROM inventory
     </select>
