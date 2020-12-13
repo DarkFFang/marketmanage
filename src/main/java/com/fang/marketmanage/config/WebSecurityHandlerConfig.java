@@ -1,8 +1,11 @@
 package com.fang.marketmanage.config;
 
 import com.fang.marketmanage.entity.JwtUser;
+import com.fang.marketmanage.entity.SysLog;
+import com.fang.marketmanage.service.SysLogService;
 import com.fang.marketmanage.util.JwtTokenUtil;
 import com.fang.marketmanage.util.RespUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 
 /**
@@ -28,6 +32,8 @@ import java.io.IOException;
  */
 @Configuration
 public class WebSecurityHandlerConfig {
+    @Autowired
+    private SysLogService sysLogService;
 
     /**
      * 登陆成功，返回Token
@@ -42,6 +48,17 @@ public class WebSecurityHandlerConfig {
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                                 Authentication authentication) throws IOException, ServletException {
                 JwtUser jwtUser = (JwtUser) authentication.getPrincipal();
+
+                SysLog sysLog = new SysLog();
+                sysLog.setUserId(jwtUser.getId());
+                sysLog.setUserPhone(jwtUser.getPhone());
+                sysLog.setUsername(jwtUser.getUsername());
+                sysLog.setIp(request.getRemoteAddr());
+                sysLog.setMethod("Login");
+                sysLog.setCreateDate(new Date());
+                sysLog.setOperation("登录");
+                sysLogService.addNewSysLog(sysLog);
+
                 response.setHeader(JwtTokenUtil.TOKEN_HEADER, JwtTokenUtil.createToken(jwtUser));
                 RespUtil.response(response, HttpStatus.OK.value(), RespUtil.success("登录成功"));
             }
