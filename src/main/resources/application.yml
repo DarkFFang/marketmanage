@@ -18,6 +18,12 @@ spring:
   date-format: yyyy-MM-dd
   time-zone: GMT+8
 
+ redis:
+  host: localhost
+  port: 6379
+  password: 555913
+
+
 mybatis:
  type-aliases-package: com.fang.marketmanage.entity
  check-config-location: true

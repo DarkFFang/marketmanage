@@ -1,7 +1,9 @@
 package com.fang.marketmanage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,7 +11,10 @@ import java.util.Collection;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class JwtUser implements UserDetails {
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
     private String username;
     private String phone;
@@ -30,31 +35,35 @@ public class JwtUser implements UserDetails {
     }
 
     @Override
+    public String getUsername() {
+        return username;
+    }
+    @Override
     public String getPassword() {
         return password;
     }
 
-    @Override
-    public String getUsername() {
-        return username;
-    }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

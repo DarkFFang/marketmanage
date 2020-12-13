@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.fang.marketmanage.entity.JwtUser;
 import com.fang.marketmanage.service.UserService;
 import com.fang.marketmanage.util.JwtTokenUtil;
+import com.fang.marketmanage.util.RedisUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
@@ -12,12 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import javax.annotation.Resource;
+
 @SpringBootTest
 class MarketmanageApplicationTests {
 
 
     @Autowired
     private UserService userService;
+
+    @Resource
+    private RedisUtil redisUtil;
 
     @Test
     void contextLoads() {
@@ -46,5 +52,13 @@ class MarketmanageApplicationTests {
         String json=JSON.toJSONString(body);
         System.out.println(json);
         System.out.println(body.get("username").toString());
+    }
+
+    @Test
+    void redisTest() {
+        JwtUser jwtUser = (JwtUser) userService.loadUserByUsername("11111111");
+        redisUtil.set(jwtUser.getId().toString(), jwtUser);
+        System.out.println(redisUtil.get(jwtUser.getId().toString()).toString());
+        System.out.println(redisUtil.get("testkey"));
     }
 }
