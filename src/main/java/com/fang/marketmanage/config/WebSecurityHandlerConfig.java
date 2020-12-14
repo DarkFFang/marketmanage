@@ -57,7 +57,7 @@ public class WebSecurityHandlerConfig {
                 sysLog.setMethod("Login");
                 sysLog.setCreateDate(new Date());
                 sysLog.setOperation("登录");
-                sysLogService.addNewSysLog(sysLog);
+                sysLogService.addNewLoginLog(sysLog);
 
                 response.setHeader(JwtTokenUtil.TOKEN_HEADER, JwtTokenUtil.createToken(jwtUser));
                 RespUtil.response(response, HttpStatus.OK.value(), RespUtil.success("登录成功"));

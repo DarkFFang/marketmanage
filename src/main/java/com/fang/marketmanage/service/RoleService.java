@@ -30,6 +30,8 @@ public interface RoleService {
 
     List<PermissionVo> findAllPermissions();
 
+    List<PermissionVo> findMenuByUserId(Integer id);
+
     int addNewRolePermissions(Integer roleid, Integer[] permissionids);
 
     int updateRolePermissions(Integer roleid, Integer[] permissionids);

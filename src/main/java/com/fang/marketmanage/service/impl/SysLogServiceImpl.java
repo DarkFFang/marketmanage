@@ -18,7 +18,17 @@ public class SysLogServiceImpl implements SysLogService {
     }
 
     @Override
+    public int addNewLoginLog(SysLog sysLog) {
+        return sysLogMapper.addNewLoginLog(sysLog);
+    }
+
+    @Override
     public List<SysLog> findSysLogList() {
         return sysLogMapper.findSysLogList();
+    }
+
+    @Override
+    public List<SysLog> findLoginLogList() {
+        return sysLogMapper.findLoginLogList();
     }
 }

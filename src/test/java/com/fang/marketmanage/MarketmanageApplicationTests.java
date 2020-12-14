@@ -60,5 +60,6 @@ class MarketmanageApplicationTests {
         redisUtil.set(jwtUser.getId().toString(), jwtUser);
         System.out.println(redisUtil.get(jwtUser.getId().toString()).toString());
         System.out.println(redisUtil.get("testkey"));
+        System.out.println(redisUtil.get("test"));
     }
 }

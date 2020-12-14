@@ -11,13 +11,13 @@
         <result property="method" column="method"/>
     </resultMap>
     <select id="findPermissionsByUserId" resultMap="permissionResultMap">
-        select p.*
-        from user u
-        LEFT JOIN user_role ur on u.id=ur.userid
-        LEFT JOIN role r on ur.roleid=r.id
-        LEFT JOIN role_permission rp on rp.roleid=r.id
-        LEFT JOIN permission p on p.id =rp.permissionid
-        where u.id=#{id}
+        SELECT p.*
+        FROM user u
+        LEFT JOIN user_role ur ON u.id=ur.userid
+        LEFT JOIN role r ON ur.roleid=r.id
+        LEFT JOIN role_permission rp ON rp.roleid=r.id
+        LEFT JOIN permission p ON p.id =rp.permissionid
+        WHERE u.id=#{id}
     </select>
     <select id="findPermissionsByRoleId" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
         SELECT id,name FROM permission
@@ -25,6 +25,15 @@
     </select>
     <select id="findAllPermissions" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
         SELECT id,name FROM permission
+    </select>
+    <select id="findMenuByUserId" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
+        SELECT p.id,p.name
+        FROM user u
+        LEFT JOIN user_role ur ON u.id=ur.userid
+        LEFT JOIN role r ON ur.roleid=r.id
+        LEFT JOIN role_permission rp ON rp.roleid=r.id
+        LEFT JOIN permission p ON p.id =rp.permissionid
+        WHERE u.id=#{id} AND pid=1
     </select>
     <insert id="addNewRolePermissions">
         INSERT INTO role_permission (roleid,permissionid) VALUES

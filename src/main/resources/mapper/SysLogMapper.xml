@@ -17,8 +17,15 @@
         INSERT INTO sys_log(userid,userphone,username,operation,method,ip,create_date)
         VALUES (#{userId},#{userPhone},#{username},#{operation},#{method},#{ip},#{createDate})
     </insert>
+    <insert id="addNewLoginLog" parameterType="com.fang.marketmanage.entity.SysLog">
+        INSERT INTO login_log(userid,userphone,username,operation,method,ip,create_date)
+        VALUES (#{userId},#{userPhone},#{username},#{operation},#{method},#{ip},#{createDate})
+    </insert>
     <select id="findSysLogList" resultMap="sysLogResultMap">
         SELECT * FROM sys_log
+    </select>
+    <select id="findLoginLogList" resultMap="sysLogResultMap">
+        SELECT * FROM login_log
     </select>
     <update id="alterAutoIncrement">
         ALTER TABLE sys_log auto_increment = 1

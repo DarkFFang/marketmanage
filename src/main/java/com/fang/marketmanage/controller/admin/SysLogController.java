@@ -12,14 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/admin/log")
 public class SysLogController {
     @Autowired
     private SysLogService sysLogService;
 
-    @GetMapping("/syslog")
-    @PreAuthorize("hasAuthority('/admin/syslog/**;GET')")
+    @GetMapping("/sys_log")
+    @PreAuthorize("hasAuthority('/admin/log/**;GET')")
     public List<SysLog> findSysLogList() {
         return sysLogService.findSysLogList();
+    }
+
+    @GetMapping("/login_log")
+    @PreAuthorize("hasAuthority('/admin/log/**;GET')")
+    public List<SysLog> findLoginLogList() {
+        return sysLogService.findLoginLogList();
     }
 }

@@ -4,6 +4,7 @@ import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.JwtUser;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
+import com.fang.marketmanage.entity.vo.PermissionVo;
 import com.fang.marketmanage.entity.vo.UserVo;
 import com.fang.marketmanage.service.RoleService;
 import com.fang.marketmanage.service.UserService;
@@ -53,5 +54,11 @@ public class UserController {
             return RespUtil.success("密码修改成功！");
         }
         return RespUtil.error("旧密码错误，修改失败！");
+    }
+
+    @GetMapping("/user/menu")
+    public List<PermissionVo> findMenuByUserId() {
+        UserVo currentUser = findCurrentUser();
+        return roleService.findMenuByUserId(currentUser.getId());
     }
 }

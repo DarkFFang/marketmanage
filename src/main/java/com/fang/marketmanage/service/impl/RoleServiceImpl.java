@@ -71,6 +71,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public List<PermissionVo> findMenuByUserId(Integer id) {
+        return permissionMapper.findMenuByUserId(id);
+    }
+
+    @Override
     public List<PermissionVo> findAllPermissions() {
         return permissionMapper.findAllPermissions();
     }

@@ -7,5 +7,9 @@ import java.util.List;
 public interface SysLogService {
     int addNewSysLog(SysLog sysLog);
 
+    int addNewLoginLog(SysLog sysLog);
+
     List<SysLog> findSysLogList();
+
+    List<SysLog> findLoginLogList();
 }
