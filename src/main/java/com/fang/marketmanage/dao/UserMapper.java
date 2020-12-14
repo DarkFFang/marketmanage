@@ -7,36 +7,103 @@ import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
+/**
+ * 接口 {@code UserMapper} 用户表.
+ *
+ * @author fang
+ * @since 2020/12/14
+ */
 @Mapper
 public interface UserMapper {
-    //系统管理员
-    int addNewUser(User user);//增加用户（营业员或库管员）
 
-    List<UserVo> findUserList();//用户列表（营业员和库管员）
+    /**
+     * 增加用户（营业员或库管员）
+     * @param user
+     * @return
+     */
+    int addNewUser(User user);
 
+    /**
+     * 用户列表（营业员和库管员）
+     * @return
+     */
+    List<UserVo> findUserList();
+
+    /**
+     * 通过id查找用户
+     * @param id
+     * @return
+     */
     User findUserById(Integer id);
 
-    int deleteUserById(Integer id);//删除用户（营业员或库管员）
+    /**
+     * 删除用户（营业员或库管员）
+     * @param id
+     * @return
+     */
+    int deleteUserById(Integer id);
 
-    int updateUserById(User user);//修改用户（营业员或库管员）
+    /**
+     * 修改用户（营业员或库管员）
+     * @param user
+     * @return
+     */
+    int updateUserById(User user);
 
-    int updateUserRoleById(Integer id);//修改用户（营业员或库管员）
+    /**
+     * 修改用户（营业员或库管员）
+     * @param id
+     * @return
+     */
+    int updateUserRoleById(Integer id);
 
-    List<User> findUserByUsername(String username);//通过用户名（营业员或库管员）查询用户
+    /**
+     * 通过用户名（营业员或库管员）查询用户
+     * @param username
+     * @return
+     */
+    List<User> findUserByUsername(String username);
 
+    /**
+     * 通过电话查找用户
+     * @param phone
+     * @return
+     */
     User findUserByPhone(String phone);
 
-    List<User> findClerkList();//搜索营业员列表
+    /**
+     * 搜索营业员列表
+     * @return
+     */
+    List<User> findClerkList();
 
-    List<User> findKeeperList();//搜索库管员列表
+    /**
+     * 搜索库管员列表
+     * @return
+     */
+    List<User> findKeeperList();
 
-    int addPermissionById();//增加用户权限
+    /**
+     * 增加用户权限
+     * @return
+     */
+    int addPermissionById();
 
-    int deletePermissionById();//删除用户权限
+    /**
+     * 删除用户权限
+     * @return
+     */
+    int deletePermissionById();
 
-    int findPermissionById();//查询用户权限
+    /**
+     * 查询用户权限
+     * @return
+     */
+    int findPermissionById();
 
+    /**
+     * 更新主键自增ID
+     */
     void alterUserAutoIncrement();
 
 }

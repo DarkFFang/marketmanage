@@ -14,15 +14,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 商品控制器
+ *
+ * @author fang
+ * @date 2020/12/14
+ */
 @Slf4j
 @RestController
 public class GoodController {
+    /**
+     * 商品服务
+     */
     @Autowired
     GoodService goodService;
 
+    /**
+     * 库存服务
+     */
     @Autowired
     StockService stockService;
 
+    /**
+     * 商品列表
+     *
+     * @return {@link List<Good>}
+     */
     @GetMapping("/good")
     @PreAuthorize("hasAuthority('/good/**;GET')")
     public List<Good> findGoodList() {
@@ -30,6 +47,12 @@ public class GoodController {
         return goodService.findGoodList();
     }
 
+    /**
+     * 添加新的商品
+     *
+     * @param good 商品
+     * @return {@link RespUtil}
+     */
     @PostMapping("/good")
     @PreAuthorize("hasAuthority('/good/**;POST')")
     @CustomLog(operation = "添加商品")
@@ -41,6 +64,12 @@ public class GoodController {
         }
     }
 
+    /**
+     * 通过id更新商品
+     *
+     * @param good 商品
+     * @return {@link RespUtil}
+     */
     @PutMapping("/good")
     @PreAuthorize("hasAuthority('/good/**;PUT')")
     @CustomLog(operation = "修改商品")
@@ -52,6 +81,12 @@ public class GoodController {
         }
     }
 
+    /**
+     * 通过id删除商品
+     *
+     * @param id id
+     * @return {@link RespUtil}
+     */
     @DeleteMapping("/good/{id}")
     @PreAuthorize("hasAuthority('/good/**;DELETE')")
     @CustomLog(operation = "删除商品")

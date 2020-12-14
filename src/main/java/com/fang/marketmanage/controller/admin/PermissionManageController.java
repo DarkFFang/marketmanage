@@ -10,18 +10,39 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 权限管理控制器
+ *
+ * @author fang
+ * @date 2020/12/14
+ */
 @RestController
 @RequestMapping("/admin")
 public class PermissionManageController {
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 所有的权限列表
+     *
+     * @return {@link List<PermissionVo>}
+     */
     @GetMapping("/permission")
     @PreAuthorize("hasAuthority('/admin/permission/**;GET')")
     public List<PermissionVo> findAllPermissions() {
         return roleService.findAllPermissions();
     }
 
+    /**
+     * 添加新角色权限
+     *
+     * @param roleid        roleid
+     * @param permissionids permissionids
+     * @return {@link RespUtil}
+     */
     @PostMapping("/role_permission")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;POST')")
     public RespUtil addNewRolePermissions(Integer roleid, Integer[] permissionids) {
@@ -31,6 +52,13 @@ public class PermissionManageController {
         return RespUtil.error("添加失败");
     }
 
+    /**
+     * 更新角色权限
+     *
+     * @param roleid        roleid
+     * @param permissionids permissionids
+     * @return {@link RespUtil}
+     */
     @PutMapping("/role_permission")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;PUT')")
     public RespUtil updateRolePermissions(Integer roleid, Integer[] permissionids) {
@@ -40,6 +68,12 @@ public class PermissionManageController {
         return RespUtil.error("修改失败");
     }
 
+    /**
+     * 通过id删除角色权限
+     *
+     * @param roleid roleid
+     * @return {@link RespUtil}
+     */
     @DeleteMapping("/role_permission/{roleid}")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;DELETE')")
     public RespUtil deleteRolePermissionByRoleId(@PathVariable Integer roleid) {
@@ -49,6 +83,12 @@ public class PermissionManageController {
         return RespUtil.error("删除失败");
     }
 
+    /**
+     * 通过角色查询权限
+     *
+     * @param roleid roleid
+     * @return {@link List<PermissionVo>}
+     */
     @GetMapping("/role_permission/{roleid}")
     @PreAuthorize("hasAuthority('/admin/rolepermission/**;GET')")
     public List<PermissionVo> findPermissionsByRoleId(@PathVariable Integer roleid) {

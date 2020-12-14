@@ -6,26 +6,73 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 接口 {@code InventoryMapper} 商品盘存表.
+ *
+ * @author fang
+ * @since 2020/12/14
+ */
 @Mapper
 public interface InventoryMapper {
 
-    int addNewInventory(Inventory inventory);//增加盘存表
+    /**
+     * 增加盘存表
+     * @param inventory
+     * @return
+     */
+    int addNewInventory(Inventory inventory);
 
-    int deleteInventoryById(Integer id);//删除盘存表
+    /**
+     * 删除盘存表
+     * @param id
+     * @return
+     */
+    int deleteInventoryById(Integer id);
 
-    int deleteAllInventory();//删除所有盘存表
+    /**
+     * 删除所有盘存表
+     * @return
+     */
+    int deleteAllInventory();
 
-    List<Inventory> findInventoryList();//盘存列表
+    /**
+     * 盘存列表
+     * @return
+     */
+    List<Inventory> findInventoryList();
 
-    int updateInventoryListById(Inventory inventory);//修改盘存表(仅修改实际数量)
+    /**
+     * 修改盘存表(仅修改实际数量)
+     * @param inventory
+     * @return
+     */
+    int updateInventoryListById(Inventory inventory);
 
-    List<Inventory> findInventoryListByDate(Date date);//通过时间查询盘存表
+    /**
+     * 通过时间查询盘存表
+     * @param date
+     * @return
+     */
+    List<Inventory> findInventoryListByDate(Date date);
 
+    /**
+     * 增加盘存目录
+     * @param inventoryRecord
+     * @return
+     */
     int addNewInventoryRecord(InventoryRecord inventoryRecord);
 
+    /**
+     * 盘存目录列表
+     * @return
+     */
     List<InventoryRecord> findInventoryRecordList();
 
+    /**
+     * 通过id查询盘存目录
+     * @param id
+     * @return
+     */
     InventoryRecord findInventoryRecordById(Integer id);
 
 }

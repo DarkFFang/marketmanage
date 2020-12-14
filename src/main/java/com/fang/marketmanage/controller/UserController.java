@@ -19,14 +19,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * 用户控制器
+ *
+ * @author fang
+ * @date 2020/12/14
+ */
 @Slf4j
 @RestController
 public class UserController {
+    /**
+     * 用户服务
+     */
     @Autowired
     private UserService userService;
+    /**
+     * 角色服务
+     */
     @Autowired
     private RoleService roleService;
 
+    /**
+     * 查找当前用户
+     *
+     * @return {@link UserVo}
+     */
     @GetMapping("/user")
     public UserVo findCurrentUser() {
         JwtUser jwtUser = (JwtUser) (SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -41,6 +58,14 @@ public class UserController {
         return userVo;
     }
 
+    /**
+     * 更新当前用户密码
+     *
+     * @param id          id
+     * @param oldPassword 旧密码
+     * @param newPassword 新密码
+     * @return {@link RespUtil}
+     */
     @PutMapping("/user/password")
     @CustomLog(operation = "修改用户密码")
     public RespUtil updateCurrentUserPassword(Integer id, String oldPassword, String newPassword) {
@@ -56,6 +81,11 @@ public class UserController {
         return RespUtil.error("旧密码错误，修改失败！");
     }
 
+    /**
+     * 通过用户id找到菜单
+     *
+     * @return {@link List<PermissionVo>}
+     */
     @GetMapping("/user/menu")
     public List<PermissionVo> findMenuByUserId() {
         UserVo currentUser = findCurrentUser();

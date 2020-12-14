@@ -4,20 +4,58 @@ import com.fang.marketmanage.entity.WorkTime;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
+/**
+ * 接口 {@code WorkTimeMapper} 工作时间表.
+ *
+ * @author fang
+ * @since 2020/12/14
+ */
 @Mapper
 public interface WorkTimeMapper {
-    int addNewWorkTime(WorkTime worktime); //增加时间表项
 
-    int deleteWorkTimeById(Integer id); //删除时间表项
+    /**
+     * 增加时间表项
+     * @param worktime
+     * @return
+     */
+    int addNewWorkTime(WorkTime worktime);
 
-    int updateWorkTimeById(WorkTime worktime); //修改时间表项
+    /**
+     * 删除时间表项
+     * @param id
+     * @return
+     */
+    int deleteWorkTimeById(Integer id);
 
-    List<WorkTime> findWorkTimeList(); //时间表列表
+    /**
+     * 修改时间表项
+     * @param worktime
+     * @return
+     */
+    int updateWorkTimeById(WorkTime worktime);
 
-    List<WorkTime> searchWorkTimeByUsername(String username); //通过姓名查询时间表列表
+    /**
+     * 时间表列表
+     * @return
+     */
+    List<WorkTime> findWorkTimeList();
 
-    List<WorkTime> findClerkTime();//查询营业员时间表列表
+    /**
+     * 通过姓名查询时间表列表
+     * @param username
+     * @return
+     */
+    List<WorkTime> searchWorkTimeByUsername(String username);
 
-    List<WorkTime> findKeeperTime();//查询库管员时间表列表
+    /**
+     * 查询营业员时间表列表
+     * @return
+     */
+    List<WorkTime> findClerkTime();
+
+    /**
+     * 查询库管员时间表列表
+     * @return
+     */
+    List<WorkTime> findKeeperTime();
 }

@@ -26,19 +26,25 @@ import java.util.Date;
 
 
 /**
+ * 网络安全处理程序配置
  * spring security处理器
  *
  * @author fang
+ * @date 2020/12/14
  */
 @Configuration
 public class WebSecurityHandlerConfig {
+    /**
+     * 系统日志服务
+     */
     @Autowired
     private SysLogService sysLogService;
 
     /**
+     * 登录成功处理程序
      * 登陆成功，返回Token
      *
-     * @return
+     * @return {@link AuthenticationSuccessHandler}
      */
     @Bean
     public AuthenticationSuccessHandler loginSuccessHandler() {
@@ -66,9 +72,10 @@ public class WebSecurityHandlerConfig {
     }
 
     /**
+     * 登录失败处理程序
      * 登陆失败
      *
-     * @return
+     * @return {@link AuthenticationFailureHandler}
      */
     @Bean
     public AuthenticationFailureHandler loginFailureHandler() {
@@ -84,9 +91,10 @@ public class WebSecurityHandlerConfig {
     }
 
     /**
+     * 认证入口点
      * 未登录，返回401
      *
-     * @return
+     * @return {@link AuthenticationEntryPoint}
      */
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
@@ -101,9 +109,10 @@ public class WebSecurityHandlerConfig {
     }
 
     /**
+     * 注销suss处理程序
      * 退出处理
      *
-     * @return
+     * @return {@link LogoutSuccessHandler}
      */
     @Bean
     public LogoutSuccessHandler logoutSussHandler() {
@@ -119,9 +128,10 @@ public class WebSecurityHandlerConfig {
     }
 
     /**
+     * 拒绝访问处理程序
      * 退出处理
      *
-     * @return
+     * @return {@link AccessDeniedHandler}
      */
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {

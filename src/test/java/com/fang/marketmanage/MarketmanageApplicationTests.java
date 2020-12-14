@@ -15,20 +15,38 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 import javax.annotation.Resource;
 
+/**
+ * marketmanage应用程序测试
+ *
+ * @author fang
+ * @date 2020/12/14
+ */
 @SpringBootTest
 class MarketmanageApplicationTests {
 
 
+    /**
+     * 用户服务
+     */
     @Autowired
     private UserService userService;
 
+    /**
+     * 实效
+     */
     @Resource
     private RedisUtil redisUtil;
 
+    /**
+     * 上下文加载
+     */
     @Test
     void contextLoads() {
     }
 
+    /**
+     * token建立
+     */
     @Test
     void tokenBuild() {
         String phone="1582584862";
@@ -42,6 +60,9 @@ class MarketmanageApplicationTests {
         System.out.println(authenticationToken.toString());
     }
 
+    /**
+     * token解析
+     */
     @Test
     void tokenParse() {
         JwtParser parser = Jwts.parser();
@@ -54,6 +75,9 @@ class MarketmanageApplicationTests {
         System.out.println(body.get("username").toString());
     }
 
+    /**
+     * 测试
+     */
     @Test
     void redisTest() {
         JwtUser jwtUser = (JwtUser) userService.loadUserByUsername("11111111");

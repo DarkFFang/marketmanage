@@ -17,10 +17,21 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * swagger2配置
+ *
+ * @author 万欣豪
+ * @date 2020/12/14
+ */
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
 
+    /**
+     * 创建rest api
+     *
+     * @return {@link Docket}
+     */
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -33,12 +44,22 @@ public class Swagger2Config {
                 .securityContexts(securityContexts());
     }
 
+    /**
+     * 安全计划
+     *
+     * @return {@link List<ApiKey>}
+     */
     private List<ApiKey> securitySchemes() {
         List<ApiKey> apiKeyList = new ArrayList<ApiKey>();
         apiKeyList.add(new ApiKey("Authorization", "Authorization", "header"));
         return apiKeyList;
     }
 
+    /**
+     * 安全上下文
+     *
+     * @return {@link List<SecurityContext>}
+     */
     private List<SecurityContext> securityContexts() {
         List<SecurityContext> securityContexts = new ArrayList<>();
         securityContexts.add(
@@ -49,6 +70,11 @@ public class Swagger2Config {
         return securityContexts;
     }
 
+    /**
+     * 默认的身份验证
+     *
+     * @return {@link List<SecurityReference>}
+     */
     private List<SecurityReference> defaultAuth() {
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
@@ -58,6 +84,11 @@ public class Swagger2Config {
         return securityReferences;
     }
 
+    /**
+     * api的信息
+     *
+     * @return {@link ApiInfo}
+     */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("超市商品管理")

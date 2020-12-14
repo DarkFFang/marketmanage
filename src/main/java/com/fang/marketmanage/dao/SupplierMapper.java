@@ -4,18 +4,53 @@ import com.fang.marketmanage.entity.Supplier;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
+/**
+ * 接口 {@code SupplierMapper} 供应商表.
+ *
+ * @author fang
+ * @since 2020/12/14
+ */
 @Mapper
 public interface SupplierMapper {
-    int addNewSupplier(Supplier supplier); //增加供应商
 
-    List<Supplier> findSupplierList(); //供应商列表
+    /**
+     * 增加供应商
+     * @param supplier
+     * @return
+     */
+    int addNewSupplier(Supplier supplier);
 
-    int deleteSupplierById(Integer id); //删除供应商
+    /**
+     * 供应商列表
+     * @return
+     */
+    List<Supplier> findSupplierList();
 
-    int updateSupplierById(Supplier supplier); //修改供应商
+    /**
+     * 删除供应商
+     * @param id
+     * @return
+     */
+    int deleteSupplierById(Integer id);
 
-    Supplier findSupplierByName(String name); //通过供应商名称查询供应商
+    /**
+     * 修改供应商
+     * @param supplier
+     * @return
+     */
+    int updateSupplierById(Supplier supplier);
 
-    List<Supplier> findSupplierListByReputation(String reputation); //通过名誉查询供应商列表
+    /**
+     * 通过供应商名称查询供应商
+     * @param name
+     * @return
+     */
+    Supplier findSupplierByName(String name);
+
+    /**
+     * 通过名誉查询供应商列表
+     * @param reputation
+     * @return
+     */
+    List<Supplier> findSupplierListByReputation(String reputation);
 }

@@ -5,24 +5,70 @@ import com.fang.marketmanage.entity.InventoryRecord;
 
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 服务 {@code InventoryService} 商品盘存表.
+ *
+ * @author fang
+ * @since 2020/12/14
+ */
 public interface InventoryService {
 
-    int addNewInventoryList(List<Inventory> inventoryList);//增加盘存表
+    /**
+     * 增加盘存表
+     * @param inventoryList
+     * @return
+     */
+    int addNewInventoryList(List<Inventory> inventoryList);
 
-    int deleteInventoryById(Integer id);//删除盘存表
+    /**
+     * 删除盘存表
+     * @param id
+     * @return
+     */
+    int deleteInventoryById(Integer id);
 
-    int deleteAllInventory();//删除所有盘存表
+    /**
+     * 删除所有盘存表
+     * @return
+     */
+    int deleteAllInventory();
 
-    List<Inventory> findInventoryList();//盘存列表
+    /**
+     * 盘存列表
+     * @return
+     */
+    List<Inventory> findInventoryList();
 
-    int updateInventoryListById(Inventory inventory);//修改盘存表(仅修改实际数量)
+    /**
+     * 修改盘存表(仅修改实际数量)
+     * @param inventory
+     * @return
+     */
+    int updateInventoryListById(Inventory inventory);
 
-    List<Inventory> findInventoryListByDate(Date date);//通过时间查询盘存表
+    /**
+     * 通过时间查询盘存表
+     * @param date
+     * @return
+     */
+    List<Inventory> findInventoryListByDate(Date date);
 
+    /**
+     * 增加商品盘存目录
+     * @return
+     */
     int addNewInventoryRecord();
 
+    /**
+     * 商品盘存目录列表
+     * @return
+     */
     List<InventoryRecord> findInventoryRecordList();
 
+    /**
+     * 通过id查找商品目录
+     * @param id
+     * @return
+     */
     InventoryRecord findInventoryRecordById(Integer id);
 }

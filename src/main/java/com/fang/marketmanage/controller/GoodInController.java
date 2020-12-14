@@ -10,17 +10,37 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * 商品入库控制器
+ *
+ * @author fang
+ * @date 2020/12/14
+ */
 @RestController
 public class GoodInController {
+    /**
+     * 商品入库服务
+     */
     @Autowired
     GoodInService goodInService;
 
+    /**
+     * 商品入库列表
+     *
+     * @return {@link List<GoodIn>}
+     */
     @GetMapping("/goodin")
     @PreAuthorize("hasAuthority('/goodin/**;GET')")
     public List<GoodIn> findGoodInList() {
         return goodInService.findGoodInList();
     }
 
+    /**
+     * 添加新的商品入库
+     *
+     * @param goodIn 好
+     * @return {@link RespUtil}
+     */
     @PostMapping("/goodin")
     @PreAuthorize("hasAuthority('/goodin/**;POST')")
     @CustomLog(operation = "添加商品入库")
@@ -32,6 +52,12 @@ public class GoodInController {
         }
     }
 
+    /**
+     * 通过id商品入库记录
+     *
+     * @param id id
+     * @return {@link RespUtil}
+     */
     @DeleteMapping("/goodin/{id}")
     @PreAuthorize("hasAuthority('/goodin/**;DELETE')")
     @CustomLog(operation = "删除商品入库")
@@ -43,6 +69,12 @@ public class GoodInController {
         }
     }
 
+    /**
+     * 通过id更新商品入库
+     *
+     * @param goodIn 商品入库
+     * @return {@link RespUtil}
+     */
     @PutMapping("/goodin")
     @PreAuthorize("hasAuthority('/goodin/**;PUT')")
     @CustomLog(operation = "修改商品入库")

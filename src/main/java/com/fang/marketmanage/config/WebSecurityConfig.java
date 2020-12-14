@@ -21,35 +21,77 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * 网络安全配置
+ *
+ * @author fang
+ * @date 2020/12/14
+ */
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    /**
+     * jwt身份验证令牌过滤器
+     */
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+    /**
+     * 认证入口点
+     */
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
+    /**
+     * 注销成功处理程序
+     */
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
+    /**
+     * 身份验证成功处理程序
+     */
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
+    /**
+     * 身份验证失败的处理程序
+     */
     @Autowired
     private AuthenticationFailureHandler authenticationFailureHandler;
+    /**
+     * 拒绝访问处理程序
+     */
     @Autowired
     private AccessDeniedHandler accessDeniedHandler;
 
+    /**
+     * 过滤器
+     */
     @Autowired
     private CorsFilter corsFilter;
 
+    /**
+     * 用户详细信息服务
+     */
     @Autowired
     private UserDetailsService userDetailsService;
 
 
+    /**
+     * 配置
+     *
+     * @param auth 身份验证
+     * @throws Exception 异常
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * 配置
+     *
+     * @param http http
+     * @throws Exception 异常
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -87,6 +129,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(corsFilter, LogoutFilter.class);
     }
 
+    /**
+     * 密码编码器
+     *
+     * @return {@link PasswordEncoder}
+     */
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

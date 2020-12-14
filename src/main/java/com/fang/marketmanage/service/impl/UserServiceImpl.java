@@ -18,18 +18,39 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 用户服务impl
+ *
+ * @author fang
+ * @date 2020/12/14
+ */
 @Service
 public class UserServiceImpl implements UserService {
+    /**
+     * 用户映射器
+     */
     @Autowired
     UserMapper userMapper;
 
+    /**
+     * 角色映射器
+     */
     @Autowired
     RoleMapper roleMapper;
 
+    /**
+     * 许可映射器
+     */
     @Autowired
     PermissionMapper permissionMapper;
 
 
+    /**
+     * 加载用户的用户名
+     *
+     * @param phone 电话
+     * @return {@link UserDetails}* @throws UsernameNotFoundException 用户名没有发现异常
+     */
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
         User user=userMapper.findUserByPhone(phone);
@@ -47,22 +68,45 @@ public class UserServiceImpl implements UserService {
         return new JwtUser(user.getId(),user.getUsername(),user.getPhone(),user.getPassword(),authorities);
     }
 
+    /**
+     * 添加新用户
+     *
+     * @param user 用户
+     * @return int
+     */
     @Override
     public int addNewUser(User user) {
         return userMapper.addNewUser(user);
     }
 
 
+    /**
+     * 用户列表
+     *
+     * @return {@link List<UserVo>}
+     */
     @Override
     public List<UserVo> findUserList() {
         return userMapper.findUserList();
     }
 
+    /**
+     * 通过id查询用户
+     *
+     * @param id id
+     * @return {@link User}
+     */
     @Override
     public User findUserById(Integer id) {
         return userMapper.findUserById(id);
     }
 
+    /**
+     * 通过id删除用户
+     *
+     * @param id id
+     * @return int
+     */
     @Override
     public int deleteUserById(Integer id) {
         int result=userMapper.deleteUserById(id);
@@ -72,36 +116,74 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    /**
+     * 通过id更新用户
+     *
+     * @param user 用户
+     * @return int
+     */
     @Override
     public int updateUserById(User user) {
         return userMapper.updateUserById(user);
     }
 
+    /**
+     * 通过id更新用户角色
+     *
+     * @param id id
+     * @return int
+     */
     @Override
     public int updateUserRoleById(Integer id) {
         return userMapper.updateUserRoleById(id);
     }
 
+    /**
+     * 通过用户名查询用户
+     *
+     * @param username 用户名
+     * @return {@link List<User>}
+     */
     @Override
     public List<User> findUserByUsername(String username) {
         return null;
     }
 
+    /**
+     * 营业员列表
+     *
+     * @return {@link List<User>}
+     */
     @Override
     public List<User> findClerkList() {
         return null;
     }
 
+    /**
+     * 库管员列表
+     *
+     * @return {@link List<User>}
+     */
     @Override
     public List<User> findKeeperList() {
         return null;
     }
 
+    /**
+     * 通过id添加权限
+     *
+     * @return int
+     */
     @Override
     public int addPermissionById() {
         return 0;
     }
 
+    /**
+     * 通过id删除权限
+     *
+     * @return int
+     */
     @Override
     public int deletePermissionById() {
         return 0;
