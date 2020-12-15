@@ -3,6 +3,7 @@ package com.fang.marketmanage.controller.admin;
 import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.service.RoleService;
+import com.fang.marketmanage.util.RedisUtil;
 import com.fang.marketmanage.util.RespUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 角色管理控制器
@@ -25,6 +27,9 @@ public class RoleManageController {
      */
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     /**
      * 所有的角色列表
@@ -92,6 +97,7 @@ public class RoleManageController {
      * @param roleid roleid
      * @return {@link RespUtil}
      */
+    /*
     @PostMapping("/user_role")
     @PreAuthorize("hasAuthority('/admin/userrole/**;POST')")
     @CustomLog(operation = "为用户添加角色")
@@ -101,6 +107,7 @@ public class RoleManageController {
         }
         return RespUtil.error("添加失败");
     }
+     */
 
     /**
      * 更新用户角色
@@ -114,6 +121,10 @@ public class RoleManageController {
     @CustomLog(operation = "修改用户角色")
     public RespUtil updateUserRole(Integer userid, Integer roleid) {
         if (roleService.updateUserRole(userid, roleid) == 1) {
+            Set keySet = redisUtil.keys("user:*");
+            String[] keys = (String[]) keySet.toArray(new String[keySet.size()]);
+            redisUtil.del(keys);
+
             return RespUtil.success("修改成功");
         }
         return RespUtil.error("修改失败");
@@ -125,6 +136,7 @@ public class RoleManageController {
      * @param userid 用户编号
      * @return {@link RespUtil}
      */
+    /*
     @DeleteMapping("/user_role/{userid}")
     @PreAuthorize("hasAuthority('/admin/userrole/**;DELETE')")
     @CustomLog(operation = "删除用户角色")
@@ -134,4 +146,6 @@ public class RoleManageController {
         }
         return RespUtil.error("删除失败");
     }
+
+     */
 }

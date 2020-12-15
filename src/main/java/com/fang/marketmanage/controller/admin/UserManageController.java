@@ -1,11 +1,13 @@
 package com.fang.marketmanage.controller.admin;
 
 import com.fang.marketmanage.annotation.CustomLog;
+import com.fang.marketmanage.entity.Good;
 import com.fang.marketmanage.entity.Role;
 import com.fang.marketmanage.entity.User;
 import com.fang.marketmanage.entity.vo.UserVo;
 import com.fang.marketmanage.service.RoleService;
 import com.fang.marketmanage.service.UserService;
+import com.fang.marketmanage.util.RedisUtil;
 import com.fang.marketmanage.util.RespUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class UserManageController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     /**
      * 用户列表
      *
@@ -41,8 +46,13 @@ public class UserManageController {
     @GetMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;GET')")
     public List<UserVo> findUserList() {
-        List<UserVo> userlist = userService.findUserList();
-        return userlist;
+        List<UserVo> userList = (List<UserVo>) redisUtil.get("userList");
+        if (userList == null) {
+            userList = userService.findUserList();
+            redisUtil.set("userList", userList);
+            redisUtil.expire("userList", 60 * 60 * 2);
+        }
+        return userList;
     }
 
     /**
@@ -58,6 +68,7 @@ public class UserManageController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         if (userService.addNewUser(user) == 1) {
+            redisUtil.del("userList");
             return RespUtil.success("添加成功！");
         } else {
             return RespUtil.error("添加失败！");
@@ -78,6 +89,7 @@ public class UserManageController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         if (userService.updateUserById(user) == 1) {
+            redisUtil.del("userList");
             return RespUtil.success("修改成功！");
         } else {
             return RespUtil.error("修改失败！");
@@ -95,6 +107,7 @@ public class UserManageController {
     @CustomLog(operation = "删除用户")
     public RespUtil deleteUserById(@PathVariable Integer id) {
         if (userService.deleteUserById(id) == 1) {
+            redisUtil.del("userList");
             return RespUtil.success("删除成功！");
         } else {
             return RespUtil.error("删除失败");

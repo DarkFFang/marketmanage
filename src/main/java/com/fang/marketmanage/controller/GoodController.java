@@ -5,6 +5,7 @@ import com.fang.marketmanage.annotation.CustomLog;
 import com.fang.marketmanage.entity.Good;
 import com.fang.marketmanage.service.GoodService;
 import com.fang.marketmanage.service.StockService;
+import com.fang.marketmanage.util.RedisUtil;
 import com.fang.marketmanage.util.RespUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class GoodController {
     @Autowired
     StockService stockService;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
     /**
      * 商品列表
      *
@@ -43,8 +47,13 @@ public class GoodController {
     @GetMapping("/good")
     @PreAuthorize("hasAuthority('/good/**;GET')")
     public List<Good> findGoodList() {
-        log.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
-        return goodService.findGoodList();
+        List<Good> goodList = (List<Good>) redisUtil.get("goodList");
+        if (goodList == null) {
+            goodList = goodService.findGoodList();
+            redisUtil.set("goodList", goodList);
+            redisUtil.expire("goodList", 60 * 60 * 2);
+        }
+        return goodList;
     }
 
     /**
@@ -58,6 +67,7 @@ public class GoodController {
     @CustomLog(operation = "添加商品")
     public RespUtil addNewGood(Good good) {
         if (goodService.addNewGood(good) == 1) {
+            redisUtil.del("goodList");
             return RespUtil.success("添加成功！");
         } else {
             return RespUtil.error("添加失败！");
@@ -75,6 +85,7 @@ public class GoodController {
     @CustomLog(operation = "修改商品")
     public RespUtil updateGoodById(Good good) {
         if (goodService.updateGoodById(good) == 1) {
+            redisUtil.del("goodList");
             return RespUtil.success("修改成功！");
         } else {
             return RespUtil.error("修改失败！");
@@ -92,6 +103,7 @@ public class GoodController {
     @CustomLog(operation = "删除商品")
     public RespUtil deleteGoodById(@PathVariable Integer id) {
         if (goodService.deleteGoodById(id) == 1) {
+            redisUtil.del("goodList");
             return RespUtil.success("删除成功！");
         } else {
             return RespUtil.error("删除失败！");
