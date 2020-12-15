@@ -1,6 +1,8 @@
 package com.fang.marketmanage.exception;
 
 import com.fang.marketmanage.util.RespUtil;
+import io.jsonwebtoken.MalformedJwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,6 +15,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
  * @author fang
  * @since 2020/12/14
  */
+@Slf4j
 @RestControllerAdvice
 public class CustomExceptionHandler {
     /**
@@ -23,7 +26,21 @@ public class CustomExceptionHandler {
     @ExceptionHandler({SQLIntegrityConstraintViolationException.class})
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public RespUtil sqlException(SQLIntegrityConstraintViolationException e) {
+        log.warn(e.getMessage());
         return RespUtil.error(e.getMessage());
     }
 
+    @ExceptionHandler({MalformedJwtException.class})
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public RespUtil jwtException(MalformedJwtException e) {
+        log.warn(e.getMessage());
+        return RespUtil.error(e.getMessage());
+    }
+
+    @ExceptionHandler({IllegalArgumentException.class})
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public RespUtil illegalArgException(IllegalArgumentException e) {
+        log.warn(e.getMessage());
+        return RespUtil.error(e.getMessage());
+    }
 }

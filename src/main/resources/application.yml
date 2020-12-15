@@ -34,4 +34,6 @@ mybatis:
 logging:
  level:
   com.fang.marketmanage: debug
+ file:
+  name: logs/log.log
 
