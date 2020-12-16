@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.Set;
  * marketmanage应用程序测试
  *
  * @author fang
- * @date 2020/12/14
+ * 2020/12/14
  */
 @SpringBootTest
 class MarketmanageApplicationTests {
@@ -98,5 +99,7 @@ class MarketmanageApplicationTests {
         for (String i : keys) {
             System.out.println(i);
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        System.out.println(encoder.encode("12345"));
     }
 }
