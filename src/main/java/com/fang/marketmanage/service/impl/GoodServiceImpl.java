@@ -42,8 +42,11 @@ public class GoodServiceImpl implements GoodService {
         stock.setGoodId(good.getId());
         stock.setUnitId(good.getUnitId());
         stock.setDate(new Date());
-        stockMapper.addNewStock(stock);
-        return goodMapper.addNewGood(good);
+        int result=goodMapper.addNewGood(good);
+        if (result == 1) {
+            stockMapper.addNewStock(stock);
+        }
+        return result;
     }
 
     /**
