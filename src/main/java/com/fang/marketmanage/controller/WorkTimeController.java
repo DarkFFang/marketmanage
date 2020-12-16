@@ -5,9 +5,13 @@ import com.fang.marketmanage.entity.WorkTime;
 import com.fang.marketmanage.service.WorkTimeService;
 import com.fang.marketmanage.util.RespUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -84,5 +88,17 @@ public class WorkTimeController {
         } else {
             return RespUtil.error("修改失败！");
         }
+    }
+
+    /**
+     * 绑定
+     *
+     * @param binder 绑定
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 }

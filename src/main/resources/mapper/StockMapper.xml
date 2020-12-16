@@ -27,17 +27,17 @@
     </select>
     <update id="updateStockQuantityIncByGoodId">
         UPDATE stock
-        SET quantity=quantity+(#{increment})
+        SET quantity=quantity+(#{increment}),date=current_date()
         WHERE goodid=#{goodid}
     </update>
     <update id="updateStockQuantityDecByGoodId">
         UPDATE stock
-        SET quantity=quantity-(#{decrement})
+        SET quantity=quantity-(#{decrement}),date=current_date()
         WHERE goodid=#{goodid}
     </update>
     <update id="updateStockQuantityByGoodId">
         UPDATE stock
-        SET quantity=#{newQuantity}
+        SET quantity=#{newQuantity},date=current_date()
         WHERE goodid=#{goodid}
     </update>
     <update id="alterStockAutoIncrement">
