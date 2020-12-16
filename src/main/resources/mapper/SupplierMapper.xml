@@ -13,9 +13,9 @@
         <result property="reputation" column="reputation"/>
         <result property="loan" column="loan"/>
     </resultMap>
-    <select id="addNewSupplier" parameterType="com.fang.marketmanage.entity.Supplier">
+    <insert id="addNewSupplier" parameterType="com.fang.marketmanage.entity.Supplier">
         INSERT INTO supplier(name,address,phone,email,fax,reputation,loan) VALUES (#{name},#{address},#{phone},#{email},#{fax},#{reputation},#{loan})
-    </select>
+    </insert>
     <select id="findSupplierList" resultMap="supplierResultMap">
         SELECT * FROM supplier
     </select>
