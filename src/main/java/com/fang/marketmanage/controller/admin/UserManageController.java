@@ -46,11 +46,11 @@ public class UserManageController {
     @GetMapping("/user")
     @PreAuthorize("hasAuthority('/admin/user/**;GET')")
     public List<UserVo> findUserList() {
-        List<UserVo> userList = (List<UserVo>) redisUtil.get("userList");
+        List<UserVo> userList = (List<UserVo>) redisUtil.get("user:List");
         if (userList == null) {
             userList = userService.findUserList();
-            redisUtil.set("userList", userList);
-            redisUtil.expire("userList", 60 * 60 * 2);
+            redisUtil.set("user:List", userList);
+            redisUtil.expire("user:List", 60 * 60 * 2);
         }
         return userList;
     }
@@ -68,7 +68,7 @@ public class UserManageController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         if (userService.addNewUser(user) == 1) {
-            redisUtil.del("userList");
+            redisUtil.del("user:List");
             return RespUtil.success("添加成功！");
         } else {
             return RespUtil.error("添加失败！");
@@ -89,7 +89,7 @@ public class UserManageController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setPassword(encoder.encode(user.getPassword()));
         if (userService.updateUserById(user) == 1) {
-            redisUtil.del("userList");
+            redisUtil.del("user:List");
             return RespUtil.success("修改成功！");
         } else {
             return RespUtil.error("修改失败！");
@@ -107,7 +107,7 @@ public class UserManageController {
     @CustomLog(operation = "删除用户")
     public RespUtil deleteUserById(@PathVariable Integer id) {
         if (userService.deleteUserById(id) == 1) {
-            redisUtil.del("userList");
+            redisUtil.del("user:List");
             return RespUtil.success("删除成功！");
         } else {
             return RespUtil.error("删除失败");
