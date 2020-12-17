@@ -131,4 +131,11 @@ public class InventoryServiceImpl implements InventoryService {
     public InventoryRecord findInventoryRecordById(Integer id) {
         return null;
     }
+
+    @Override
+    public int deleteInventoryRecordById(Integer id) {
+        InventoryRecord inventoryRecord = inventoryMapper.findInventoryRecordById(id);
+        inventoryMapper.deleteInventoryByDate(inventoryRecord.getDate());
+        return inventoryMapper.deleteInventoryRecordById(inventoryRecord.getId());
+    }
 }

@@ -33,7 +33,7 @@ public interface InventoryMapper {
      * 删除所有盘存表
      * @return
      */
-    int deleteAllInventory();
+    int deleteInventoryByDate(Date date);
 
     /**
      * 盘存列表
@@ -74,5 +74,7 @@ public interface InventoryMapper {
      * @return
      */
     InventoryRecord findInventoryRecordById(Integer id);
+
+    int deleteInventoryRecordById(Integer id);
 
 }

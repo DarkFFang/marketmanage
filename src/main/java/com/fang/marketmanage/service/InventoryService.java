@@ -71,4 +71,6 @@ public interface InventoryService {
      * @return
      */
     InventoryRecord findInventoryRecordById(Integer id);
+
+    int deleteInventoryRecordById(Integer id);
 }

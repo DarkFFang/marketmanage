@@ -23,8 +23,9 @@
     <delete id="deleteInventoryById">
         DELETE FROM inventory WHERE id=#{id} AND date=#{date}
     </delete>
-    <delete id="deleteAllInventory">
+    <delete id="deleteInventoryByDate">
         DELETE FROM inventory
+        WHERE date=#{date}
     </delete>
     <update id="updateInventoryListById">
         UPDATE inventory SET newquantity=#{newQuantity} WHERE goodid=#{goodId} and date=#{date}
@@ -43,4 +44,8 @@
         SELECT * FROM inventory_record
         WHERE id=#{id}
     </select>
+    <delete id="deleteInventoryRecordById">
+        DELETE FROM inventory_record
+        WHERE id=#{id}
+    </delete>
 </mapper>
