@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,7 +35,9 @@ public class SysLogController {
     @GetMapping("/sys_log")
     @PreAuthorize("hasAuthority('/admin/log/**;GET')")
     public List<SysLog> findSysLogList() {
-        return sysLogService.findSysLogList();
+        List<SysLog> sysLogList = sysLogService.findSysLogList();
+        Collections.reverse(sysLogList);
+        return sysLogList;
     }
 
     /**
@@ -45,6 +48,8 @@ public class SysLogController {
     @GetMapping("/login_log")
     @PreAuthorize("hasAuthority('/admin/log/**;GET')")
     public List<SysLog> findLoginLogList() {
-        return sysLogService.findLoginLogList();
+        List<SysLog> sysLogList = sysLogService.findLoginLogList();
+        Collections.reverse(sysLogList);
+        return sysLogList;
     }
 }
