@@ -55,10 +55,10 @@ public class InventoryController {
         return RespUtil.error("添加失败！");
     }
 
-    @DeleteMapping("/inventory/record")
+    @DeleteMapping("/inventory/record/{id}")
     @PreAuthorize("hasAuthority('/inventory/**;DELETE')")
     @CustomLog(operation = "删除盘存记录")
-    public RespUtil deleteInventoryRecordById(Integer id) {
+    public RespUtil deleteInventoryRecordById(@PathVariable Integer id) {
         if (inventoryService.deleteInventoryRecordById(id) == 1) {
             return RespUtil.success("删除成功！");
         }
