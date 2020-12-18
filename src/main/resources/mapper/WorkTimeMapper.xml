@@ -19,18 +19,18 @@
     </select>
     <delete id="deleteWorkTimeById">
         DELETE FROM worktime
-        WHERE userid=#{id}
+        WHERE id=#{id}
     </delete>
     <update id="updateWorkTimeById">
         UPDATE worktime w
         <trim prefix="set" suffixOverrides=",">
-            <if test="userId != null and userId != ''">
+            <if test="userId != null">
                 w.userid = #{userId},
             </if>
-            <if test="sDate != null and sDate != ''">
+            <if test="sDate != null">
                 w.sdate = #{sDate},
             </if>
-            <if test="sDate != null and eDate != ''">
+            <if test="sDate != null">
                 w.edate = #{eDate},
             </if>
             <if test="workDay != null and workDay != ''">
@@ -41,11 +41,5 @@
     </update>
     <select id="searchWorkTimeByUsername" resultMap="workTimeResultMap">
         SELECT * FROM worktime WHERE userid=(SELECT userid FROM user WHERE username=#{username}
-    </select>
-    <select id="findClerkTime" resultMap="workTimeResultMap">
-        SELECT * FROM worktime WHERE roleid=2
-    </select>
-    <select id="findKeeperTime" resultMap="workTimeResultMap">
-        SELECT * FROM worktime WHERE roleid=3
     </select>
 </mapper>

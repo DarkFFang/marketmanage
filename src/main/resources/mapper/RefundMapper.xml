@@ -28,16 +28,16 @@
             <if test="goodId != null and goodId != ''">
                 w.goodid = #{goodId},
             </if>
-            <if test="date != null and date != ''">
+            <if test="date != null">
                 w.date = #{date},
             </if>
-            <if test="quantity != null and quantity != ''">
+            <if test="quantity != null and quantity != '' or quantiry == 0">
                 w.quantity = #{quantity},
             </if>
             <if test="unitId != null and unitId != ''">
                 w.unitid = #{unitId},
             </if>
-            <if test="price != null and price != ''">
+            <if test="price != null and price != '' or price == 0">
                 w.price = #{price},
             </if>
             <if test="reason != null and reason != ''">

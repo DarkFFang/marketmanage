@@ -59,14 +59,14 @@ public class WorkTimeController {
     /**
      * 通过id删除工作时间
      *
-     * @param userid 用户编码
+     * @param id 主键
      * @return {@link RespUtil}
      */
-    @DeleteMapping("/worktime/{userid}")
+    @DeleteMapping("/worktime/{id}")
     @PreAuthorize("hasAuthority('/worktime/**;DELETE')")
     @CustomLog(operation = "删除时间表项")
-    public RespUtil deleteWorkTimeById(@PathVariable Integer userid) {
-        if (workTimeService.deleteWorkTimeById(userid) == 1) {
+    public RespUtil deleteWorkTimeById(@PathVariable Integer id) {
+        if (workTimeService.deleteWorkTimeById(id) == 1) {
             return RespUtil.success("删除成功！");
         } else {
             return RespUtil.error("删除失败！");

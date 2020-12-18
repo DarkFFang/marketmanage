@@ -29,7 +29,7 @@ public class WorkTimeServiceImpl implements WorkTimeService {
      * @return int
      */
     @Override
-    public int addNewWorkTime(WorkTime worktime){return workTimeMapper.addNewWorkTime(worktime);};
+    public int addNewWorkTime(WorkTime worktime){return workTimeMapper.addNewWorkTime(worktime);}
 
     /**
      * 通过id删除工作时间
@@ -38,7 +38,7 @@ public class WorkTimeServiceImpl implements WorkTimeService {
      * @return int
      */
     @Override
-    public int deleteWorkTimeById(Integer id){return workTimeMapper.deleteWorkTimeById(id);};
+    public int deleteWorkTimeById(Integer id){return workTimeMapper.deleteWorkTimeById(id);}
 
     /**
      * 通过id更新工作时间
@@ -47,7 +47,7 @@ public class WorkTimeServiceImpl implements WorkTimeService {
      * @return int
      */
     @Override
-    public int updateWorkTimeById(WorkTime worktime){return workTimeMapper.updateWorkTimeById(worktime);};
+    public int updateWorkTimeById(WorkTime worktime){return workTimeMapper.updateWorkTimeById(worktime);}
 
     /**
      * 工作时间列表
@@ -55,7 +55,7 @@ public class WorkTimeServiceImpl implements WorkTimeService {
      * @return {@link List<WorkTime>}
      */
     @Override
-    public List<WorkTime> findWorkTimeList(){return workTimeMapper.findWorkTimeList();};
+    public List<WorkTime> findWorkTimeList(){return workTimeMapper.findWorkTimeList();}
 
     /**
      * 按用户名搜索工作时间
@@ -64,22 +64,6 @@ public class WorkTimeServiceImpl implements WorkTimeService {
      * @return {@link List<WorkTime>}
      */
     @Override
-    public List<WorkTime> searchWorkTimeByUsername(String username){return null;};
-
-    /**
-     * 营业员工作时间列表
-     *
-     * @return {@link List<WorkTime>}
-     */
-    @Override
-    public List<WorkTime> findClerkTime(){return null;};
-
-    /**
-     * 库管员工作时间列表
-     *
-     * @return {@link List<WorkTime>}
-     */
-    @Override
-    public List<WorkTime> findKeeperTime(){return null;};
+    public List<WorkTime> searchWorkTimeByUsername(String username){return null;}
 
 }

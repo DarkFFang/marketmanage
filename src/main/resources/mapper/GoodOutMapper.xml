@@ -36,7 +36,7 @@
             <if test="supplierId != null and supplierId != ''">
                 supplierid = #{supplierId},
             </if>
-            <if test="date != null and date != ''">
+            <if test="date != null">
                 date = #{date},
             </if>
             <if test="quantity != null and quantity != '' or quantity == 0">
@@ -45,10 +45,10 @@
             <if test="unitId != null and unitId != ''">
                 unitid = #{unitId},
             </if>
-            <if test="price != null and price != ''">
+            <if test="price != null and price != '' or price == 0">
                 price = #{price},
             </if>
-            <if test="paid != null and paid != ''">
+            <if test="paid != null and paid != '' or paid == 0">
                 paid = #{paid},
             </if>
             <if test="userId != null and userId != ''">

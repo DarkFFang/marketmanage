@@ -44,16 +44,4 @@ public interface WorkTimeService {
      * @return
      */
     List<WorkTime> searchWorkTimeByUsername(String username);
-
-    /**
-     * 查询营业员时间表列表
-     * @return
-     */
-    List<WorkTime> findClerkTime();
-
-    /**
-     * 查询库管员时间表列表
-     * @return
-     */
-    List<WorkTime> findKeeperTime();
 }

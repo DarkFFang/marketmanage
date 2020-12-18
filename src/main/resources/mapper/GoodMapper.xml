@@ -34,16 +34,16 @@
             <if test="name != null and name != ''">
                 g.name = #{name},
             </if>
-            <if test="typeId != null and typeId != ''">
+            <if test="typeId != null">
                 g.typeid = #{typeId},
             </if>
-            <if test="sDate != null and sDate != ''">
+            <if test="sDate != null">
                 g.sdate = #{sDate},
             </if>
-            <if test="eDate != null and eDate != ''">
+            <if test="eDate != null">
                 g.edate = #{eDate},
             </if>
-            <if test="price != null and price != ''">
+            <if test="price != null and price != '' or price == 0">
                 g.price = #{price},
             </if>
             <if test="unitId != null and unitId != ''">
