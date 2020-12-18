@@ -55,6 +55,15 @@ public class InventoryController {
         return RespUtil.error("添加失败！");
     }
 
+    @DeleteMapping("/inventory/record")
+    @PreAuthorize("hasAuthority('/inventory/**;DELETE')")
+    @CustomLog(operation = "删除盘存记录")
+    public RespUtil deleteInventoryRecordById(Integer id) {
+        if (inventoryService.deleteInventoryRecordById(id) == 1) {
+            return RespUtil.success("删除成功！");
+        }
+        return RespUtil.error("删除失败！");
+    }
     /**
      * 按日期查询库存列表
      *
