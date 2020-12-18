@@ -43,4 +43,12 @@ public class CustomExceptionHandler {
         log.warn(e.getMessage());
         return RespUtil.error(e.getMessage());
     }
+
+    @ExceptionHandler({NullPointerException.class})
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    public RespUtil nullPointerException(NullPointerException e) {
+        log.warn(e.getMessage());
+        return RespUtil.error(e.getMessage());
+    }
+
 }
