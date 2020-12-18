@@ -20,13 +20,6 @@
     <select id="findInventoryList" resultMap="inventoryResultMap">
         SELECT * FROM inventory
     </select>
-    <delete id="deleteInventoryById">
-        DELETE FROM inventory WHERE id=#{id} AND date=#{date}
-    </delete>
-    <delete id="deleteInventoryByDate">
-        DELETE FROM inventory
-        WHERE date=#{date}
-    </delete>
     <update id="updateInventoryListById">
         UPDATE inventory SET newquantity=#{newQuantity} WHERE goodid=#{goodId} and date=#{date}
     </update>
@@ -34,6 +27,13 @@
         SELECT * FROM inventory
         WHERE date=#{date}
     </select>
+    <delete id="deleteInventoryById">
+        DELETE FROM inventory WHERE id=#{id} AND date=#{date}
+    </delete>
+    <delete id="deleteInventoryByDate">
+        DELETE FROM inventory
+        WHERE date=#{date}
+    </delete>
     <insert id="addNewInventoryRecord" parameterType="com.fang.marketmanage.entity.InventoryRecord">
         INSERT INTO inventory_record(date) VALUES (#{date})
     </insert>
