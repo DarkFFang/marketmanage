@@ -33,6 +33,10 @@ public class Stock {
      */
     private Integer unitId;
     /**
+     * 种类编号
+     */
+    private Integer typeId;
+    /**
      * 总金额
      */
     private Integer price;
