@@ -20,14 +20,14 @@
         WHERE u.id=#{id}
     </select>
     <select id="findPermissionsByRoleId" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
-        SELECT id,name FROM permission
+        SELECT id,url,name FROM permission
         WHERE id in (SELECT permissionid FROM role_permission WHERE roleid=#{roleid})
     </select>
     <select id="findAllPermissions" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
-        SELECT id,name FROM permission
+        SELECT id,url,name FROM permission
     </select>
     <select id="findMenuByUserId" resultType="com.fang.marketmanage.entity.vo.PermissionVo">
-        SELECT p.id,p.name
+        SELECT p.id,url,p.name
         FROM user u
         LEFT JOIN user_role ur ON u.id=ur.userid
         LEFT JOIN role r ON ur.roleid=r.id

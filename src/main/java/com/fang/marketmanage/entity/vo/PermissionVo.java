@@ -18,6 +18,10 @@ public class PermissionVo {
      */
     private Integer id;
     /**
+     * 地址
+     */
+    private String url;
+    /**
      * 权限名称
      */
     private String name;
