@@ -27,6 +27,12 @@
     <select id="findLoginLogList" resultMap="sysLogResultMap">
         SELECT * FROM login_log
     </select>
+    <delete id="deleteAllSysLog">
+        DELETE FROM sys_log
+    </delete>
+    <delete id="deleteAllLoginLog">
+        DELETE FROM login_log
+    </delete>
     <update id="alterAutoIncrement">
         ALTER TABLE sys_log auto_increment = 1
     </update>

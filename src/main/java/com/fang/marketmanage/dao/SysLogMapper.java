@@ -38,4 +38,8 @@ public interface SysLogMapper {
      * @return
      */
     List<SysLog> findLoginLogList();
+
+    int deleteAllSysLog();
+
+    int deleteAllLoginLog();
 }

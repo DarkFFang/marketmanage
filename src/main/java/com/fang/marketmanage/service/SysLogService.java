@@ -36,4 +36,8 @@ public interface SysLogService {
      * @return
      */
     List<SysLog> findLoginLogList();
+
+    int deleteAllSysLog();
+
+    int deleteAllLoginLog();
 }

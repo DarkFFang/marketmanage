@@ -63,4 +63,14 @@ public class SysLogServiceImpl implements SysLogService {
     public List<SysLog> findLoginLogList() {
         return sysLogMapper.findLoginLogList();
     }
+
+    @Override
+    public int deleteAllSysLog() {
+        return sysLogMapper.deleteAllSysLog();
+    }
+
+    @Override
+    public int deleteAllLoginLog() {
+        return sysLogMapper.deleteAllLoginLog();
+    }
 }
