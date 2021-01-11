@@ -7,8 +7,8 @@ spring:
   encoding: utf-8
 
  datasource:
-  url: jdbc:mysql://119.29.40.206:3306/marketmanage?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-  username: market
+  url: jdbc:mysql://localhost:3306/marketmanage?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+  username: root
   password: 555913
   driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
